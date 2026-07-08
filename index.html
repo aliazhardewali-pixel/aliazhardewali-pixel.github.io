@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ali Azhar Dewali — Biomedical Engineer</title>
+<meta name="description" content="Ali Azhar Dewali — Biomedical Engineering portfolio. Brain-computer interfaces, embedded systems, and biomedical signal processing.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
+      },
+      colors: {
+        ink: '#0a0e14',
+        panel: '#10151f',
+        edge: '#1e2733',
+        neon: '#00e5c3',
+        neondim: '#00e5c31a',
+      },
+    },
+  },
+};
+</script>
+<style>
+  body { background-color: #0a0e14; }
+
+  /* Subtle engineering-grid background */
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+
+  /* Scroll fade-in */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* Glow accents */
+  .neon-glow { text-shadow: 0 0 24px rgba(0,229,195,0.35); }
+  .card-hover { transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; }
+  .card-hover:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0,229,195,0.4);
+    box-shadow: 0 12px 40px -12px rgba(0,229,195,0.15);
+  }
+
+  /* Animated EEG trace in hero */
+  .eeg-path {
+    stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
+    animation: draw 5s ease-out forwards, pulseGlow 3s ease-in-out 5s infinite alternate;
+  }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes pulseGlow {
+    from { filter: drop-shadow(0 0 2px rgba(0,229,195,0.4)); }
+    to   { filter: drop-shadow(0 0 8px rgba(0,229,195,0.8)); }
+  }
+
+  /* Pipeline connector line */
+  .pipe-step { position: relative; }
+  @media (min-width: 768px) {
+    .pipe-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: -1.25rem;
+      width: 1.25rem;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(0,229,195,0.6), rgba(0,229,195,0.15));
+    }
+  }
+
+  ::selection { background: rgba(0,229,195,0.25); }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: #0a0e14; }
+  ::-webkit-scrollbar-thumb { background: #1e2733; border-radius: 6px; }
+  ::-webkit-scrollbar-thumb:hover { background: #2a3646; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .eeg-path { animation: none; stroke-dashoffset: 0; }
+  }
+</style>
+</head>
+
+<body class="grid-bg text-slate-300 font-sans antialiased">
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<header class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-ink/80 border-b border-edge">
+  <nav class="max-w-6xl mx-auto flex items-center justify-between px-5 sm:px-8 h-16">
+    <a href="#top" class="font-mono text-sm font-semibold tracking-widest text-neon">AAD<span class="text-slate-500">.dev</span></a>
+    <div class="hidden md:flex items-center gap-8 text-sm">
+      <a href="#project" class="hover:text-neon transition-colors">BCI</a>
+      <a href="#more-projects" class="hover:text-neon transition-colors">Projects</a>
+      <a href="#skills" class="hover:text-neon transition-colors">Skills</a>
+      <a href="#contact" class="hover:text-neon transition-colors">Contact</a>
+      <a href="https://github.com/aliazhardewali-pixel/EEG-Levitation-BCI" target="_blank" rel="noopener"
+         class="px-4 py-1.5 rounded-md border border-edge hover:border-neon/50 hover:text-neon transition-colors font-mono text-xs">GitHub ↗</a>
+    </div>
+    <button id="menuBtn" class="md:hidden p-2 text-slate-400 hover:text-neon" aria-label="Toggle menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>
+      </svg>
+    </button>
+  </nav>
+  <div id="mobileMenu" class="hidden md:hidden border-t border-edge bg-ink/95 backdrop-blur-md">
+    <div class="flex flex-col px-6 py-4 gap-4 text-sm">
+      <a href="#project" class="hover:text-neon">BCI</a>
+      <a href="#more-projects" class="hover:text-neon">Projects</a>
+      <a href="#skills" class="hover:text-neon">Skills</a>
+      <a href="#contact" class="hover:text-neon">Contact</a>
+      <a href="https://github.com/aliazhardewali-pixel/EEG-Levitation-BCI" target="_blank" rel="noopener" class="font-mono text-xs text-neon">GitHub ↗</a>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section id="top" class="min-h-screen flex items-center pt-16">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 w-full py-20">
+    <p class="reveal font-mono text-neon text-sm tracking-widest mb-5">// BIOMEDICAL ENGINEERING</p>
+    <h1 class="reveal reveal-delay-1 text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-tight tracking-tight">
+      Ali Azhar <span class="text-neon neon-glow">Dewali</span>
+    </h1>
+    <p class="reveal reveal-delay-2 mt-5 text-lg sm:text-2xl text-slate-400 font-light max-w-2xl">
+      Bridging neurons and machines — brain-computer interfaces, embedded systems, and biomedical signal processing.
+    </p>
+    <p class="reveal reveal-delay-2 mt-6 max-w-2xl text-slate-400 leading-relaxed">
+      Biomedical Engineering student focused on turning physiological signals into real-world control systems.
+      I design end-to-end pipelines — from raw EEG acquisition and signal processing to firmware that moves
+      physical hardware in real time.
+    </p>
+    <div class="reveal reveal-delay-3 mt-9 flex flex-wrap gap-4">
+      <a href="#project" class="px-6 py-3 rounded-md bg-neon text-ink font-semibold text-sm hover:bg-white transition-colors">View BCI Project</a>
+      <a href="#contact" class="px-6 py-3 rounded-md border border-edge text-slate-300 text-sm hover:border-neon/50 hover:text-neon transition-colors">Get in Touch</a>
+    </div>
+
+    <!-- Animated EEG trace -->
+    <div class="reveal reveal-delay-3 mt-16 overflow-hidden" aria-hidden="true">
+      <svg viewBox="0 0 1000 80" class="w-full h-16 sm:h-20" preserveAspectRatio="none">
+        <path class="eeg-path" fill="none" stroke="#00e5c3" stroke-width="1.5"
+          d="M0,40 L60,40 70,38 80,42 95,40 110,15 120,68 130,25 140,52 150,40 220,40 232,36 244,44 260,40 275,10 285,72 295,20 305,55 318,40 400,40 412,37 424,43 440,40 455,18 465,64 475,28 485,50 498,40 580,40 592,36 604,44 620,40 635,8 645,70 655,22 665,54 678,40 760,40 772,37 784,43 800,40 815,16 825,66 835,26 845,51 858,40 1000,40"/>
+      </svg>
+      <p class="font-mono text-[10px] text-slate-600 tracking-widest mt-2">RAW EEG · CH-01 · 512 Hz</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ BCI SHOWCASE ═══════════════ -->
+<section id="project" class="py-24 border-t border-edge">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
+    <p class="reveal font-mono text-neon text-sm tracking-widest mb-3">// FEATURED PROJECT</p>
+    <h2 class="reveal text-3xl sm:text-4xl font-bold text-white tracking-tight">EEG-Controlled Aerodynamic Levitation</h2>
+    <p class="reveal reveal-delay-1 mt-4 max-w-3xl text-slate-400 leading-relaxed">
+      A complete brain-computer interface that levitates a ping-pong ball using nothing but focus.
+      A NeuroSky MindWave Mobile 2 headset streams raw EEG data to a Python engine that quantifies mental
+      concentration in real time and drives an ESP32-controlled fan through a 3D-printed nozzle —
+      the harder you focus, the higher the ball floats.
+    </p>
+
+    <!-- Pipeline -->
+    <div class="reveal reveal-delay-1 mt-12">
+      <h3 class="font-mono text-xs tracking-widest text-slate-500 mb-5">DATA PIPELINE</h3>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-10">
+        <div class="pipe-step bg-panel border border-edge rounded-lg p-5 card-hover">
+          <span class="font-mono text-neon text-xs">01 · ACQUIRE</span>
+          <h4 class="text-white font-semibold mt-2 text-sm">NeuroSky MindWave 2</h4>
+          <p class="text-xs text-slate-400 mt-2 leading-relaxed">Dry-electrode EEG headset streams ThinkGear packets over Bluetooth serial at 57.6 kbaud — sync bytes, payload, and checksum verified on every frame.</p>
+        </div>
+        <div class="pipe-step bg-panel border border-edge rounded-lg p-5 card-hover">
+          <span class="font-mono text-neon text-xs">02 · PROCESS</span>
+          <h4 class="text-white font-semibold mt-2 text-sm">Python Signal Engine</h4>
+          <p class="text-xs text-slate-400 mt-2 leading-relaxed">A threaded parser extracts 8 EEG power bands (Delta → Mid-Gamma), log-normalizes them, detects blinks, and computes a Focus Score from the Beta / (Alpha + Theta) ratio.</p>
+        </div>
+        <div class="pipe-step bg-panel border border-edge rounded-lg p-5 card-hover">
+          <span class="font-mono text-neon text-xs">03 · TRANSMIT</span>
+          <h4 class="text-white font-semibold mt-2 text-sm">Serial Bridge</h4>
+          <p class="text-xs text-slate-400 mt-2 leading-relaxed">Focus is normalized to 0–100 and streamed to the ESP32 as a single byte over USB serial at 115200 baud — a minimal, latency-free protocol.</p>
+        </div>
+        <div class="pipe-step bg-panel border border-edge rounded-lg p-5 card-hover">
+          <span class="font-mono text-neon text-xs">04 · ACTUATE</span>
+          <h4 class="text-white font-semibold mt-2 text-sm">ESP32 + PWM Fan</h4>
+          <p class="text-xs text-slate-400 mt-2 leading-relaxed">Firmware maps focus to a 25 kHz PWM duty cycle with a calibrated spin-up floor, driving airflow through a 3D-printed nozzle to levitate the ball.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Detail cards -->
+    <div class="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="reveal bg-panel border border-edge rounded-lg p-6 card-hover">
+        <h3 class="text-white font-semibold flex items-center gap-2">
+          <span class="text-neon font-mono text-sm">⟨/⟩</span> Hardware–Software Connection
+        </h3>
+        <p class="text-sm text-slate-400 mt-3 leading-relaxed">
+          The system closes the loop between mind and machine across three layers. The headset handles analog
+          front-end amplification and digitization; Python owns parsing, filtering, and the focus algorithm; the
+          ESP32 owns real-time actuation. Keeping the microcontroller "dumb" — it receives only a pre-computed
+          focus byte — makes the firmware deterministic and the control latency negligible, while all heavy
+          signal processing stays on the host where it can be iterated quickly.
+        </p>
+        <div class="mt-4 font-mono text-[11px] text-slate-500 bg-ink rounded-md border border-edge p-3 overflow-x-auto">
+          <span class="text-neon">EEG</span> → Bluetooth 57600 → <span class="text-neon">Python</span> → USB 115200 → <span class="text-neon">ESP32</span> → PWM 25kHz → <span class="text-neon">Fan</span> → 🏐
+        </div>
+      </div>
+      <div class="reveal reveal-delay-1 bg-panel border border-edge rounded-lg p-6 card-hover">
+        <h3 class="text-white font-semibold flex items-center gap-2">
+          <span class="text-neon font-mono text-sm">📊</span> Live Research Dashboard
+        </h3>
+        <p class="text-sm text-slate-400 mt-3 leading-relaxed">
+          A real-time Matplotlib dashboard visualizes the session: a polar radar of all 8 brainwave bands,
+          a rolling band timeline, and a quantitative focus trend with goal threshold. Every packet is logged
+          to CSV for offline analysis, blink events are counted from raw signal spikes, and signal quality is
+          monitored continuously with automatic headset reconnection on dropout.
+        </p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">Threaded ingestion</span>
+          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">Checksum validation</span>
+          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">CSV logging</span>
+          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">Auto-reconnect</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal mt-8">
+      <a href="https://github.com/aliazhardewali-pixel/EEG-Levitation-BCI" target="_blank" rel="noopener"
+         class="inline-flex items-center gap-2 font-mono text-sm text-neon hover:text-white transition-colors">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-1.94c-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.7 5.38-5.26 5.67.41.35.77 1.05.77 2.12v3.14c0 .3.21.66.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+        View source on GitHub →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ MORE PROJECTS ═══════════════ -->
+<section id="more-projects" class="py-24 border-t border-edge">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
+    <p class="reveal font-mono text-neon text-sm tracking-widest mb-3">// MORE PROJECTS</p>
+    <h2 class="reveal text-3xl sm:text-4xl font-bold text-white tracking-tight">Other Builds</h2>
+
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- PID Fan Control -->
+      <div class="reveal bg-panel border border-edge rounded-lg p-6 card-hover flex flex-col">
+        <span class="font-mono text-neon text-xs">CONTROL SYSTEMS</span>
+        <h3 class="text-white font-semibold mt-2">Closed-Loop PID Fan Speed Control</h3>
+        <p class="text-sm text-slate-400 mt-3 leading-relaxed flex-1">
+          A closed-loop RPM controller on an Arduino Nano. A hall-effect sensor measures actual fan
+          speed via interrupt-driven pulse counting, and a tuned PID loop adjusts PWM output to hold
+          a target RPM set by potentiometer or push buttons. A 16×2 I²C LCD shows setpoint vs. actual
+          speed live, with LED indicators for speed zones and anti-windup on the integral term.
+        </p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">PID Control</span>
+          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">Hall Sensor</span>
+          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">Interrupts</span>
+          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">I²C LCD</span>
+        </div>
+      </div>
+
+      <!-- Microprocessor Fan Controller -->
+      <div class="reveal reveal-delay-1 bg-panel border border-edge rounded-lg p-6 card-hover flex flex-col">
+        <span class="font-mono text-neon text-xs">MICROPROCESSORS</span>
+        <h3 class="text-white font-semibold mt-2">6-Level DC Motor Speed Controller</h3>
+        <p class="text-sm text-slate-400 mt-3 leading-relaxed flex-1">
+          A dual-input motor controller with six calibrated PWM speed levels driven through a
+          transistor stage. Speed can be set either by potentiometer (mapped into discrete level
+          slices) or by up/down push buttons — the system arbitrates between them and takes the
+          higher level. An LED bar displays the active level, with dedicated ON/OFF status indicators.
+        </p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">PWM</span>
+          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">ADC Mapping</span>
+          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">Transistor Driver</span>
+          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">Arduino</span>
+        </div>
+      </div>
+
+      <!-- C++ Calculator -->
+      <div class="reveal reveal-delay-2 bg-panel border border-edge rounded-lg p-6 card-hover flex flex-col">
+        <span class="font-mono text-neon text-xs">SOFTWARE</span>
+        <h3 class="text-white font-semibold mt-2">C++ Calculator</h3>
+        <p class="text-sm text-slate-400 mt-3 leading-relaxed flex-1">
+          A console calculator written from scratch in C++ handling arithmetic operations with
+          input validation and clean control flow. A foundational project in structured programming —
+          functions, operator handling, and edge cases like division by zero — that built the C++
+          fluency now applied to embedded firmware.
+        </p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">C++</span>
+          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">Control Flow</span>
+          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">Input Validation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SKILLS ═══════════════ -->
+<section id="skills" class="py-24 border-t border-edge">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
+    <p class="reveal font-mono text-neon text-sm tracking-widest mb-3">// CAPABILITIES</p>
+    <h2 class="reveal text-3xl sm:text-4xl font-bold text-white tracking-tight">Skills & Interests</h2>
+
+    <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div class="reveal bg-panel border border-edge rounded-lg p-6 card-hover">
+        <div class="w-10 h-10 rounded-md bg-neondim border border-neon/20 flex items-center justify-center font-mono text-neon text-sm mb-4">C++</div>
+        <h3 class="text-white font-semibold text-sm">C / C++</h3>
+        <p class="text-xs text-slate-400 mt-2 leading-relaxed">Firmware development on ESP32 — PWM control, serial protocols, non-blocking real-time loops.</p>
+      </div>
+      <div class="reveal reveal-delay-1 bg-panel border border-edge rounded-lg p-6 card-hover">
+        <div class="w-10 h-10 rounded-md bg-neondim border border-neon/20 flex items-center justify-center font-mono text-neon text-sm mb-4">Py</div>
+        <h3 class="text-white font-semibold text-sm">Python</h3>
+        <p class="text-xs text-slate-400 mt-2 leading-relaxed">NumPy, Matplotlib, PySerial, multithreading — real-time data pipelines and scientific visualization.</p>
+      </div>
+      <div class="reveal reveal-delay-2 bg-panel border border-edge rounded-lg p-6 card-hover">
+        <div class="w-10 h-10 rounded-md bg-neondim border border-neon/20 flex items-center justify-center font-mono text-neon text-sm mb-4">⚙</div>
+        <h3 class="text-white font-semibold text-sm">Embedded Systems</h3>
+        <p class="text-xs text-slate-400 mt-2 leading-relaxed">Microcontroller integration, sensor interfacing, UART/Bluetooth comms, hardware calibration.</p>
+      </div>
+      <div class="reveal reveal-delay-3 bg-panel border border-edge rounded-lg p-6 card-hover">
+        <div class="w-10 h-10 rounded-md bg-neondim border border-neon/20 flex items-center justify-center font-mono text-neon text-sm mb-4">∿</div>
+        <h3 class="text-white font-semibold text-sm">Biomedical Signal Processing</h3>
+        <p class="text-xs text-slate-400 mt-2 leading-relaxed">EEG band analysis, artifact/blink detection, feature extraction, normalization and smoothing.</p>
+      </div>
+    </div>
+
+    <div class="reveal mt-8 flex flex-wrap gap-2.5">
+      <span class="font-mono text-xs px-3 py-1.5 rounded-full border border-edge text-slate-400">Brain-Computer Interfaces</span>
+      <span class="font-mono text-xs px-3 py-1.5 rounded-full border border-edge text-slate-400">Neurotechnology</span>
+      <span class="font-mono text-xs px-3 py-1.5 rounded-full border border-edge text-slate-400">3D Printing</span>
+      <span class="font-mono text-xs px-3 py-1.5 rounded-full border border-edge text-slate-400">Control Systems</span>
+      <span class="font-mono text-xs px-3 py-1.5 rounded-full border border-edge text-slate-400">Data Visualization</span>
+      <span class="font-mono text-xs px-3 py-1.5 rounded-full border border-edge text-slate-400">Human-Machine Interaction</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<section id="contact" class="py-24 border-t border-edge">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
+    <p class="reveal font-mono text-neon text-sm tracking-widest mb-3">// CONTACT</p>
+    <h2 class="reveal text-3xl sm:text-4xl font-bold text-white tracking-tight">Let's Build Something</h2>
+    <p class="reveal reveal-delay-1 mt-4 max-w-2xl text-slate-400">
+      Open to research collaborations, internships, and interesting problems at the intersection of biology and engineering.
+    </p>
+
+    <div class="mt-12 grid grid-cols-1 lg:grid-cols-5 gap-8">
+      <!-- Form -->
+      <form id="contactForm" class="reveal lg:col-span-3 bg-panel border border-edge rounded-lg p-6 sm:p-8 space-y-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div>
+            <label for="name" class="block font-mono text-xs text-slate-500 mb-2">NAME</label>
+            <input id="name" type="text" required placeholder="Jane Doe"
+              class="w-full bg-ink border border-edge rounded-md px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-neon/60 focus:ring-1 focus:ring-neon/30 transition-colors">
+          </div>
+          <div>
+            <label for="email" class="block font-mono text-xs text-slate-500 mb-2">EMAIL</label>
+            <input id="email" type="email" required placeholder="jane@example.com"
+              class="w-full bg-ink border border-edge rounded-md px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-neon/60 focus:ring-1 focus:ring-neon/30 transition-colors">
+          </div>
+        </div>
+        <div>
+          <label for="message" class="block font-mono text-xs text-slate-500 mb-2">MESSAGE</label>
+          <textarea id="message" rows="4" required placeholder="Tell me about your project…"
+            class="w-full bg-ink border border-edge rounded-md px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-neon/60 focus:ring-1 focus:ring-neon/30 transition-colors resize-none"></textarea>
+        </div>
+        <button type="submit"
+          class="w-full sm:w-auto px-8 py-3 rounded-md bg-neon text-ink font-semibold text-sm hover:bg-white transition-colors">
+          Send Message
+        </button>
+        <p id="formStatus" class="hidden font-mono text-xs text-neon">✓ Message ready — this demo form opens your email client.</p>
+      </form>
+
+      <!-- Links -->
+      <div class="reveal reveal-delay-1 lg:col-span-2 space-y-4">
+        <a href="https://github.com/aliazhardewali-pixel/EEG-Levitation-BCI" target="_blank" rel="noopener"
+           class="flex items-center gap-4 bg-panel border border-edge rounded-lg p-5 card-hover group">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-slate-400 group-hover:text-neon transition-colors shrink-0"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-1.94c-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.7 5.38-5.26 5.67.41.35.77 1.05.77 2.12v3.14c0 .3.21.66.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+          <div>
+            <p class="text-white text-sm font-semibold">GitHub</p>
+            <p class="font-mono text-xs text-slate-500 group-hover:text-neon/70 transition-colors">EEG-Levitation-BCI</p>
+          </div>
+        </a>
+        <a href="mailto:ali.azhar.dewali@gmail.com"
+           class="flex items-center gap-4 bg-panel border border-edge rounded-lg p-5 card-hover group">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-slate-400 group-hover:text-neon transition-colors shrink-0"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          <div>
+            <p class="text-white text-sm font-semibold">Email</p>
+            <p class="font-mono text-xs text-slate-500 group-hover:text-neon/70 transition-colors">ali.azhar.dewali@gmail.com</p>
+          </div>
+        </a>
+        <div class="bg-panel border border-edge rounded-lg p-5">
+          <p class="font-mono text-xs text-slate-500 leading-relaxed">
+            <span class="text-neon">$</span> status<br>
+            <span class="text-slate-300">→ open to opportunities</span><br>
+            <span class="text-slate-300">→ response time: &lt; 24h</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="border-t border-edge py-8">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
+    <p class="font-mono text-xs text-slate-600">© 2026 Ali Azhar Dewali</p>
+    <p class="font-mono text-xs text-slate-600">Designed & built with signal — not noise.</p>
+  </div>
+</footer>
+
+<script>
+// ── Scroll fade-in via IntersectionObserver ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+// ── Mobile menu ──
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+mobileMenu.querySelectorAll('a').forEach((a) =>
+  a.addEventListener('click', () => mobileMenu.classList.add('hidden'))
+);
+
+// ── Contact form → mailto (no backend needed) ──
+document.getElementById('contactForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const message = document.getElementById('message').value;
+  const subject = encodeURIComponent(`Portfolio contact from ${name}`);
+  const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+  window.location.href = `mailto:ali.azhar.dewali@gmail.com?subject=${subject}&body=${body}`;
+  document.getElementById('formStatus').classList.remove('hidden');
+});
+</script>
+</body>
+</html>
