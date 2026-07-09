@@ -1,462 +1,991 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ali Azhar Dewali — Biomedical Engineer</title>
-<meta name="description" content="Ali Azhar Dewali — Biomedical Engineering portfolio. Brain-computer interfaces, embedded systems, and biomedical signal processing.">
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<meta name="description" content="Ali Azhar Dewali — Biomedical Engineering student (UoD & THM Germany). Brain-computer interfaces, embedded systems, and biomedical signal processing.">
 <!-- GoatCounter analytics — counts every visit & QR scan (free, never expires) -->
 <script data-goatcounter="https://alidewali.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
-      },
-      colors: {
-        ink: '#0a0e14',
-        panel: '#10151f',
-        edge: '#1e2733',
-        neon: '#00e5c3',
-        neondim: '#00e5c31a',
-      },
-    },
-  },
-};
-</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cairo:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  body { background-color: #0a0e14; }
+  /* ── THEME: CREAM (default / light) ── */
+  :root, [data-theme="cream"] {
+    --cream: #fbf7ef;
+    --cream-2: #f4eee2;
+    --card: #ffffff;
+    --ink: #22303a;
+    --muted: #6a7680;
+    --line: #e7ded0;
+    --accent: #0f8a8f;      /* teal */
+    --accent-dark: #0a6266;
+    --accent-soft: #e2f2f2;
+    --amber: #e08a2b;       /* warm highlight */
+    --amber-soft: #fbeede;
+    --header-bg: rgba(251,247,239,0.88);
+  }
+  /* ── THEME: DARK ── */
+  [data-theme="dark"] {
+    --cream: #0f141b;
+    --cream-2: #1a222e;
+    --card: #161d27;
+    --ink: #e8eef3;
+    --muted: #97a3b0;
+    --line: #273240;
+    --accent: #2dd4bf;
+    --accent-dark: #5eead4;
+    --accent-soft: #123536;
+    --amber: #f0a54a;
+    --amber-soft: #2a2113;
+    --header-bg: rgba(15,20,27,0.85);
+  }
+  /* ── THEME: OCEAN (deep blue) ── */
+  [data-theme="ocean"] {
+    --cream: #0b1b2b;
+    --cream-2: #12283d;
+    --card: #10233a;
+    --ink: #e6f1fb;
+    --muted: #8fa8bd;
+    --line: #1e3a52;
+    --accent: #38bdf8;
+    --accent-dark: #7dd3fc;
+    --accent-soft: #0e2f47;
+    --amber: #fbbf24;
+    --amber-soft: #26210f;
+    --header-bg: rgba(11,27,43,0.85);
+  }
+  html { transition: background-color .35s ease; }
+  body, .card, header, .badge, .contact-card, input, textarea, .lang-select {
+    transition: background-color .35s ease, color .35s ease, border-color .35s ease;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Arabic-script languages use Cairo + heavier line height */
+  html[dir="rtl"] body { font-family: 'Cairo', 'Inter', sans-serif; line-height: 1.8; }
 
-  /* Subtle engineering-grid background */
-  .grid-bg {
-    background-image:
-      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-    background-size: 44px 44px;
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 22px; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  html[dir="rtl"] .mono { font-family: 'Cairo', monospace; }
+
+  /* subtle warm dotted background */
+  body {
+    background-image: radial-gradient(var(--cream-2) 1.2px, transparent 1.2px);
+    background-size: 26px 26px;
   }
 
-  /* Scroll fade-in */
-  .reveal {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  /* ── HERO photo + EEG ── */
+  .hero-flex { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+  .hero-text { flex: 1; min-width: 0; }
+  .avatar-wrap { position: relative; flex-shrink: 0; }
+  .avatar {
+    width: 210px; height: 210px; border-radius: 50%; object-fit: cover; display: block;
+    border: 4px solid var(--card); box-shadow: 0 0 0 3px var(--accent), 0 18px 44px -18px rgba(0,0,0,.45);
   }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.3s; }
-
-  /* Glow accents */
-  .neon-glow { text-shadow: 0 0 24px rgba(0,229,195,0.35); }
-  .card-hover { transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; }
-  .card-hover:hover {
-    transform: translateY(-4px);
-    border-color: rgba(0,229,195,0.4);
-    box-shadow: 0 12px 40px -12px rgba(0,229,195,0.15);
+  .avatar-wrap::before {
+    content: ''; position: absolute; inset: -10px; border-radius: 50%;
+    border: 2px solid var(--accent); opacity: 0; animation: pulse 2.6s ease-out infinite; pointer-events: none;
   }
-
-  /* Animated EEG trace in hero */
-  .eeg-path {
-    stroke-dasharray: 1200;
-    stroke-dashoffset: 1200;
-    animation: draw 5s ease-out forwards, pulseGlow 3s ease-in-out 5s infinite alternate;
+  @keyframes pulse { 0% { transform: scale(.92); opacity: .65; } 70% { transform: scale(1.1); opacity: 0; } 100% { opacity: 0; } }
+  /* shimmering gradient on the name */
+  h1 .accent {
+    background: linear-gradient(90deg, var(--accent), var(--amber), var(--accent));
+    background-size: 200% auto;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 7s linear infinite;
   }
-  @keyframes draw { to { stroke-dashoffset: 0; } }
-  @keyframes pulseGlow {
-    from { filter: drop-shadow(0 0 2px rgba(0,229,195,0.4)); }
-    to   { filter: drop-shadow(0 0 8px rgba(0,229,195,0.8)); }
+  @keyframes shine { to { background-position: 200% center; } }
+  /* soft ambient glow behind the hero */
+  #top { position: relative; overflow: hidden; }
+  #top .wrap { position: relative; z-index: 1; }
+  #top::before, #top::after { content: ''; position: absolute; border-radius: 50%; pointer-events: none; filter: blur(8px); }
+  #top::before { width: 440px; height: 440px; top: -130px; inset-inline-end: -100px; background: radial-gradient(circle, var(--accent-soft), transparent 68%); }
+  #top::after { width: 340px; height: 340px; bottom: -120px; inset-inline-start: -110px; background: radial-gradient(circle, var(--amber-soft), transparent 68%); }
+  @media (max-width: 760px) {
+    .hero-flex { flex-direction: column-reverse; align-items: flex-start; gap: 26px; }
+    .avatar { width: 150px; height: 150px; }
   }
+  @media (prefers-reduced-motion: reduce) { .avatar-wrap::before, h1 .accent { animation: none; } }
 
-  /* Pipeline connector line */
-  .pipe-step { position: relative; }
-  @media (min-width: 768px) {
-    .pipe-step:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      right: -1.25rem;
-      width: 1.25rem;
-      height: 1px;
-      background: linear-gradient(90deg, rgba(0,229,195,0.6), rgba(0,229,195,0.15));
-    }
+  /* ── NAV ── */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--header-bg);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
   }
-
-  ::selection { background: rgba(0,229,195,0.25); }
-
-  /* Custom scrollbar */
-  ::-webkit-scrollbar { width: 10px; }
-  ::-webkit-scrollbar-track { background: #0a0e14; }
-  ::-webkit-scrollbar-thumb { background: #1e2733; border-radius: 6px; }
-  ::-webkit-scrollbar-thumb:hover { background: #2a3646; }
-
-  @media (prefers-reduced-motion: reduce) {
-    .reveal { opacity: 1; transform: none; transition: none; }
-    .eeg-path { animation: none; stroke-dashoffset: 0; }
+  /* scroll progress bar */
+  #progress { position: fixed; top: 0; inset-inline-start: 0; height: 3px; width: 0%; background: var(--accent); z-index: 100; transition: width .1s linear; }
+  /* theme toggle button */
+  .theme-btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-family: inherit; font-size: 13px; font-weight: 600;
+    padding: 7px 12px; border: 1px solid var(--line); border-radius: 8px;
+    background: var(--card); color: var(--accent-dark); cursor: pointer;
   }
+  .theme-btn:hover { border-color: var(--accent); }
+  /* back-to-top */
+  #toTop {
+    position: fixed; inset-inline-end: 22px; bottom: 22px; z-index: 60;
+    width: 46px; height: 46px; border-radius: 50%; border: none; cursor: pointer;
+    background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transform: translateY(12px);
+    transition: opacity .3s, transform .3s; box-shadow: 0 8px 24px -8px rgba(0,0,0,.4);
+  }
+  #toTop.show { opacity: 1; pointer-events: auto; transform: none; }
+  /* hero stats */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 34px; max-width: 640px; }
+  .stat { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; text-align: center; }
+  .stat .num { font-size: 26px; font-weight: 800; color: var(--accent); line-height: 1; }
+  .stat .lbl { font-size: 12px; color: var(--muted); margin-top: 6px; }
+  /* active nav link */
+  .nav-links a.active { color: var(--accent); }
+  @media (max-width: 560px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+  nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-weight: 800; font-size: 16px; color: var(--accent-dark); letter-spacing: 1px; text-decoration: none; }
+  .logo span { color: var(--amber); }
+  .nav-links { display: flex; align-items: center; gap: 26px; }
+  .nav-links a { color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* language selector */
+  .lang-select {
+    font-family: inherit; font-size: 13px; font-weight: 600;
+    padding: 7px 12px; border: 1px solid var(--line); border-radius: 8px;
+    background: var(--card); color: var(--accent-dark); cursor: pointer;
+  }
+  .lang-select:focus { outline: none; border-color: var(--accent); }
+
+  .menu-btn { display: none; background: none; border: none; cursor: pointer; color: var(--ink); padding: 6px; }
+  .mobile-menu { display: none; flex-direction: column; gap: 14px; padding: 16px 0; border-top: 1px solid var(--line); }
+  .mobile-menu a { color: var(--ink); text-decoration: none; font-weight: 500; }
+
+  /* ── SECTIONS ── */
+  section { padding: 72px 0; border-bottom: 1px solid var(--line); }
+  .eyebrow { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+  html[dir="rtl"] .eyebrow { font-family: 'Cairo', sans-serif; letter-spacing: 1px; }
+  h1 { font-size: clamp(34px, 6vw, 62px); font-weight: 800; line-height: 1.08; letter-spacing: -0.5px; }
+  h2 { font-size: clamp(26px, 4vw, 36px); font-weight: 800; letter-spacing: -0.3px; }
+  .accent { color: var(--accent); }
+  .lead { font-size: clamp(17px, 2.4vw, 22px); color: var(--muted); font-weight: 400; margin-top: 16px; max-width: 640px; }
+  p.body { color: var(--muted); margin-top: 16px; max-width: 680px; }
+
+  .btn-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+  .btn { padding: 13px 24px; border-radius: 10px; font-size: 15px; font-weight: 600; text-decoration: none; cursor: pointer; transition: all .2s; display: inline-block; }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-dark); }
+  .btn-ghost { background: transparent; color: var(--accent-dark); border: 1px solid var(--line); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* hero badges */
+  .badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+  .badge { background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: 13px; font-weight: 500; color: var(--ink); }
+  .badge b { color: var(--accent-dark); }
+
+  /* section head */
+  .sec-head { margin-bottom: 36px; }
+
+  /* cards */
+  .grid { display: grid; gap: 18px; }
+  .g2 { grid-template-columns: repeat(2, 1fr); }
+  .g3 { grid-template-columns: repeat(3, 1fr); }
+  .g4 { grid-template-columns: repeat(4, 1fr); }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px;
+    transition: transform .25s, box-shadow .25s, border-color .25s;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 14px 34px -18px rgba(15,138,143,0.35); border-color: var(--accent); }
+  .card .tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  html[dir="rtl"] .card .tag { font-family: 'Cairo', sans-serif; }
+  .card h3 { font-size: 18px; font-weight: 700; margin-top: 8px; }
+  .card h4 { font-size: 15px; font-weight: 600; margin-top: 4px; color: var(--muted); }
+  .card p { font-size: 14px; color: var(--muted); margin-top: 10px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
+  .chip { background: var(--accent-soft); color: var(--accent-dark); border-radius: 6px; padding: 4px 10px; font-size: 11px; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+  html[dir="rtl"] .chip { font-family: 'Cairo', sans-serif; }
+
+  /* timeline (experience) */
+  .tl { position: relative; padding-inline-start: 26px; }
+  .tl::before { content: ''; position: absolute; inset-inline-start: 6px; top: 6px; bottom: 6px; width: 2px; background: var(--line); }
+  .tl-item { position: relative; margin-bottom: 26px; }
+  .tl-item::before { content: ''; position: absolute; inset-inline-start: -26px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 3px solid var(--cream); }
+  .tl-item .when { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--amber); font-weight: 600; }
+  html[dir="rtl"] .tl-item .when { font-family: 'Cairo', sans-serif; }
+  .tl-item h3 { font-size: 18px; font-weight: 700; margin-top: 4px; }
+  .tl-item .org { font-size: 14px; color: var(--accent-dark); font-weight: 600; }
+  .tl-item p { font-size: 14px; color: var(--muted); margin-top: 8px; }
+
+  /* education highlight */
+  .edu-card { background: linear-gradient(135deg, var(--accent-soft), var(--card)); border: 1px solid var(--line); border-radius: 16px; padding: 26px; }
+  .edu-card .deg { font-size: 20px; font-weight: 800; }
+  .edu-card .school { color: var(--accent-dark); font-weight: 600; margin-top: 6px; }
+  .edu-card .meta { color: var(--muted); font-size: 14px; margin-top: 4px; }
+
+  /* small lists */
+  .plain-list { margin-top: 14px; display: grid; gap: 10px; }
+  .li { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--muted); }
+  .li::before { content: '▹'; color: var(--accent); flex-shrink: 0; }
+  html[dir="rtl"] .li::before { content: '◃'; }
+
+  /* interests pills */
+  .pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+  .pill { background: var(--amber-soft); color: #9a5a12; border-radius: 999px; padding: 8px 16px; font-size: 14px; font-weight: 500; }
+
+  /* contact */
+  .contact-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; }
+  .contact-card { display: flex; align-items: center; gap: 14px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px; text-decoration: none; color: var(--ink); transition: all .2s; }
+  .contact-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .contact-card .ic { width: 42px; height: 42px; border-radius: 10px; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--accent-dark); }
+  .contact-card .t { font-weight: 700; font-size: 15px; }
+  .contact-card .s { font-size: 13px; color: var(--muted); }
+  input, textarea { width: 100%; padding: 11px 14px; border: 1px solid var(--line); border-radius: 10px; font-family: inherit; font-size: 14px; background: var(--cream); margin-bottom: 12px; }
+  input:focus, textarea:focus { outline: none; border-color: var(--accent); background: #fff; }
+
+  footer { padding: 30px 0; text-align: center; }
+  footer p { font-size: 13px; color: var(--muted); }
+
+  /* reveal animation */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+  .reveal.vis { opacity: 1; transform: none; }
+
+  ::selection { background: var(--accent-soft); }
+
+  @media (max-width: 860px) {
+    .nav-links { display: none; }
+    .menu-btn { display: block; }
+    .nav-links.open { display: flex; }
+    .g2, .g3, .g4 { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+  @media (min-width: 861px) {
+    .mobile-menu { display: none !important; }
+  }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
 </style>
 </head>
+<body>
+<div id="progress"></div>
 
-<body class="grid-bg text-slate-300 font-sans antialiased">
-
-<!-- ═══════════════ NAV ═══════════════ -->
-<header class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-ink/80 border-b border-edge">
-  <nav class="max-w-6xl mx-auto flex items-center justify-between px-5 sm:px-8 h-16">
-    <a href="#top" class="font-mono text-sm font-semibold tracking-widest text-neon">AAD<span class="text-slate-500">.dev</span></a>
-    <div class="hidden md:flex items-center gap-8 text-sm">
-      <a href="#project" class="hover:text-neon transition-colors">BCI</a>
-      <a href="#more-projects" class="hover:text-neon transition-colors">Projects</a>
-      <a href="#skills" class="hover:text-neon transition-colors">Skills</a>
-      <a href="#contact" class="hover:text-neon transition-colors">Contact</a>
-      <a href="https://github.com/aliazhardewali-pixel/EEG-Levitation-BCI" target="_blank" rel="noopener"
-         class="px-4 py-1.5 rounded-md border border-edge hover:border-neon/50 hover:text-neon transition-colors font-mono text-xs">GitHub ↗</a>
-    </div>
-    <button id="menuBtn" class="md:hidden p-2 text-slate-400 hover:text-neon" aria-label="Toggle menu">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>
-      </svg>
-    </button>
-  </nav>
-  <div id="mobileMenu" class="hidden md:hidden border-t border-edge bg-ink/95 backdrop-blur-md">
-    <div class="flex flex-col px-6 py-4 gap-4 text-sm">
-      <a href="#project" class="hover:text-neon">BCI</a>
-      <a href="#more-projects" class="hover:text-neon">Projects</a>
-      <a href="#skills" class="hover:text-neon">Skills</a>
-      <a href="#contact" class="hover:text-neon">Contact</a>
-      <a href="https://github.com/aliazhardewali-pixel/EEG-Levitation-BCI" target="_blank" rel="noopener" class="font-mono text-xs text-neon">GitHub ↗</a>
+<!-- ═══════ NAV ═══════ -->
+<header>
+  <div class="wrap">
+    <nav>
+      <a href="#top" class="logo">AAD<span>.</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="#about" data-i18n="nav_about">About</a>
+        <a href="#experience" data-i18n="nav_exp">Experience</a>
+        <a href="#projects" data-i18n="nav_projects">Projects</a>
+        <a href="#skills" data-i18n="nav_skills">Skills</a>
+        <a href="#contact" data-i18n="nav_contact">Contact</a>
+        <button class="theme-btn" id="themeBtn" title="Switch theme"><span id="themeIcon">☀</span><span id="themeLabel" data-i18n="theme_cream">Cream</span></button>
+        <select class="lang-select" id="langSelect" aria-label="Language">
+          <option value="en">🇬🇧 English</option>
+          <option value="ar">🇮🇶 العربية</option>
+          <option value="bad">Kurdî (Badînî)</option>
+          <option value="sor">کوردی (سۆرانی)</option>
+          <option value="de">🇩🇪 Deutsch</option>
+        </select>
+      </div>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#about" data-i18n="nav_about">About</a>
+      <a href="#experience" data-i18n="nav_exp">Experience</a>
+      <a href="#projects" data-i18n="nav_projects">Projects</a>
+      <a href="#skills" data-i18n="nav_skills">Skills</a>
+      <a href="#contact" data-i18n="nav_contact">Contact</a>
+      <button class="theme-btn" id="themeBtnMobile" title="Switch theme" style="width:fit-content;"><span id="themeIconM">☀</span><span data-i18n="theme_switch">Theme</span></button>
+      <select class="lang-select" id="langSelectMobile" aria-label="Language">
+        <option value="en">🇬🇧 English</option>
+        <option value="ar">🇮🇶 العربية</option>
+        <option value="bad">Kurdî (Badînî)</option>
+        <option value="sor">کوردی (سۆرانی)</option>
+        <option value="de">🇩🇪 Deutsch</option>
+      </select>
     </div>
   </div>
 </header>
 
-<!-- ═══════════════ HERO ═══════════════ -->
-<section id="top" class="min-h-screen flex items-center pt-16">
-  <div class="max-w-6xl mx-auto px-5 sm:px-8 w-full py-20">
-    <p class="reveal font-mono text-neon text-sm tracking-widest mb-5">// BIOMEDICAL ENGINEERING</p>
-    <h1 class="reveal reveal-delay-1 text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-tight tracking-tight">
-      Ali Azhar <span class="text-neon neon-glow">Dewali</span>
-    </h1>
-    <p class="reveal reveal-delay-2 mt-5 text-lg sm:text-2xl text-slate-400 font-light max-w-2xl">
-      Bridging neurons and machines — brain-computer interfaces, embedded systems, and biomedical signal processing.
-    </p>
-    <p class="reveal reveal-delay-2 mt-6 max-w-2xl text-slate-400 leading-relaxed">
-      Biomedical Engineering student focused on turning physiological signals into real-world control systems.
-      I design end-to-end pipelines — from raw EEG acquisition and signal processing to firmware that moves
-      physical hardware in real time.
-    </p>
-    <div class="reveal reveal-delay-3 mt-9 flex flex-wrap gap-4">
-      <a href="#project" class="px-6 py-3 rounded-md bg-neon text-ink font-semibold text-sm hover:bg-white transition-colors">View BCI Project</a>
-      <a href="#contact" class="px-6 py-3 rounded-md border border-edge text-slate-300 text-sm hover:border-neon/50 hover:text-neon transition-colors">Get in Touch</a>
+<!-- ═══════ HERO ═══════ -->
+<section id="top" style="border-bottom:none; padding-top:60px;">
+  <div class="wrap">
+    <div class="hero-flex">
+    <div class="hero-text">
+    <p class="eyebrow reveal" data-i18n="hero_eyebrow">Biomedical Engineering</p>
+    <h1 class="reveal">Ali Azhar <span class="accent">Dewali</span></h1>
+    <p class="lead reveal" data-i18n="hero_tagline">Biomedical engineer bridging medicine and machines — brain-computer interfaces, embedded systems, and biomedical signal processing.</p>
+    <p class="body reveal" data-i18n="hero_summary">Fourth-year Biomedical Engineering student in a double-degree program between the University of Duhok and TH Mittelhessen (Germany). I design end-to-end systems — from bio-signal acquisition to firmware that controls real hardware.</p>
     </div>
-
-    <!-- Animated EEG trace -->
-    <div class="reveal reveal-delay-3 mt-16 overflow-hidden" aria-hidden="true">
-      <svg viewBox="0 0 1000 80" class="w-full h-16 sm:h-20" preserveAspectRatio="none">
-        <path class="eeg-path" fill="none" stroke="#00e5c3" stroke-width="1.5"
-          d="M0,40 L60,40 70,38 80,42 95,40 110,15 120,68 130,25 140,52 150,40 220,40 232,36 244,44 260,40 275,10 285,72 295,20 305,55 318,40 400,40 412,37 424,43 440,40 455,18 465,64 475,28 485,50 498,40 580,40 592,36 604,44 620,40 635,8 645,70 655,22 665,54 678,40 760,40 772,37 784,43 800,40 815,16 825,66 835,26 845,51 858,40 1000,40"/>
-      </svg>
-      <p class="font-mono text-[10px] text-slate-600 tracking-widest mt-2">RAW EEG · CH-01 · 512 Hz</p>
+    <div class="avatar-wrap reveal">
+      <img class="avatar" src="data:image/jpeg;base64,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" alt="Ali Azhar Dewali">
     </div>
-  </div>
-</section>
-
-<!-- ═══════════════ BCI SHOWCASE ═══════════════ -->
-<section id="project" class="py-24 border-t border-edge">
-  <div class="max-w-6xl mx-auto px-5 sm:px-8">
-    <p class="reveal font-mono text-neon text-sm tracking-widest mb-3">// FEATURED PROJECT</p>
-    <h2 class="reveal text-3xl sm:text-4xl font-bold text-white tracking-tight">EEG-Controlled Aerodynamic Levitation</h2>
-    <p class="reveal reveal-delay-1 mt-4 max-w-3xl text-slate-400 leading-relaxed">
-      A complete brain-computer interface that levitates a ping-pong ball using nothing but focus.
-      A NeuroSky MindWave Mobile 2 headset streams raw EEG data to a Python engine that quantifies mental
-      concentration in real time and drives an ESP32-controlled fan through a 3D-printed nozzle —
-      the harder you focus, the higher the ball floats.
-    </p>
-
-    <!-- Pipeline -->
-    <div class="reveal reveal-delay-1 mt-12">
-      <h3 class="font-mono text-xs tracking-widest text-slate-500 mb-5">DATA PIPELINE</h3>
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-10">
-        <div class="pipe-step bg-panel border border-edge rounded-lg p-5 card-hover">
-          <span class="font-mono text-neon text-xs">01 · ACQUIRE</span>
-          <h4 class="text-white font-semibold mt-2 text-sm">NeuroSky MindWave 2</h4>
-          <p class="text-xs text-slate-400 mt-2 leading-relaxed">Dry-electrode EEG headset streams ThinkGear packets over Bluetooth serial at 57.6 kbaud — sync bytes, payload, and checksum verified on every frame.</p>
-        </div>
-        <div class="pipe-step bg-panel border border-edge rounded-lg p-5 card-hover">
-          <span class="font-mono text-neon text-xs">02 · PROCESS</span>
-          <h4 class="text-white font-semibold mt-2 text-sm">Python Signal Engine</h4>
-          <p class="text-xs text-slate-400 mt-2 leading-relaxed">A threaded parser extracts 8 EEG power bands (Delta → Mid-Gamma), log-normalizes them, detects blinks, and computes a Focus Score from the Beta / (Alpha + Theta) ratio.</p>
-        </div>
-        <div class="pipe-step bg-panel border border-edge rounded-lg p-5 card-hover">
-          <span class="font-mono text-neon text-xs">03 · TRANSMIT</span>
-          <h4 class="text-white font-semibold mt-2 text-sm">Serial Bridge</h4>
-          <p class="text-xs text-slate-400 mt-2 leading-relaxed">Focus is normalized to 0–100 and streamed to the ESP32 as a single byte over USB serial at 115200 baud — a minimal, latency-free protocol.</p>
-        </div>
-        <div class="pipe-step bg-panel border border-edge rounded-lg p-5 card-hover">
-          <span class="font-mono text-neon text-xs">04 · ACTUATE</span>
-          <h4 class="text-white font-semibold mt-2 text-sm">ESP32 + PWM Fan</h4>
-          <p class="text-xs text-slate-400 mt-2 leading-relaxed">Firmware maps focus to a 25 kHz PWM duty cycle with a calibrated spin-up floor, driving airflow through a 3D-printed nozzle to levitate the ball.</p>
-        </div>
-      </div>
     </div>
-
-    <!-- Detail cards -->
-    <div class="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div class="reveal bg-panel border border-edge rounded-lg p-6 card-hover">
-        <h3 class="text-white font-semibold flex items-center gap-2">
-          <span class="text-neon font-mono text-sm">⟨/⟩</span> Hardware–Software Connection
-        </h3>
-        <p class="text-sm text-slate-400 mt-3 leading-relaxed">
-          The system closes the loop between mind and machine across three layers. The headset handles analog
-          front-end amplification and digitization; Python owns parsing, filtering, and the focus algorithm; the
-          ESP32 owns real-time actuation. Keeping the microcontroller "dumb" — it receives only a pre-computed
-          focus byte — makes the firmware deterministic and the control latency negligible, while all heavy
-          signal processing stays on the host where it can be iterated quickly.
-        </p>
-        <div class="mt-4 font-mono text-[11px] text-slate-500 bg-ink rounded-md border border-edge p-3 overflow-x-auto">
-          <span class="text-neon">EEG</span> → Bluetooth 57600 → <span class="text-neon">Python</span> → USB 115200 → <span class="text-neon">ESP32</span> → PWM 25kHz → <span class="text-neon">Fan</span> → 🏐
-        </div>
-      </div>
-      <div class="reveal reveal-delay-1 bg-panel border border-edge rounded-lg p-6 card-hover">
-        <h3 class="text-white font-semibold flex items-center gap-2">
-          <span class="text-neon font-mono text-sm">📊</span> Live Research Dashboard
-        </h3>
-        <p class="text-sm text-slate-400 mt-3 leading-relaxed">
-          A real-time Matplotlib dashboard visualizes the session: a polar radar of all 8 brainwave bands,
-          a rolling band timeline, and a quantitative focus trend with goal threshold. Every packet is logged
-          to CSV for offline analysis, blink events are counted from raw signal spikes, and signal quality is
-          monitored continuously with automatic headset reconnection on dropout.
-        </p>
-        <div class="mt-4 flex flex-wrap gap-2">
-          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">Threaded ingestion</span>
-          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">Checksum validation</span>
-          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">CSV logging</span>
-          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">Auto-reconnect</span>
-        </div>
-      </div>
+    <div class="badges reveal">
+      <span class="badge"><b data-i18n="badge_degree_k">Double Degree</b> · <span data-i18n="badge_degree_v">UoD × THM Germany</span></span>
+      <span class="badge"><b data-i18n="badge_grad_k">Graduating</b> · 2027</span>
+      <span class="badge"><b data-i18n="badge_loc_k">Based in</b> · <span data-i18n="badge_loc_v">Duhok, Iraq</span></span>
     </div>
-
-    <div class="reveal mt-8">
-      <a href="https://github.com/aliazhardewali-pixel/EEG-Levitation-BCI" target="_blank" rel="noopener"
-         class="inline-flex items-center gap-2 font-mono text-sm text-neon hover:text-white transition-colors">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-1.94c-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.7 5.38-5.26 5.67.41.35.77 1.05.77 2.12v3.14c0 .3.21.66.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
-        View source on GitHub →
-      </a>
+    <div class="btn-row reveal">
+      <a href="#projects" class="btn btn-primary" data-i18n="hero_cta1">View Projects</a>
+      <a href="#contact" class="btn btn-ghost" data-i18n="hero_cta2">Get in Touch</a>
+    </div>
+    <div class="stats reveal">
+      <div class="stat"><div class="num">6+</div><div class="lbl" data-i18n="stat_projects">Projects</div></div>
+      <div class="stat"><div class="num">1</div><div class="lbl" data-i18n="stat_intern">Internship</div></div>
+      <div class="stat"><div class="num">3</div><div class="lbl" data-i18n="stat_langs">Languages</div></div>
+      <div class="stat"><div class="num">2027</div><div class="lbl" data-i18n="stat_grad">Graduation</div></div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ MORE PROJECTS ═══════════════ -->
-<section id="more-projects" class="py-24 border-t border-edge">
-  <div class="max-w-6xl mx-auto px-5 sm:px-8">
-    <p class="reveal font-mono text-neon text-sm tracking-widest mb-3">// MORE PROJECTS</p>
-    <h2 class="reveal text-3xl sm:text-4xl font-bold text-white tracking-tight">Other Builds</h2>
-
-    <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-      <!-- PID Fan Control -->
-      <div class="reveal bg-panel border border-edge rounded-lg p-6 card-hover flex flex-col">
-        <span class="font-mono text-neon text-xs">CONTROL SYSTEMS</span>
-        <h3 class="text-white font-semibold mt-2">Closed-Loop PID Fan Speed Control</h3>
-        <p class="text-sm text-slate-400 mt-3 leading-relaxed flex-1">
-          A closed-loop RPM controller on an Arduino Nano. A hall-effect sensor measures actual fan
-          speed via interrupt-driven pulse counting, and a tuned PID loop adjusts PWM output to hold
-          a target RPM set by potentiometer or push buttons. A 16×2 I²C LCD shows setpoint vs. actual
-          speed live, with LED indicators for speed zones and anti-windup on the integral term.
-        </p>
-        <div class="mt-4 flex flex-wrap gap-2">
-          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">PID Control</span>
-          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">Hall Sensor</span>
-          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">Interrupts</span>
-          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">I²C LCD</span>
+<!-- ═══════ ABOUT / EDUCATION ═══════ -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow" data-i18n="about_eyebrow">About</p>
+      <h2 data-i18n="about_title">Education &amp; Background</h2>
+    </div>
+    <div class="grid g2">
+      <div class="edu-card reveal">
+        <div class="deg" data-i18n="edu_deg">B.Sc. Biomedical Engineering</div>
+        <div class="school" data-i18n="edu_school">University of Duhok (UoD) &amp; TH Mittelhessen (THM), Germany</div>
+        <div class="meta" data-i18n="edu_meta">Double-degree program · 4th-year student · Expected graduation 2027</div>
+        <div class="plain-list">
+          <div class="li" data-i18n="edu_li1">International double-degree curriculum taught fully in English.</div>
+          <div class="li" data-i18n="edu_li2">Focus on medical devices, signal processing, and embedded systems.</div>
+          <div class="li" data-i18n="edu_li3">Secondary education: Werar High School (2023).</div>
         </div>
       </div>
-
-      <!-- Microprocessor Fan Controller -->
-      <div class="reveal reveal-delay-1 bg-panel border border-edge rounded-lg p-6 card-hover flex flex-col">
-        <span class="font-mono text-neon text-xs">MICROPROCESSORS</span>
-        <h3 class="text-white font-semibold mt-2">6-Level DC Motor Speed Controller</h3>
-        <p class="text-sm text-slate-400 mt-3 leading-relaxed flex-1">
-          A dual-input motor controller with six calibrated PWM speed levels driven through a
-          transistor stage. Speed can be set either by potentiometer (mapped into discrete level
-          slices) or by up/down push buttons — the system arbitrates between them and takes the
-          higher level. An LED bar displays the active level, with dedicated ON/OFF status indicators.
-        </p>
-        <div class="mt-4 flex flex-wrap gap-2">
-          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">PWM</span>
-          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">ADC Mapping</span>
-          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">Transistor Driver</span>
-          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">Arduino</span>
-        </div>
-      </div>
-
-      <!-- C++ Calculator -->
-      <div class="reveal reveal-delay-2 bg-panel border border-edge rounded-lg p-6 card-hover flex flex-col">
-        <span class="font-mono text-neon text-xs">SOFTWARE</span>
-        <h3 class="text-white font-semibold mt-2">C++ Calculator</h3>
-        <p class="text-sm text-slate-400 mt-3 leading-relaxed flex-1">
-          A console calculator written from scratch in C++ handling arithmetic operations with
-          input validation and clean control flow. A foundational project in structured programming —
-          functions, operator handling, and edge cases like division by zero — that built the C++
-          fluency now applied to embedded firmware.
-        </p>
-        <div class="mt-4 flex flex-wrap gap-2">
-          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">C++</span>
-          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">Control Flow</span>
-          <span class="font-mono text-[11px] px-2.5 py-1 rounded bg-neondim text-neon border border-neon/20">Input Validation</span>
+      <div class="card reveal" style="display:flex;flex-direction:column;justify-content:center;">
+        <p class="tag" data-i18n="milestone_tag">Upcoming</p>
+        <h3 data-i18n="milestone_title">German Internship — 2027</h3>
+        <p data-i18n="milestone_body">A six-month biomedical engineering internship in Germany, as part of the double-degree program.</p>
+        <div class="chips">
+          <span class="chip" data-i18n="chip_designday">13th Engineering Design Day · UoD</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ SKILLS ═══════════════ -->
-<section id="skills" class="py-24 border-t border-edge">
-  <div class="max-w-6xl mx-auto px-5 sm:px-8">
-    <p class="reveal font-mono text-neon text-sm tracking-widest mb-3">// CAPABILITIES</p>
-    <h2 class="reveal text-3xl sm:text-4xl font-bold text-white tracking-tight">Skills & Interests</h2>
-
-    <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-      <div class="reveal bg-panel border border-edge rounded-lg p-6 card-hover">
-        <div class="w-10 h-10 rounded-md bg-neondim border border-neon/20 flex items-center justify-center font-mono text-neon text-sm mb-4">C++</div>
-        <h3 class="text-white font-semibold text-sm">C / C++</h3>
-        <p class="text-xs text-slate-400 mt-2 leading-relaxed">Firmware development on ESP32 — PWM control, serial protocols, non-blocking real-time loops.</p>
-      </div>
-      <div class="reveal reveal-delay-1 bg-panel border border-edge rounded-lg p-6 card-hover">
-        <div class="w-10 h-10 rounded-md bg-neondim border border-neon/20 flex items-center justify-center font-mono text-neon text-sm mb-4">Py</div>
-        <h3 class="text-white font-semibold text-sm">Python</h3>
-        <p class="text-xs text-slate-400 mt-2 leading-relaxed">NumPy, Matplotlib, PySerial, multithreading — real-time data pipelines and scientific visualization.</p>
-      </div>
-      <div class="reveal reveal-delay-2 bg-panel border border-edge rounded-lg p-6 card-hover">
-        <div class="w-10 h-10 rounded-md bg-neondim border border-neon/20 flex items-center justify-center font-mono text-neon text-sm mb-4">⚙</div>
-        <h3 class="text-white font-semibold text-sm">Embedded Systems</h3>
-        <p class="text-xs text-slate-400 mt-2 leading-relaxed">Microcontroller integration, sensor interfacing, UART/Bluetooth comms, hardware calibration.</p>
-      </div>
-      <div class="reveal reveal-delay-3 bg-panel border border-edge rounded-lg p-6 card-hover">
-        <div class="w-10 h-10 rounded-md bg-neondim border border-neon/20 flex items-center justify-center font-mono text-neon text-sm mb-4">∿</div>
-        <h3 class="text-white font-semibold text-sm">Biomedical Signal Processing</h3>
-        <p class="text-xs text-slate-400 mt-2 leading-relaxed">EEG band analysis, artifact/blink detection, feature extraction, normalization and smoothing.</p>
-      </div>
+<!-- ═══════ EXPERIENCE ═══════ -->
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow" data-i18n="exp_eyebrow">Experience</p>
+      <h2 data-i18n="exp_title">Professional Experience</h2>
     </div>
-
-    <div class="reveal mt-8 flex flex-wrap gap-2.5">
-      <span class="font-mono text-xs px-3 py-1.5 rounded-full border border-edge text-slate-400">Brain-Computer Interfaces</span>
-      <span class="font-mono text-xs px-3 py-1.5 rounded-full border border-edge text-slate-400">Neurotechnology</span>
-      <span class="font-mono text-xs px-3 py-1.5 rounded-full border border-edge text-slate-400">3D Printing</span>
-      <span class="font-mono text-xs px-3 py-1.5 rounded-full border border-edge text-slate-400">Control Systems</span>
-      <span class="font-mono text-xs px-3 py-1.5 rounded-full border border-edge text-slate-400">Data Visualization</span>
-      <span class="font-mono text-xs px-3 py-1.5 rounded-full border border-edge text-slate-400">Human-Machine Interaction</span>
+    <div class="tl reveal">
+      <div class="tl-item">
+        <div class="when">2025 · Jul – Sep</div>
+        <h3 data-i18n="exp1_role">Biomedical Engineering Intern</h3>
+        <div class="org" data-i18n="exp1_org">Dr. Ghazi Hospital</div>
+        <p data-i18n="exp1_body">Hands-on training in the operation, repair, calibration, and installation of clinical medical devices — supervised by Eng. Mohammed Mizori, under hospital CEO Dr. Abdullah Abdullah, and recognized for professional conduct and commitment to hospital safety standards.</p>
+        <p data-i18n="exp1_body2">As part of the same training: maintenance and inspection of high-capacity oxygen and CO₂ generation plants, plus troubleshooting of hospital-wide medical vacuum systems used in critical care.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ CONTACT ═══════════════ -->
-<section id="contact" class="py-24 border-t border-edge">
-  <div class="max-w-6xl mx-auto px-5 sm:px-8">
-    <p class="reveal font-mono text-neon text-sm tracking-widest mb-3">// CONTACT</p>
-    <h2 class="reveal text-3xl sm:text-4xl font-bold text-white tracking-tight">Let's Build Something</h2>
-    <p class="reveal reveal-delay-1 mt-4 max-w-2xl text-slate-400">
-      Open to research collaborations, internships, and interesting problems at the intersection of biology and engineering.
-    </p>
+<!-- ═══════ PROJECTS ═══════ -->
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow" data-i18n="proj_eyebrow">Projects</p>
+      <h2 data-i18n="proj_title">Technical Projects</h2>
+    </div>
+    <div class="grid g2">
+      <div class="card reveal">
+        <p class="tag" data-i18n="proj1_tag">Brain-Computer Interface</p>
+        <h3 data-i18n="proj1_title">EEG-Controlled Aerodynamic Levitation</h3>
+        <p data-i18n="proj1_body">A NeuroSky EEG headset streams brainwave data to a Python engine that measures focus in real time and drives an ESP32-controlled fan — the harder you focus, the higher a ping-pong ball floats. Full pipeline: acquisition, signal parsing, and motor control.</p>
+        <div class="chips"><span class="chip">EEG</span><span class="chip">ESP32</span><span class="chip">Python</span><span class="chip">Signal Processing</span></div>
+      </div>
+      <div class="card reveal">
+        <p class="tag" data-i18n="proj2_tag">Bio-Signal Hardware</p>
+        <h3 data-i18n="proj2_title">ECG Monitor Design</h3>
+        <p data-i18n="proj2_body">Engineered a functional, simplified electrocardiogram (ECG) device using three bio-potential electrodes to capture and display the heart's electrical signal.</p>
+        <div class="chips"><span class="chip">ECG</span><span class="chip" data-i18n="chip_biopot">Bio-potential</span><span class="chip" data-i18n="chip_circuit">Circuit Design</span></div>
+      </div>
+      <div class="card reveal">
+        <p class="tag" data-i18n="proj3_tag">Embedded Control</p>
+        <h3 data-i18n="proj3_title">Microcontroller Motor Control</h3>
+        <p data-i18n="proj3_body">Designed DC motor speed-control systems on Arduino Uno, Nano, and ESP32, using push-buttons and potentiometers for variable speed regulation, with closed-loop PID control and live LCD feedback.</p>
+        <div class="chips"><span class="chip">Arduino</span><span class="chip">PWM</span><span class="chip">PID</span></div>
+      </div>
+      <div class="card reveal">
+        <p class="tag" data-i18n="proj4_tag">Simulation</p>
+        <h3 data-i18n="proj4_title">Multibody System Simulations</h3>
+        <p data-i18n="proj4_body">Modeled and analyzed mechanical systems in Dymola, focusing on mechanical joints such as prismatic joints and spring systems.</p>
+        <div class="chips"><span class="chip">Dymola</span><span class="chip" data-i18n="chip_modelica">Modelica</span></div>
+      </div>
+      <div class="card reveal">
+        <p class="tag" data-i18n="proj5_tag">Clinical Software</p>
+        <h3 data-i18n="proj5_title">Patient Intake Sheet Tool</h3>
+        <p data-i18n="proj5_body">A browser tool I built for physicians — fill in patient data and print a clean one-page intake sheet.</p>
+        <div class="chips"><span class="chip">HTML</span></div>
+      </div>
+      <div class="card reveal">
+        <p class="tag" data-i18n="proj6_tag">Software</p>
+        <h3 data-i18n="proj6_title">C++ Calculator</h3>
+        <p data-i18n="proj6_body">A console calculator built from scratch in C++ with arithmetic operations, input validation, and clean control flow — a foundation project in structured programming.</p>
+        <div class="chips"><span class="chip">C++</span><span class="chip" data-i18n="chip_ctrl">Control Flow</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <div class="mt-12 grid grid-cols-1 lg:grid-cols-5 gap-8">
-      <!-- Form -->
-      <form id="contactForm" class="reveal lg:col-span-3 bg-panel border border-edge rounded-lg p-6 sm:p-8 space-y-5">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          <div>
-            <label for="name" class="block font-mono text-xs text-slate-500 mb-2">NAME</label>
-            <input id="name" type="text" required placeholder="Jane Doe"
-              class="w-full bg-ink border border-edge rounded-md px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-neon/60 focus:ring-1 focus:ring-neon/30 transition-colors">
-          </div>
-          <div>
-            <label for="email" class="block font-mono text-xs text-slate-500 mb-2">EMAIL</label>
-            <input id="email" type="email" required placeholder="jane@example.com"
-              class="w-full bg-ink border border-edge rounded-md px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-neon/60 focus:ring-1 focus:ring-neon/30 transition-colors">
-          </div>
+<!-- ═══════ SKILLS ═══════ -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow" data-i18n="skills_eyebrow">Skills</p>
+      <h2 data-i18n="skills_title">Technical Skills</h2>
+    </div>
+    <div class="grid g4">
+      <div class="card reveal">
+        <h4 data-i18n="sk1_cat">Programming</h4>
+        <div class="chips"><span class="chip">C++</span><span class="chip">Python</span></div>
+      </div>
+      <div class="card reveal">
+        <h4 data-i18n="sk2_cat">Engineering Software</h4>
+        <div class="chips"><span class="chip">MATLAB</span><span class="chip">Dymola</span><span class="chip">PlatformIO</span><span class="chip">Arduino IDE</span><span class="chip">Visual Studio</span></div>
+      </div>
+      <div class="card reveal">
+        <h4 data-i18n="sk3_cat">Hardware &amp; Embedded</h4>
+        <div class="chips"><span class="chip">ESP32</span><span class="chip">Arduino</span><span class="chip" data-i18n="chip_circuitd">Circuit Design</span></div>
+      </div>
+      <div class="card reveal">
+        <h4 data-i18n="sk4_cat">Data &amp; Productivity</h4>
+        <div class="chips"><span class="chip">Power BI</span><span class="chip">MS Office</span></div>
+      </div>
+    </div>
+
+    <!-- Certifications + Languages -->
+    <div class="grid g2" style="margin-top:18px;">
+      <div class="card reveal">
+        <p class="tag" data-i18n="cert_tag">Certifications &amp; Training</p>
+        <div class="plain-list">
+          <div class="li" data-i18n="cert0">Certificate of Participation — 13th Engineering Design Day, University of Duhok.</div>
+          <div class="li" data-i18n="cert1">Leadership Training (22h) — Kurdistan Students Development Organization, 2023.</div>
+          <div class="li" data-i18n="cert2">Rules of Success Course (7h) — Infinity Organization for Civil Development, 2020.</div>
+          <div class="li" data-i18n="cert3">English Language Training — Da Vinci Institute, 2020.</div>
         </div>
-        <div>
-          <label for="message" class="block font-mono text-xs text-slate-500 mb-2">MESSAGE</label>
-          <textarea id="message" rows="4" required placeholder="Tell me about your project…"
-            class="w-full bg-ink border border-edge rounded-md px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-neon/60 focus:ring-1 focus:ring-neon/30 transition-colors resize-none"></textarea>
+      </div>
+      <div class="card reveal">
+        <p class="tag" data-i18n="lang_tag">Languages</p>
+        <div class="plain-list">
+          <div class="li"><span data-i18n="lang1">Kurdish (Badini) — Native</span></div>
+          <div class="li"><span data-i18n="lang2">Arabic — Fluent</span></div>
+          <div class="li"><span data-i18n="lang3">English — Fluent · full degree taught in English</span></div>
+          <div class="li"><span data-i18n="lang4">Next up: German &amp; Sorani (future goals)</span></div>
         </div>
-        <button type="submit"
-          class="w-full sm:w-auto px-8 py-3 rounded-md bg-neon text-ink font-semibold text-sm hover:bg-white transition-colors">
-          Send Message
-        </button>
-        <p id="formStatus" class="hidden font-mono text-xs text-neon">✓ Message ready — this demo form opens your email client.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ INTERESTS ═══════ -->
+<section id="interests">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow" data-i18n="int_eyebrow">Beyond Engineering</p>
+      <h2 data-i18n="int_title">Interests &amp; Hobbies</h2>
+    </div>
+    <div class="pills reveal">
+      <span class="pill" data-i18n="int1">⚽ FC Barcelona supporter</span>
+      <span class="pill" data-i18n="int2">🇩🇪 Germany national football team</span>
+      <span class="pill" data-i18n="int3">🪐 Science fiction &amp; mystery (Dune, Sherlock Holmes)</span>
+      <span class="pill" data-i18n="int4">🐉 Game of Thrones</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CONTACT ═══════ -->
+<section id="contact">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow" data-i18n="contact_eyebrow">Contact</p>
+      <h2 data-i18n="contact_title">Let's Connect</h2>
+      <p class="body" data-i18n="contact_body">Open to research collaborations, internships, and interesting problems at the intersection of biology and engineering.</p>
+    </div>
+    <div class="contact-grid">
+      <form class="card reveal" id="contactForm">
+        <input type="text" id="cName" data-i18n-ph="form_name" placeholder="Your name" required>
+        <input type="email" id="cEmail" data-i18n-ph="form_email" placeholder="Your email" required>
+        <textarea id="cMsg" rows="4" data-i18n-ph="form_msg" placeholder="Your message…" required></textarea>
+        <button type="submit" class="btn btn-primary" data-i18n="form_send">Send Message</button>
       </form>
-
-      <!-- Links -->
-      <div class="reveal reveal-delay-1 lg:col-span-2 space-y-4">
-        <a href="https://github.com/aliazhardewali-pixel/EEG-Levitation-BCI" target="_blank" rel="noopener"
-           class="flex items-center gap-4 bg-panel border border-edge rounded-lg p-5 card-hover group">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-slate-400 group-hover:text-neon transition-colors shrink-0"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-1.94c-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.7 5.38-5.26 5.67.41.35.77 1.05.77 2.12v3.14c0 .3.21.66.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
-          <div>
-            <p class="text-white text-sm font-semibold">GitHub</p>
-            <p class="font-mono text-xs text-slate-500 group-hover:text-neon/70 transition-colors">EEG-Levitation-BCI</p>
-          </div>
+      <div class="reveal" style="display:grid; gap:14px; align-content:start;">
+        <a href="mailto:ali.azhar.dewali@gmail.com" class="contact-card">
+          <span class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="18" height="14" rx="2"/><path d="m2 6 9 6 9-6"/></svg></span>
+          <span><span class="t" data-i18n="cc_email">Email</span><br><span class="s">ali.azhar.dewali@gmail.com</span></span>
         </a>
-        <a href="mailto:ali.azhar.dewali@gmail.com"
-           class="flex items-center gap-4 bg-panel border border-edge rounded-lg p-5 card-hover group">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-slate-400 group-hover:text-neon transition-colors shrink-0"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-          <div>
-            <p class="text-white text-sm font-semibold">Email</p>
-            <p class="font-mono text-xs text-slate-500 group-hover:text-neon/70 transition-colors">ali.azhar.dewali@gmail.com</p>
-          </div>
+        <a href="https://github.com/aliazhardewali-pixel" target="_blank" rel="noopener" class="contact-card">
+          <span class="ic"><svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-1.94c-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.7 5.38-5.26 5.67.41.35.77 1.05.77 2.12v3.14c0 .3.21.66.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg></span>
+          <span><span class="t">GitHub</span><br><span class="s">@aliazhardewali-pixel</span></span>
         </a>
-        <div class="bg-panel border border-edge rounded-lg p-5">
-          <p class="font-mono text-xs text-slate-500 leading-relaxed">
-            <span class="text-neon">$</span> status<br>
-            <span class="text-slate-300">→ open to opportunities</span><br>
-            <span class="text-slate-300">→ response time: &lt; 24h</span>
-          </p>
-        </div>
+        <a href="https://instagram.com/aliii.azharr" target="_blank" rel="noopener" class="contact-card">
+          <span class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></span>
+          <span><span class="t">Instagram</span><br><span class="s">@aliii.azharr</span></span>
+        </a>
+        <a href="#" class="contact-card">
+          <span class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M11 2a9 9 0 1 0 0 18 9 9 0 0 0 0-18z"/><path d="M11 6v5l3 2"/></svg></span>
+          <span><span class="t" data-i18n="cc_loc">Location</span><br><span class="s" data-i18n="cc_loc_v">Duhok, Kurdistan Region, Iraq</span></span>
+        </a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ FOOTER ═══════════════ -->
-<footer class="border-t border-edge py-8">
-  <div class="max-w-6xl mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
-    <p class="font-mono text-xs text-slate-600">© 2026 Ali Azhar Dewali</p>
-    <p class="font-mono text-xs text-slate-600">Designed & built with signal — not noise.</p>
+<footer>
+  <div class="wrap">
+    <p data-i18n="footer">© 2026 Ali Azhar Dewali · Biomedical Engineering</p>
   </div>
 </footer>
 
+<button id="toTop" aria-label="Back to top">
+  <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 16V5M5 10l5-5 5 5"/></svg>
+</button>
+
 <script>
-// ── Scroll fade-in via IntersectionObserver ──
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
+// ════════════ TRANSLATIONS ════════════
+const I18N = {
+  en: {
+    nav_about:"About", nav_exp:"Experience", nav_projects:"Projects", nav_skills:"Skills", nav_contact:"Contact",
+    hero_eyebrow:"Biomedical Engineering",
+    hero_tagline:"Biomedical engineer bridging medicine and machines — brain-computer interfaces, embedded systems, and biomedical signal processing.",
+    hero_summary:"Fourth-year Biomedical Engineering student in a double-degree program between the University of Duhok and TH Mittelhessen (Germany). I design end-to-end systems — from bio-signal acquisition to firmware that controls real hardware.",
+    badge_degree_k:"Double Degree", badge_degree_v:"UoD × THM Germany", badge_grad_k:"Graduating", badge_loc_k:"Based in", badge_loc_v:"Duhok, Iraq",
+    hero_cta1:"View Projects", hero_cta2:"Get in Touch",
+    about_eyebrow:"About", about_title:"Education & Background",
+    edu_deg:"B.Sc. Biomedical Engineering", edu_school:"University of Duhok (UoD) & TH Mittelhessen (THM), Germany",
+    edu_meta:"Double-degree program · 4th-year student · Expected graduation 2027",
+    edu_li1:"International double-degree curriculum taught fully in English.",
+    edu_li2:"Focus on medical devices, signal processing, and embedded systems.",
+    edu_li3:"Secondary education: Werar High School (2023).",
+    milestone_tag:"Upcoming", milestone_title:"German Internship — 2027",
+    milestone_body:"A six-month biomedical engineering internship in Germany, as part of the double-degree program.",
+    chip_designday:"13th Engineering Design Day · UoD",
+    exp_eyebrow:"Experience", exp_title:"Professional Experience",
+    exp1_role:"Biomedical Engineering Intern", exp1_org:"Dr. Ghazi Hospital",
+    exp1_body:"Hands-on training in the operation, repair, calibration, and installation of clinical medical devices — supervised by Eng. Mohammed Mizori, under hospital CEO Dr. Abdullah Abdullah, and recognized for professional conduct and commitment to hospital safety standards.",
+    exp1_body2:"As part of the same training: maintenance and inspection of high-capacity oxygen and CO₂ generation plants, plus troubleshooting of hospital-wide medical vacuum systems used in critical care.",
+    proj_eyebrow:"Projects", proj_title:"Technical Projects",
+    proj1_tag:"Brain-Computer Interface", proj1_title:"EEG-Controlled Aerodynamic Levitation",
+    proj1_body:"A NeuroSky EEG headset streams brainwave data to a Python engine that measures focus in real time and drives an ESP32-controlled fan — the harder you focus, the higher a ping-pong ball floats. Full pipeline: acquisition, signal parsing, and motor control.",
+    proj2_tag:"Bio-Signal Hardware", proj2_title:"ECG Monitor Design",
+    proj2_body:"Engineered a functional, simplified electrocardiogram (ECG) device using three bio-potential electrodes to capture and display the heart's electrical signal.",
+    chip_biopot:"Bio-potential", chip_circuit:"Circuit Design",
+    proj3_tag:"Embedded Control", proj3_title:"Microcontroller Motor Control",
+    proj3_body:"Designed DC motor speed-control systems on Arduino Uno, Nano, and ESP32, using push-buttons and potentiometers for variable speed regulation, with closed-loop PID control and live LCD feedback.",
+    proj4_tag:"Simulation", proj4_title:"Multibody System Simulations",
+    proj4_body:"Modeled and analyzed mechanical systems in Dymola, focusing on mechanical joints such as prismatic joints and spring systems.",
+    chip_modelica:"Modelica",
+    proj5_tag:"Clinical Software", proj5_title:"Patient Intake Sheet Tool",
+    proj5_body:"A browser tool I built for physicians — fill in patient data and print a clean one-page intake sheet.",
+    proj6_tag:"Software", proj6_title:"C++ Calculator",
+    proj6_body:"A console calculator built from scratch in C++ with arithmetic operations, input validation, and clean control flow — a foundation project in structured programming.",
+    chip_ctrl:"Control Flow",
+    skills_eyebrow:"Skills", skills_title:"Technical Skills",
+    sk1_cat:"Programming", sk2_cat:"Engineering Software", sk3_cat:"Hardware & Embedded", sk4_cat:"Data & Productivity",
+    chip_circuitd:"Circuit Design",
+    cert_tag:"Certifications & Training",
+    cert0:"Certificate of Participation — 13th Engineering Design Day, University of Duhok.",
+    cert1:"Leadership Training (22h) — Kurdistan Students Development Organization, 2023.",
+    cert2:"Rules of Success Course (7h) — Infinity Organization for Civil Development, 2020.",
+    cert3:"English Language Training — Da Vinci Institute, 2020.",
+    lang_tag:"Languages",
+    lang1:"Kurdish (Badini) — Native", lang2:"Arabic — Fluent",
+    lang3:"English — Fluent · full degree taught in English", lang4:"Next up: German & Sorani (future goals)",
+    int_eyebrow:"Beyond Engineering", int_title:"Interests & Hobbies",
+    int1:"⚽ FC Barcelona supporter", int2:"🇩🇪 Germany national football team",
+    int3:"🪐 Science fiction & mystery (Dune, Sherlock Holmes)", int4:"🐉 Game of Thrones",
+    contact_eyebrow:"Contact", contact_title:"Let's Connect",
+    contact_body:"Open to research collaborations, internships, and interesting problems at the intersection of biology and engineering.",
+    form_name:"Your name", form_email:"Your email", form_msg:"Your message…", form_send:"Send Message",
+    cc_email:"Email", cc_loc:"Location", cc_loc_v:"Duhok, Kurdistan Region, Iraq",
+    footer:"© 2026 Ali Azhar Dewali · Biomedical Engineering",
+    theme_cream:"Cream", theme_dark:"Dark", theme_ocean:"Ocean", theme_switch:"Theme",
+    stat_projects:"Projects", stat_intern:"Internship", stat_langs:"Languages", stat_grad:"Graduation",
+  },
+
+  ar: {
+    nav_about:"نبذة", nav_exp:"الخبرة", nav_projects:"المشاريع", nav_skills:"المهارات", nav_contact:"تواصل",
+    hero_eyebrow:"الهندسة الطبية الحيوية",
+    hero_tagline:"مهندس طبي حيوي يربط بين الطب والآلات — واجهات الدماغ والحاسوب، والأنظمة المدمجة، ومعالجة الإشارات الحيوية.",
+    hero_summary:"طالب في السنة الرابعة بهندسة الأجهزة الطبية ضمن برنامج شهادة مزدوجة بين جامعة دهوك وجامعة ميتلهيسن التقنية في ألمانيا. أصمّم أنظمة متكاملة — من التقاط الإشارات الحيوية إلى البرمجيات التي تتحكم بالعتاد الحقيقي.",
+    badge_degree_k:"شهادة مزدوجة", badge_degree_v:"دهوك × THM ألمانيا", badge_grad_k:"التخرج", badge_loc_k:"المقر", badge_loc_v:"دهوك، العراق",
+    hero_cta1:"شاهد المشاريع", hero_cta2:"تواصل معي",
+    about_eyebrow:"نبذة", about_title:"التعليم والخلفية",
+    edu_deg:"بكالوريوس هندسة طبية حيوية", edu_school:"جامعة دهوك (UoD) وجامعة ميتلهيسن التقنية (THM)، ألمانيا",
+    edu_meta:"برنامج شهادة مزدوجة · طالب سنة رابعة · التخرج المتوقع 2027",
+    edu_li1:"منهج دولي بشهادة مزدوجة يُدرَّس بالكامل باللغة الإنجليزية.",
+    edu_li2:"التركيز على الأجهزة الطبية ومعالجة الإشارات والأنظمة المدمجة.",
+    edu_li3:"التعليم الثانوي: ثانوية ويرار (2023).",
+    milestone_tag:"قادم", milestone_title:"تدريب في ألمانيا — 2027",
+    milestone_body:"تدريب لمدة ستة أشهر في الهندسة الطبية الحيوية بألمانيا، ضمن برنامج الشهادة المزدوجة.",
+    chip_designday:"يوم التصميم الهندسي 13 · دهوك",
+    exp_eyebrow:"الخبرة", exp_title:"الخبرة المهنية",
+    exp1_role:"متدرب هندسة طبية حيوية", exp1_org:"مستشفى الدكتور غازي",
+    exp1_body:"اكتسبتُ خبرة عملية في تشغيل وإصلاح ومعايرة وتركيب الأجهزة الطبية السريرية، بإشراف المهندس محمد ميزوري (المدير التنفيذي للمستشفى: د. عبدالله عبدالله)، ونلتُ تقديراً على السلوك المهني والالتزام بمعايير السلامة في المستشفى.",
+    exp1_body2:"وضمن التدريب نفسه: صيانة وفحص محطات توليد الأوكسجين وثاني أوكسيد الكربون عالية السعة، والمساعدة في إصلاح أنظمة الشفط الطبي المستخدمة في العناية الحرجة.",
+    proj_eyebrow:"المشاريع", proj_title:"المشاريع التقنية",
+    proj1_tag:"واجهة دماغ-حاسوب", proj1_title:"تحليق هوائي يتحكم به تخطيط الدماغ EEG",
+    proj1_body:"سماعة EEG من NeuroSky تبثّ بيانات موجات الدماغ إلى محرك بايثون يقيس التركيز لحظياً ويشغّل مروحة يتحكم بها ESP32 — كلما زاد تركيزك ارتفعت كرة تنس الطاولة. مسار كامل: الالتقاط، تحليل الإشارة، والتحكم بالمحرك.",
+    proj2_tag:"عتاد الإشارات الحيوية", proj2_title:"تصميم جهاز تخطيط القلب ECG",
+    proj2_body:"صمّمتُ جهاز تخطيط قلب (ECG) مبسّطاً وعملياً باستخدام ثلاثة أقطاب لالتقاط وعرض الإشارة الكهربائية للقلب.",
+    chip_biopot:"جهد حيوي", chip_circuit:"تصميم الدوائر",
+    proj3_tag:"تحكم مدمج", proj3_title:"التحكم بالمحرك عبر المتحكم الدقيق",
+    proj3_body:"صمّمتُ أنظمة تحكم بسرعة محركات التيار المستمر على Arduino Uno و Nano و ESP32، باستخدام الأزرار والمقاومات المتغيرة لتنظيم السرعة، مع تحكم PID مغلق الحلقة وعرض حي على شاشة LCD.",
+    proj4_tag:"محاكاة", proj4_title:"محاكاة الأنظمة متعددة الأجسام",
+    proj4_body:"نمذجة وتحليل أنظمة ميكانيكية في Dymola، مع التركيز على المفاصل الميكانيكية مثل المفاصل المنزلقة وأنظمة النوابض.",
+    chip_modelica:"Modelica",
+    proj5_tag:"برمجيات سريرية", proj5_title:"أداة صفحة استقبال المريض",
+    proj5_body:"أداة عبر المتصفح بنيتها للأطباء — لإدخال بيانات المريض وطباعة صفحة استقبال أنيقة من صفحة واحدة.",
+    proj6_tag:"برمجيات", proj6_title:"آلة حاسبة بلغة ++C",
+    proj6_body:"آلة حاسبة طرفية بُنيت من الصفر بلغة ++C مع عمليات حسابية والتحقق من المدخلات وتدفق تحكم نظيف — مشروع أساسي في البرمجة المنظمة.",
+    chip_ctrl:"تدفق التحكم",
+    skills_eyebrow:"المهارات", skills_title:"المهارات التقنية",
+    sk1_cat:"البرمجة", sk2_cat:"برمجيات هندسية", sk3_cat:"العتاد والأنظمة المدمجة", sk4_cat:"البيانات والإنتاجية",
+    chip_circuitd:"تصميم الدوائر",
+    cert_tag:"الشهادات والتدريب",
+    cert0:"شهادة مشاركة — يوم التصميم الهندسي الثالث عشر، جامعة دهوك.",
+    cert1:"تدريب على القيادة (22 ساعة) — منظمة تطوير الطلبة في كردستان، 2023.",
+    cert2:"دورة قواعد النجاح (7 ساعات) — منظمة إنفينيتي للتنمية المدنية، 2020.",
+    cert3:"تدريب على اللغة الإنجليزية — معهد دافنشي، 2020.",
+    lang_tag:"اللغات",
+    lang1:"الكردية (البادينية) — اللغة الأم", lang2:"العربية — بطلاقة",
+    lang3:"الإنجليزية — بطلاقة · الدراسة كاملة بالإنجليزية", lang4:"لاحقاً: الألمانية والسورانية (أهداف مستقبلية)",
+    int_eyebrow:"ما وراء الهندسة", int_title:"الاهتمامات والهوايات",
+    int1:"⚽ مشجع لبرشلونة", int2:"🇩🇪 منتخب ألمانيا لكرة القدم",
+    int3:"🪐 الخيال العلمي والألغاز (Dune، شيرلوك هولمز)", int4:"🐉 صراع العروش (Game of Thrones)",
+    contact_eyebrow:"تواصل", contact_title:"لنتواصل",
+    contact_body:"منفتح على التعاون البحثي والتدريب والمشاكل المثيرة عند تقاطع الأحياء والهندسة.",
+    form_name:"اسمك", form_email:"بريدك الإلكتروني", form_msg:"رسالتك…", form_send:"إرسال الرسالة",
+    cc_email:"البريد الإلكتروني", cc_loc:"الموقع", cc_loc_v:"دهوك، إقليم كردستان، العراق",
+    footer:"© 2026 علي أزهر ديوالي · الهندسة الطبية الحيوية",
+    theme_cream:"كريمي", theme_dark:"داكن", theme_ocean:"محيطي", theme_switch:"السمة",
+    stat_projects:"مشاريع", stat_intern:"تدريب", stat_langs:"لغات", stat_grad:"التخرج",
+  },
+
+  bad: {
+    nav_about:"دەربارە", nav_exp:"شارەزایی", nav_projects:"پرۆژە", nav_skills:"توانا", nav_contact:"پەیوەندی",
+    hero_eyebrow:"ئەندازیاریا بایۆمێدیکاڵ",
+    hero_tagline:"ئەندازیارێ بایۆمێدیکاڵ — پرەک د ناڤبەرا پزیشکی و ئامێران دا: ڕوویێن مێشک-کۆمپیوتەر، سیستەمێن ئێمبێدد، و پرۆسێسکرنا سیگناڵێن جەستەیی.",
+    hero_summary:"خواندکارێ سالا چارێ یێ ئەندازیاریا بایۆمێدیکاڵ، د بەرنامەیێ دوو بڕوانامەیان دا د ناڤبەرا زانکۆیا دهۆک و زانکۆیا تەکنیکی یا میتڵهێسن (ئەلمانیا) دا. ئەز سیستەمێن تەمام دروست دکەم — ژ وەرگرتنا سیگناڵێن جەستەیی هەتا فیرموێرا کو کۆنترۆلا ئامێرێن ڕاستەقینە دکەت.",
+    badge_degree_k:"دوو بڕوانامە", badge_degree_v:"دهۆک × THM ئەلمانیا", badge_grad_k:"دەرچوون", badge_loc_k:"جهـ", badge_loc_v:"دهۆک، عێراق",
+    hero_cta1:"پرۆژان ببینە", hero_cta2:"پەیوەندیێ بکە",
+    about_eyebrow:"دەربارە", about_title:"خواندن و پاشخان",
+    edu_deg:"بەکالۆریۆس د ئەندازیاریا بایۆمێدیکاڵ دا", edu_school:"زانکۆیا دهۆک (UoD) و زانکۆیا تەکنیکی یا میتڵهێسن (THM)، ئەلمانیا",
+    edu_meta:"بەرنامەیێ دوو بڕوانامەیان · خواندکارێ سالا چارێ · دەرچوون 2027",
+    edu_li1:"پرۆگرامەکێ نێڤدەوڵەتی یێ دوو بڕوانامەیان — خواندن هەمی ب ئینگلیزی یە.",
+    edu_li2:"سەرنج ل سەر ئامێرێن پزیشکی، پرۆسێسکرنا ئاماژە، و سیستەمێن ئێمبێدد.",
+    edu_li3:"خواندنا ئامادەیی: ئامادەیا وەرار (2023).",
+    milestone_tag:"دێ هێت", milestone_title:"ستاژ ل ئەلمانیا — 2027",
+    milestone_body:"ستاژەکێ شەش هەیڤا یێ ئەندازیاریا بایۆمێدیکاڵ ل ئەلمانیا، وەکی پشکەک ژ بەرنامەیێ دوو بڕوانامەیان.",
+    chip_designday:"ڕۆژا دیزاینا ئەندازیاری یا 13 · زانکۆیا دهۆک",
+    exp_eyebrow:"شارەزایی", exp_title:"شارەزاییا پیشەیی",
+    exp1_role:"ستاژیێرێ ئەندازیاریا بایۆمێدیکاڵ", exp1_org:"نەخۆشخانا د. غازی",
+    exp1_body:"شارەزاییا دەستی د بکارئینان، چاکرن، عەیارکرن و دانانا ئامێرێن پزیشکی دا — ب سەرپەرشتیا ئەندازیار محەمەد میزۆری (سەرۆکێ نەخۆشخانێ: د. عەبدوڵا عەبدوڵا)، و هاتمە پەسنکرن بۆ ڕەفتارا پیشەیی و پابەندبوونا ب سەلامەتیا نەخۆشخانێ.",
+    exp1_body2:"د هەمان ستاژی دا: چاڤدێری و پشکنینا وێستگەهێن ئۆکسجینێ و CO₂ یێن مەزن، و چاکرنا سیستەمێن ڤاکیومێ پزیشکی یێن نەخۆشخانێ.",
+    proj_eyebrow:"پرۆژە", proj_title:"پرۆژێن تەکنیکی",
+    proj1_tag:"ڕوویا مێشک-کۆمپیوتەر", proj1_title:"فڕینا هەوایی یا ب EEG کۆنترۆلکری",
+    proj1_body:"هێدسێتا EEG یا NeuroSky داتایێن پێلێن مێشکی دهنێریتە پرۆگرامەکێ پایتۆنێ کو ڕادەیا سەرنجدانێ ب دەمێ ڕاست دپیڤیت و پەنکەیەکا ب ESP32 کۆنترۆلکری دخەبیتینیت — چەند تو پتر سەرنجێ بدەی، تۆپا پینگ-پۆنگێ بلندتر دبیت. زنجیرەکا تەواو: وەرگرتن، شیکارا سیگناڵێ، و کۆنترۆلا مۆتۆرێ.",
+    proj2_tag:"هاردوێرا سیگناڵێن جەستەیی", proj2_title:"دیزاینا ئامێرا ECG",
+    proj2_body:"ئامێرەکا ECG یا سادە و کارا دروستکر ب کارئینانا سێ ئێلێکترۆدان بۆ وەرگرتن و نیشاندانا ئاماژەیا کارەبایی یا دلی.",
+    chip_biopot:"بایۆپۆتێنشیال", chip_circuit:"دیزاینا سووڕی",
+    proj3_tag:"کۆنترۆلا ئێمبێدد", proj3_title:"کۆنترۆلا مۆتۆرێ ب مایکرۆکۆنترۆلەر",
+    proj3_body:"سیستەمێن کۆنترۆلا لەزا مۆتۆرێن DC دیزاینکرن ل سەر Arduino Uno، Nano و ESP32، ب دووگمە و پۆتانشیۆمەتەران بۆ ڕێکخستنا لەزێ، دگەل کۆنترۆلا PID و نیشاندانا زیندی ل سەر LCD.",
+    proj4_tag:"سیمولاسیۆن", proj4_title:"سیمولاسیۆنا سیستەمێن پڕجەستە",
+    proj4_body:"مۆدێلکرن و شیکارا سیستەمێن میکانیکی د Dymola دا، ب سەرنجدانا جومگەیێن میکانیکی وەکی جومگەیێن پریزماتیک و سیستەمێن سپرینگ.",
+    chip_modelica:"Modelica",
+    proj5_tag:"سۆفتوێرا کلینیکی", proj5_title:"ئامرازا پەڕەیا وەرگرتنا نەخۆشی",
+    proj5_body:"ئامرازەکا براوزەری کو من بۆ پزیشکان دروستکر — داتایێن نەخۆشی تژی بکە و پەڕەیەکا پاک یا یەک لاپەڕەیی چاپ بکە.",
+    proj6_tag:"سۆفتوێر", proj6_title:"ژمێرکارا ++C",
+    proj6_body:"ژمێرکارەکا کۆنسۆلی ژ سفرێ ب ++C دروستکری دگەل کارێن حسابی، پشکنینا داخل و ڕەوانا کۆنترۆلا پاک — پرۆژەیەکا بنەڕەتی د بەرنامەسازیا ڕێکخراوی دا.",
+    chip_ctrl:"ڕەوانا کۆنترۆل",
+    skills_eyebrow:"توانا", skills_title:"توانایێن تەکنیکی",
+    sk1_cat:"بەرنامەسازی", sk2_cat:"سۆفتوێرا ئەندازیاری", sk3_cat:"هاردوێر و ئێمبێدد", sk4_cat:"داتا و بەرهەمداری",
+    chip_circuitd:"دیزاینا سووڕی",
+    cert_tag:"بڕوانامە و ڕاهێنان",
+    cert0:"بڕوانامەیا بەشداریێ — ڕۆژا دیزاینا ئەندازیاری یا 13، زانکۆیا دهۆک.",
+    cert1:"ڕاهێنانا سەرکردایەتی (22 دەمژمێر) — ڕێکخراوا پێشڤەبرنا خواندکارێن کوردستانێ، 2023.",
+    cert2:"کۆرسا یاسایێن سەرکەفتنێ (7 دەمژمێر) — ڕێکخراوا ئینفینیتی بۆ پێشڤەبرنا شارستانی، 2020.",
+    cert3:"ڕاهێنانا زمانێ ئینگلیزی — ئینستیتیوتا دافنشی، 2020.",
+    lang_tag:"زمان",
+    lang1:"کوردی (بادینی) — زمانێ دەیکێ", lang2:"عەرەبی — ب باشی",
+    lang3:"ئینگلیزی — ب باشی · خواندن هەمی ب ئینگلیزی یە", lang4:"پاشی: ئەلمانی و سۆرانی (ئارمانجێن پاشەرۆژێ)",
+    int_eyebrow:"دەرڤەیی ئەندازیاری", int_title:"حەز و مەرەق",
+    int1:"⚽ لایەنگرێ بارشلۆنا", int2:"🇩🇪 تیما ئەلمانیا یا تۆپا پێ",
+    int3:"🪐 خەیاڵا زانستی و نهێنی (Dune، شێرلۆک هۆڵمز)", int4:"🐉 گەیم ئۆف سرۆنز (Game of Thrones)",
+    contact_eyebrow:"پەیوەندی", contact_title:"با پەیوەندیێ بکەین",
+    contact_body:"ڤەکری بۆ هەڤکارییا لێکۆلینی، ستاژ، و کێشەیێن باڵکێش ل سەر سنووری بایۆلۆجی و ئەندازیاری.",
+    form_name:"ناڤێ تە", form_email:"ئیمەیلا تە", form_msg:"پەیاما تە…", form_send:"پەیامێ بنێرە",
+    cc_email:"ئیمەیل", cc_loc:"جهـ", cc_loc_v:"دهۆک، هەرێما کوردستان، عێراق",
+    footer:"© 2026 عەلی ئەزهەر دیوالی · ئەندازیاریا بایۆمێدیکاڵ",
+    theme_cream:"کرێمی", theme_dark:"تاری", theme_ocean:"دەریایی", theme_switch:"ڕەنگ",
+    stat_projects:"پرۆژە", stat_intern:"ستاژ", stat_langs:"زمان", stat_grad:"دەرچوون",
+  },
+
+  sor: {
+    nav_about:"دەربارە", nav_exp:"شارەزایی", nav_projects:"پڕۆژەکان", nav_skills:"لێهاتووییەکان", nav_contact:"پەیوەندی",
+    hero_eyebrow:"ئەندازیاری بایۆمێدیکاڵ",
+    hero_tagline:"ئەندازیاری بایۆمێدیکاڵ کە پرد دەبەستێت لەنێوان پزیشکی و ئامێرەکان — ڕووکاری مێشک-کۆمپیوتەر، سیستەمە ئێمبێددکراوەکان، و پرۆسێسکردنی سیگناڵی بایۆلۆجی.",
+    hero_summary:"خوێندکاری ساڵی چوارەمی ئەندازیاری بایۆمێدیکاڵ لە بەرنامەیەکی بڕوانامەی دووانەدا لەنێوان زانکۆی دهۆک و زانکۆی تەکنیکی میتڵهێسن (ئەڵمانیا). سیستەمی تەواو دروست دەکەم — لە وەرگرتنی سیگناڵی بایۆلۆجییەوە تا فیرموێر کە کۆنترۆڵی هاردوێری ڕاستەقینە دەکات.",
+    badge_degree_k:"بڕوانامەی دووانە", badge_degree_v:"دهۆک × THM ئەڵمانیا", badge_grad_k:"دەرچوون", badge_loc_k:"شوێن", badge_loc_v:"دهۆک، عێراق",
+    hero_cta1:"پڕۆژەکان ببینە", hero_cta2:"پەیوەندیم پێوە بکە",
+    about_eyebrow:"دەربارە", about_title:"خوێندن و پاشخان",
+    edu_deg:"بەکالۆریۆس لە ئەندازیاری بایۆمێدیکاڵ", edu_school:"زانکۆی دهۆک (UoD) و زانکۆی تەکنیکی میتڵهێسن (THM)، ئەڵمانیا",
+    edu_meta:"بەرنامەی بڕوانامەی دووانە · خوێندکاری ساڵی چوارەم · دەرچوونی چاوەڕوانکراو 2027",
+    edu_li1:"پڕۆگرامێکی نێودەوڵەتی بڕوانامەی دووانە — خوێندنەکە بە تەواوی بە ئینگلیزییە.",
+    edu_li2:"جەخت لەسەر ئامێرە پزیشکییەکان، پرۆسێسکردنی سیگناڵ، و سیستەمە ئێمبێددکراوەکان.",
+    edu_li3:"خوێندنی ئامادەیی: ئامادەیی وەرار (2023).",
+    milestone_tag:"داهاتوو", milestone_title:"مەشقی پیشەیی لە ئەڵمانیا — 2027",
+    milestone_body:"مەشقێکی شەش مانگی ئەندازیاری بایۆمێدیکاڵ لە ئەڵمانیا، وەک بەشێک لە بەرنامەی بڕوانامەی دووانە.",
+    chip_designday:"ڕۆژی دیزاینی ئەندازیاری ١٣ · زانکۆی دهۆک",
+    exp_eyebrow:"شارەزایی", exp_title:"شارەزایی پیشەیی",
+    exp1_role:"مەشقکاری ئەندازیاری بایۆمێدیکاڵ", exp1_org:"نەخۆشخانەی د. غازی",
+    exp1_body:"شارەزایی کردەیی لە بەکارهێنان، چاککردن، پێوانەکردن و دامەزراندنی ئامێرە پزیشکییەکان — بە سەرپەرشتی ئەندازیار محەمەد میزۆری (بەڕێوەبەری نەخۆشخانە: د. عەبدوڵڵا عەبدوڵڵا)، و پەسەندکرا بۆ ڕەفتاری پیشەیی و پابەندبوون بە سەلامەتی نەخۆشخانە.",
+    exp1_body2:"لە هەمان مەشقدا: چاودێری و پشکنینی وێستگەکانی ئۆکسجین و CO₂ی گەورە، و چاککردنی سیستەمەکانی ڤاکیومی پزیشکی نەخۆشخانە کە لە چاودێری چڕدا بەکاردێن.",
+    proj_eyebrow:"پڕۆژەکان", proj_title:"پڕۆژە تەکنیکییەکان",
+    proj1_tag:"ڕووکاری مێشک-کۆمپیوتەر", proj1_title:"فڕینی هەوایی بە EEG کۆنترۆڵکراو",
+    proj1_body:"هێدسێتی EEGی NeuroSky داتای شەپۆلی مێشک دەنێرێت بۆ ئەنجینێکی پایتۆن کە سەرنج بە کاتی ڕاست دەپێوێت و پەنکەیەک بە ESP32 کۆنترۆڵدەکات — هەرچەند زیاتر سەرنج بدەیت، تۆپی پینگ-پۆنگ بەرزتر دەبێتەوە. زنجیرەی تەواو: وەرگرتن، شیکاری سیگناڵ، و کۆنترۆڵی مۆتۆر.",
+    proj2_tag:"هاردوێری سیگناڵی بایۆلۆجی", proj2_title:"دیزاینی ئامێری ECG",
+    proj2_body:"ئامێرێکی ECGی سادە و کارا دروستکرا بە بەکارهێنانی سێ ئێلێکترۆد بۆ وەرگرتن و پیشاندانی سیگناڵی کارەبایی دڵ.",
+    chip_biopot:"جهدی بایۆلۆجی", chip_circuit:"دیزاینی سووڕ",
+    proj3_tag:"کۆنترۆڵی ئێمبێدد", proj3_title:"کۆنترۆڵی مۆتۆر بە مایکرۆکۆنترۆڵەر",
+    proj3_body:"سیستەمی کۆنترۆڵی خێرایی مۆتۆری DC دیزاینکرا لەسەر Arduino Uno، Nano و ESP32، بە دوگمە و پۆتانشیۆمیتەر بۆ ڕێکخستنی خێرایی، لەگەڵ کۆنترۆڵی PIDی گرێخراو و پیشاندانی زیندووی LCD.",
+    proj4_tag:"سیمولاسیۆن", proj4_title:"سیمولاسیۆنی سیستەمی فرەجەستە",
+    proj4_body:"مۆدێلکردن و شیکاری سیستەمی میکانیکی لە Dymola، بە جەخت لەسەر جومگە میکانیکییەکان وەک جومگەی پریزماتیک و سیستەمی سپرینگ.",
+    chip_modelica:"Modelica",
+    proj5_tag:"سۆفتوێری کلینیکی", proj5_title:"ئامرازی پەڕەی وەرگرتنی نەخۆش",
+    proj5_body:"ئامرازێکی وێبگەڕ کە بۆ پزیشکان دروستم کرد — داتای نەخۆش پڕبکەرەوە و پەڕەیەکی پاکی یەک لاپەڕەیی چاپ بکە.",
+    proj6_tag:"سۆفتوێر", proj6_title:"ژمێرەری ++C",
+    proj6_body:"ژمێرەرێکی کۆنسۆڵی لە سفرەوە بە ++C دروستکرا لەگەڵ کردارە بیرکارییەکان، پشکنینی داخڵ و ڕەوانی کۆنترۆڵی پاک — پڕۆژەیەکی بنەڕەتی لە پرۆگرامسازی ڕێکخراودا.",
+    chip_ctrl:"ڕەوانی کۆنترۆڵ",
+    skills_eyebrow:"لێهاتووییەکان", skills_title:"لێهاتووییە تەکنیکییەکان",
+    sk1_cat:"پرۆگرامسازی", sk2_cat:"سۆفتوێری ئەندازیاری", sk3_cat:"هاردوێر و ئێمبێدد", sk4_cat:"داتا و بەرهەمداری",
+    chip_circuitd:"دیزاینی سووڕ",
+    cert_tag:"بڕوانامە و مەشق",
+    cert0:"بڕوانامەی بەشداری — ڕۆژی دیزاینی ئەندازیاری ١٣، زانکۆی دهۆک.",
+    cert1:"مەشقی سەرکردایەتی (٢٢ کاتژمێر) — ڕێکخراوی گەشەپێدانی خوێندکارانی کوردستان، 2023.",
+    cert2:"کۆرسی یاساکانی سەرکەوتن (٧ کاتژمێر) — ڕێکخراوی ئینفینیتی بۆ گەشەپێدانی شارستانی، 2020.",
+    cert3:"مەشقی زمانی ئینگلیزی — ئینستیتیوتی دافنشی، 2020.",
+    lang_tag:"زمانەکان",
+    lang1:"کوردی (بادینی) — زمانی دایک", lang2:"عەرەبی — بە ڕەوانی",
+    lang3:"ئینگلیزی — بە ڕەوانی · خوێندنەکە بە ئینگلیزییە", lang4:"دواتر: ئەڵمانی و سۆرانی (ئامانجی داهاتوو)",
+    int_eyebrow:"دەرەوەی ئەندازیاری", int_title:"ئارەزوو و خولیاکان",
+    int1:"⚽ لایەنگری بارسێلۆنا", int2:"🇩🇪 تیمی نیشتمانی ئەڵمانیا بۆ تۆپی پێ",
+    int3:"🪐 خەیاڵی زانستی و نهێنی (Dune، شێرلۆک هۆڵمز)", int4:"🐉 گەیم ئۆف سرۆنز (Game of Thrones)",
+    contact_eyebrow:"پەیوەندی", contact_title:"با پەیوەندی بکەین",
+    contact_body:"کراوەم بۆ هاوکاری توێژینەوە، مەشق، و کێشە سەرنجڕاکێشەکان لەسەر سنووری بایۆلۆجی و ئەندازیاری.",
+    form_name:"ناوت", form_email:"ئیمەیڵت", form_msg:"پەیامەکەت…", form_send:"پەیام بنێرە",
+    cc_email:"ئیمەیڵ", cc_loc:"شوێن", cc_loc_v:"دهۆک، هەرێمی کوردستان، عێراق",
+    footer:"© 2026 عەلی ئەزهەر دیوالی · ئەندازیاری بایۆمێدیکاڵ",
+    theme_cream:"کرێمی", theme_dark:"تاریک", theme_ocean:"دەریایی", theme_switch:"ڕەنگ",
+    stat_projects:"پڕۆژە", stat_intern:"ستاژ", stat_langs:"زمان", stat_grad:"دەرچوون",
+  },
+
+  de: {
+    nav_about:"Über mich", nav_exp:"Erfahrung", nav_projects:"Projekte", nav_skills:"Fähigkeiten", nav_contact:"Kontakt",
+    hero_eyebrow:"Biomedizintechnik",
+    hero_tagline:"Biomedizintechniker, der Medizin und Maschinen verbindet — Gehirn-Computer-Schnittstellen, eingebettete Systeme und biomedizinische Signalverarbeitung.",
+    hero_summary:"Student im vierten Jahr der Biomedizintechnik in einem Doppelabschluss-Programm zwischen der Universität Duhok und der TH Mittelhessen (Deutschland). Ich entwerfe End-to-End-Systeme — von der Biosignalerfassung bis zur Firmware, die echte Hardware steuert.",
+    badge_degree_k:"Doppelabschluss", badge_degree_v:"UoD × THM Deutschland", badge_grad_k:"Abschluss", badge_loc_k:"Standort", badge_loc_v:"Duhok, Irak",
+    hero_cta1:"Projekte ansehen", hero_cta2:"Kontakt aufnehmen",
+    about_eyebrow:"Über mich", about_title:"Ausbildung & Hintergrund",
+    edu_deg:"B.Sc. Biomedizintechnik", edu_school:"Universität Duhok (UoD) & TH Mittelhessen (THM), Deutschland",
+    edu_meta:"Doppelabschluss-Programm · Student im 4. Jahr · Voraussichtlicher Abschluss 2027",
+    edu_li1:"Internationaler Doppelabschluss-Lehrplan, vollständig auf Englisch unterrichtet.",
+    edu_li2:"Schwerpunkt auf Medizingeräte, Signalverarbeitung und eingebettete Systeme.",
+    edu_li3:"Sekundarschulbildung: Werar High School (2023).",
+    milestone_tag:"Bevorstehend", milestone_title:"Praktikum in Deutschland — 2027",
+    milestone_body:"Ein sechsmonatiges Biomedizintechnik-Praktikum in Deutschland, als Teil des Doppelabschluss-Programms.",
+    chip_designday:"13. Engineering Design Day · UoD",
+    exp_eyebrow:"Erfahrung", exp_title:"Berufserfahrung",
+    exp1_role:"Praktikant Biomedizintechnik", exp1_org:"Dr.-Ghazi-Krankenhaus",
+    exp1_body:"Praktische Erfahrung in Betrieb, Reparatur, Kalibrierung und Installation klinischer Medizingeräte — betreut von Ing. Mohammed Mizori (Krankenhaus-CEO: Dr. Abdullah Abdullah); anerkannt für professionelles Verhalten und Einhaltung der Sicherheitsstandards.",
+    exp1_body2:"Im Rahmen desselben Praktikums: Wartung und Inspektion von Sauerstoff- und CO₂-Erzeugungsanlagen sowie Fehlersuche an krankenhausweiten medizinischen Vakuumsystemen für die Intensivpflege.",
+    proj_eyebrow:"Projekte", proj_title:"Technische Projekte",
+    proj1_tag:"Gehirn-Computer-Schnittstelle", proj1_title:"EEG-gesteuerte aerodynamische Levitation",
+    proj1_body:"Ein NeuroSky-EEG-Headset überträgt Hirnwellendaten an eine Python-Engine, die die Konzentration in Echtzeit misst und einen ESP32-gesteuerten Ventilator antreibt — je stärker die Konzentration, desto höher schwebt ein Tischtennisball. Vollständige Pipeline: Erfassung, Signalanalyse und Motorsteuerung.",
+    proj2_tag:"Biosignal-Hardware", proj2_title:"EKG-Monitor-Entwurf",
+    proj2_body:"Entwicklung eines funktionsfähigen, vereinfachten Elektrokardiogramm-Geräts (EKG) mit drei Biopotential-Elektroden zur Erfassung und Anzeige des elektrischen Herzsignals.",
+    chip_biopot:"Biopotential", chip_circuit:"Schaltungsdesign",
+    proj3_tag:"Eingebettete Steuerung", proj3_title:"Mikrocontroller-Motorsteuerung",
+    proj3_body:"Entwurf von DC-Motordrehzahlregelungen auf Arduino Uno, Nano und ESP32, mit Tastern und Potentiometern zur variablen Drehzahlregelung, geschlossener PID-Regelung und Live-LCD-Anzeige.",
+    proj4_tag:"Simulation", proj4_title:"Mehrkörpersystem-Simulationen",
+    proj4_body:"Modellierung und Analyse mechanischer Systeme in Dymola mit Fokus auf mechanische Gelenke wie Schubgelenke und Federsysteme.",
+    chip_modelica:"Modelica",
+    proj5_tag:"Klinische Software", proj5_title:"Patientenaufnahmebogen-Tool",
+    proj5_body:"Ein Browser-Tool für Ärzte — Patientendaten eingeben und einen sauberen einseitigen Aufnahmebogen drucken.",
+    proj6_tag:"Software", proj6_title:"C++-Rechner",
+    proj6_body:"Ein von Grund auf in C++ entwickelter Konsolenrechner mit arithmetischen Operationen, Eingabevalidierung und sauberem Kontrollfluss — ein Grundlagenprojekt der strukturierten Programmierung.",
+    chip_ctrl:"Kontrollfluss",
+    skills_eyebrow:"Fähigkeiten", skills_title:"Technische Fähigkeiten",
+    sk1_cat:"Programmierung", sk2_cat:"Ingenieur-Software", sk3_cat:"Hardware & Embedded", sk4_cat:"Daten & Produktivität",
+    chip_circuitd:"Schaltungsdesign",
+    cert_tag:"Zertifikate & Schulungen",
+    cert0:"Teilnahmezertifikat — 13. Engineering Design Day, Universität Duhok.",
+    cert1:"Führungstraining (22 Std.) — Kurdistan Students Development Organization, 2023.",
+    cert2:"Kurs „Regeln des Erfolgs“ (7 Std.) — Infinity Organization for Civil Development, 2020.",
+    cert3:"Englisch-Sprachtraining — Da Vinci Institute, 2020.",
+    lang_tag:"Sprachen",
+    lang1:"Kurdisch (Badini) — Muttersprache", lang2:"Arabisch — Fließend",
+    lang3:"Englisch — Fließend · Studium vollständig auf Englisch", lang4:"Als Nächstes: Deutsch & Sorani (Zukunftsziele)",
+    int_eyebrow:"Jenseits der Technik", int_title:"Interessen & Hobbys",
+    int1:"⚽ FC-Barcelona-Fan", int2:"🇩🇪 Deutsche Fußballnationalmannschaft",
+    int3:"🪐 Science-Fiction & Mystery (Dune, Sherlock Holmes)", int4:"🐉 Game of Thrones",
+    contact_eyebrow:"Kontakt", contact_title:"Lass uns vernetzen",
+    contact_body:"Offen für Forschungskooperationen, Praktika und spannende Probleme an der Schnittstelle von Biologie und Technik.",
+    form_name:"Ihr Name", form_email:"Ihre E-Mail", form_msg:"Ihre Nachricht…", form_send:"Nachricht senden",
+    cc_email:"E-Mail", cc_loc:"Standort", cc_loc_v:"Duhok, Region Kurdistan, Irak",
+    footer:"© 2026 Ali Azhar Dewali · Biomedizintechnik",
+    theme_cream:"Creme", theme_dark:"Dunkel", theme_ocean:"Ozean", theme_switch:"Thema",
+    stat_projects:"Projekte", stat_intern:"Praktikum", stat_langs:"Sprachen", stat_grad:"Abschluss",
+  },
+};
+
+const RTL_LANGS = ['ar','bad','sor'];
+let currentLang = 'en';
+
+// THEME switching (cream -> dark -> ocean)
+const THEMES = ['cream','dark','ocean'];
+const THEME_ICONS = { cream:'☀', dark:'🌙', ocean:'🌊' };
+let currentTheme = 'cream';
+try { currentTheme = localStorage.getItem('theme') || 'cream'; } catch(e) {}
+
+function updateThemeLabel() {
+  const dict = I18N[currentLang] || I18N.en;
+  const icon = THEME_ICONS[currentTheme];
+  const lbl = dict['theme_'+currentTheme] || currentTheme;
+  const li = document.getElementById('themeIcon'); if (li) li.textContent = icon;
+  const la = document.getElementById('themeLabel'); if (la) la.textContent = lbl;
+  const lim = document.getElementById('themeIconM'); if (lim) lim.textContent = icon;
+}
+function applyTheme(theme) {
+  currentTheme = theme;
+  document.documentElement.setAttribute('data-theme', theme);
+  try { localStorage.setItem('theme', theme); } catch(e) {}
+  updateThemeLabel();
+}
+function cycleTheme() {
+  const next = THEMES[(THEMES.indexOf(currentTheme) + 1) % THEMES.length];
+  applyTheme(next);
+}
+document.getElementById('themeBtn').addEventListener('click', cycleTheme);
+const tbm = document.getElementById('themeBtnMobile');
+if (tbm) tbm.addEventListener('click', cycleTheme);
+applyTheme(currentTheme);
+
+function applyLang(lang) {
+  const dict = I18N[lang] || I18N.en;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key] !== undefined) el.textContent = dict[key];
   });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const key = el.getAttribute('data-i18n-ph');
+    if (dict[key] !== undefined) el.setAttribute('placeholder', dict[key]);
+  });
+  const html = document.documentElement;
+  html.setAttribute('lang', lang === 'bad' || lang === 'sor' ? 'ku' : lang);
+  html.setAttribute('dir', RTL_LANGS.includes(lang) ? 'rtl' : 'ltr');
+  document.getElementById('langSelect').value = lang;
+  const m = document.getElementById('langSelectMobile');
+  if (m) m.value = lang;
+  currentLang = lang;
+  updateThemeLabel();
+  try { localStorage.setItem('lang', lang); } catch(e) {}
+}
 
-document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+document.getElementById('langSelect').addEventListener('change', e => applyLang(e.target.value));
+const mob = document.getElementById('langSelectMobile');
+if (mob) mob.addEventListener('change', e => applyLang(e.target.value));
 
-// ── Mobile menu ──
-const menuBtn = document.getElementById('menuBtn');
-const mobileMenu = document.getElementById('mobileMenu');
-menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-mobileMenu.querySelectorAll('a').forEach((a) =>
-  a.addEventListener('click', () => mobileMenu.classList.add('hidden'))
+// default language (restore saved choice, else English)
+let savedLang = 'en';
+try { savedLang = localStorage.getItem('lang') || 'en'; } catch(e) {}
+applyLang(I18N[savedLang] ? savedLang : 'en');
+
+// mobile menu
+document.getElementById('menuBtn').addEventListener('click', () => {
+  const mm = document.getElementById('mobileMenu');
+  mm.style.display = mm.style.display === 'flex' ? 'none' : 'flex';
+});
+document.querySelectorAll('#mobileMenu a').forEach(a =>
+  a.addEventListener('click', () => { document.getElementById('mobileMenu').style.display = 'none'; })
 );
 
-// ── Contact form → mailto (no backend needed) ──
+// reveal on scroll
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('vis'); obs.unobserve(en.target); } });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// scroll progress bar + back-to-top + active nav
+const progress = document.getElementById('progress');
+const toTop = document.getElementById('toTop');
+const sections = ['about','experience','projects','skills','contact'];
+const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+window.addEventListener('scroll', () => {
+  const st = document.documentElement.scrollTop;
+  const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  progress.style.width = (h > 0 ? (st / h) * 100 : 0) + '%';
+  toTop.classList.toggle('show', st > 500);
+  let active = '';
+  for (const id of sections) {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top <= 120) active = id;
+  }
+  navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + active));
+});
+toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// animated count-up on hero stats
+(function () {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.stat .num').forEach(el => {
+    const m = el.textContent.trim().match(/^(\d+)(.*)$/);
+    if (!m || reduced) return;
+    const target = +m[1], suffix = m[2];
+    el.textContent = '0' + suffix;
+    let done = false;
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (!en.isIntersecting || done) return;
+        done = true; io.disconnect();
+        const t0 = performance.now(), dur = 1400;
+        (function step(now) {
+          const p = Math.min((now - t0) / dur, 1);
+          el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + suffix;
+          if (p < 1) requestAnimationFrame(step);
+        })(t0);
+      });
+    }, { threshold: 0.4 });
+    io.observe(el);
+  });
+})();
+
+// contact form -> mailto
 document.getElementById('contactForm').addEventListener('submit', (e) => {
   e.preventDefault();
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const message = document.getElementById('message').value;
-  const subject = encodeURIComponent(`Portfolio contact from ${name}`);
-  const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
-  window.location.href = `mailto:ali.azhar.dewali@gmail.com?subject=${subject}&body=${body}`;
-  document.getElementById('formStatus').classList.remove('hidden');
+  const n = document.getElementById('cName').value;
+  const em = document.getElementById('cEmail').value;
+  const msg = document.getElementById('cMsg').value;
+  window.location.href = 'mailto:ali.azhar.dewali@gmail.com?subject=' + encodeURIComponent('Portfolio contact from ' + n) + '&body=' + encodeURIComponent(msg + '\n\n- ' + n + ' (' + em + ')');
 });
 </script>
 </body>
