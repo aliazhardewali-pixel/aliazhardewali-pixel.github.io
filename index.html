@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ali Azhar Dewali — Biomedical Engineer</title>
 <meta name="description" content="Ali Azhar Dewali — Biomedical Engineering student (UoD & THM Germany). Brain-computer interfaces, embedded systems, and biomedical signal processing.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ali Azhar Dewali — Biomedical Engineer">
+<meta property="og:description" content="Fourth-year Biomedical Engineering student (UoD × THM Germany). Brain-computer interfaces, embedded systems, biomedical signal processing.">
+<meta property="og:url" content="https://aliazhardewali-pixel.github.io/">
+<meta property="og:image" content="https://aliazhardewali-pixel.github.io/icon-512.png">
+<meta name="twitter:card" content="summary">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0f8a8f">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -388,6 +394,7 @@
     <div class="btn-row reveal">
       <a href="#projects" class="btn btn-primary" data-i18n="hero_cta1">View Projects</a>
       <a href="#contact" class="btn btn-ghost" data-i18n="hero_cta2">Get in Touch</a>
+      <a href="Ali-Dewali-CV.pdf" download class="btn btn-ghost" data-i18n="hero_cta3">Download CV</a>
     </div>
     <div class="stats reveal">
       <div class="stat"><div class="num">6+</div><div class="lbl" data-i18n="stat_projects">Projects</div></div>
@@ -460,6 +467,7 @@
         <h3 data-i18n="proj1_title">EEG-Controlled Aerodynamic Levitation</h3>
         <p data-i18n="proj1_body">A NeuroSky EEG headset streams brainwave data to a Python engine that measures focus in real time and drives an ESP32-controlled fan — the harder you focus, the higher a ping-pong ball floats. Full pipeline: acquisition, signal parsing, and motor control.</p>
         <div class="chips"><span class="chip">EEG</span><span class="chip">ESP32</span><span class="chip">Python</span><span class="chip">Signal Processing</span></div>
+        <p style="margin-top:12px;"><a href="https://github.com/aliazhardewali-pixel/EEG-Levitation-BCI" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600;font-size:13px;text-decoration:none;" data-i18n="proj1_link">View code on GitHub →</a></p>
       </div>
       <div class="card reveal">
         <p class="tag" data-i18n="proj2_tag">Bio-Signal Hardware</p>
@@ -589,6 +597,10 @@
           <span class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></span>
           <span><span class="t">Instagram</span><br><span class="s">@aliii.azharr</span></span>
         </a>
+        <a href="https://wa.me/9647507924022" target="_blank" rel="noopener" class="contact-card">
+          <span class="ic"><svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.4-.7-2.4-1.3-3.3-2.9-.3-.4.3-.4.7-1.3.1-.2 0-.4 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1.1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.5-.3z"/></svg></span>
+          <span><span class="t">WhatsApp</span><br><span class="s">+964 750 792 4022</span></span>
+        </a>
         <a href="#" class="contact-card">
           <span class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M11 2a9 9 0 1 0 0 18 9 9 0 0 0 0-18z"/><path d="M11 6v5l3 2"/></svg></span>
           <span><span class="t" data-i18n="cc_loc">Location</span><br><span class="s" data-i18n="cc_loc_v">Duhok, Kurdistan Region, Iraq</span></span>
@@ -637,7 +649,7 @@ const I18N = {
     hero_tagline:"Biomedical engineer bridging medicine and machines — brain-computer interfaces, embedded systems, and biomedical signal processing.",
     hero_summary:"Fourth-year Biomedical Engineering student in a double-degree program between the University of Duhok and TH Mittelhessen (Germany). I design end-to-end systems — from bio-signal acquisition to firmware that controls real hardware.",
     badge_degree_k:"Double Degree", badge_degree_v:"UoD × THM Germany", badge_grad_k:"Graduating", badge_loc_k:"Based in", badge_loc_v:"Duhok, Iraq",
-    hero_cta1:"View Projects", hero_cta2:"Get in Touch",
+    hero_cta1:"View Projects", hero_cta2:"Get in Touch", hero_cta3:"Download CV", proj1_link:"View code on GitHub →",
     about_eyebrow:"About", about_title:"Education & Background",
     edu_deg:"B.Sc. Biomedical Engineering", edu_school:"University of Duhok (UoD) & TH Mittelhessen (THM), Germany",
     edu_meta:"Double-degree program · 4th-year student · Expected graduation 2027",
@@ -697,7 +709,7 @@ const I18N = {
     hero_tagline:"مهندس طبي حيوي يربط بين الطب والآلات — واجهات الدماغ والحاسوب، والأنظمة المدمجة، ومعالجة الإشارات الحيوية.",
     hero_summary:"طالب في السنة الرابعة بهندسة الأجهزة الطبية ضمن برنامج شهادة مزدوجة بين جامعة دهوك وجامعة ميتلهيسن التقنية في ألمانيا. أصمّم أنظمة متكاملة — من التقاط الإشارات الحيوية إلى البرمجيات التي تتحكم بالعتاد الحقيقي.",
     badge_degree_k:"شهادة مزدوجة", badge_degree_v:"دهوك × THM ألمانيا", badge_grad_k:"التخرج", badge_loc_k:"المقر", badge_loc_v:"دهوك، العراق",
-    hero_cta1:"شاهد المشاريع", hero_cta2:"تواصل معي",
+    hero_cta1:"شاهد المشاريع", hero_cta2:"تواصل معي", hero_cta3:"تحميل السيرة الذاتية", proj1_link:"شاهد الكود على GitHub ←",
     about_eyebrow:"نبذة", about_title:"التعليم والخلفية",
     edu_deg:"بكالوريوس هندسة طبية حيوية", edu_school:"جامعة دهوك (UoD) وجامعة ميتلهيسن التقنية (THM)، ألمانيا",
     edu_meta:"برنامج شهادة مزدوجة · طالب سنة رابعة · التخرج المتوقع 2027",
@@ -757,7 +769,7 @@ const I18N = {
     hero_tagline:"ئەندازیارێ بایۆمێدیکاڵ — پرەک د ناڤبەرا پزیشکی و ئامێران دا: ڕوویێن مێشک-کۆمپیوتەر، سیستەمێن ئێمبێدد، و پرۆسێسکرنا سیگناڵێن جەستەیی.",
     hero_summary:"خواندکارێ سالا چارێ یێ ئەندازیاریا بایۆمێدیکاڵ، د بەرنامەیێ دوو بڕوانامەیان دا د ناڤبەرا زانکۆیا دهۆک و زانکۆیا تەکنیکی یا میتڵهێسن (ئەلمانیا) دا. ئەز سیستەمێن تەمام دروست دکەم — ژ وەرگرتنا سیگناڵێن جەستەیی هەتا فیرموێرا کو کۆنترۆلا ئامێرێن ڕاستەقینە دکەت.",
     badge_degree_k:"دوو بڕوانامە", badge_degree_v:"دهۆک × THM ئەلمانیا", badge_grad_k:"دەرچوون", badge_loc_k:"جهـ", badge_loc_v:"دهۆک، عێراق",
-    hero_cta1:"پرۆژان ببینە", hero_cta2:"پەیوەندیێ بکە",
+    hero_cta1:"پرۆژان ببینە", hero_cta2:"پەیوەندیێ بکە", hero_cta3:"CV داگرە", proj1_link:"کۆدی ل GitHub ببینە ←",
     about_eyebrow:"دەربارە", about_title:"خواندن و پاشخان",
     edu_deg:"بەکالۆریۆس د ئەندازیاریا بایۆمێدیکاڵ دا", edu_school:"زانکۆیا دهۆک (UoD) و زانکۆیا تەکنیکی یا میتڵهێسن (THM)، ئەلمانیا",
     edu_meta:"بەرنامەیێ دوو بڕوانامەیان · خواندکارێ سالا چارێ · دەرچوون 2027",
@@ -817,7 +829,7 @@ const I18N = {
     hero_tagline:"ئەندازیاری بایۆمێدیکاڵ کە پرد دەبەستێت لەنێوان پزیشکی و ئامێرەکان — ڕووکاری مێشک-کۆمپیوتەر، سیستەمە ئێمبێددکراوەکان، و پرۆسێسکردنی سیگناڵی بایۆلۆجی.",
     hero_summary:"خوێندکاری ساڵی چوارەمی ئەندازیاری بایۆمێدیکاڵ لە بەرنامەیەکی بڕوانامەی دووانەدا لەنێوان زانکۆی دهۆک و زانکۆی تەکنیکی میتڵهێسن (ئەڵمانیا). سیستەمی تەواو دروست دەکەم — لە وەرگرتنی سیگناڵی بایۆلۆجییەوە تا فیرموێر کە کۆنترۆڵی هاردوێری ڕاستەقینە دەکات.",
     badge_degree_k:"بڕوانامەی دووانە", badge_degree_v:"دهۆک × THM ئەڵمانیا", badge_grad_k:"دەرچوون", badge_loc_k:"شوێن", badge_loc_v:"دهۆک، عێراق",
-    hero_cta1:"پڕۆژەکان ببینە", hero_cta2:"پەیوەندیم پێوە بکە",
+    hero_cta1:"پڕۆژەکان ببینە", hero_cta2:"پەیوەندیم پێوە بکە", hero_cta3:"CV دابگرە", proj1_link:"کۆدەکە لە GitHub ببینە ←",
     about_eyebrow:"دەربارە", about_title:"خوێندن و پاشخان",
     edu_deg:"بەکالۆریۆس لە ئەندازیاری بایۆمێدیکاڵ", edu_school:"زانکۆی دهۆک (UoD) و زانکۆی تەکنیکی میتڵهێسن (THM)، ئەڵمانیا",
     edu_meta:"بەرنامەی بڕوانامەی دووانە · خوێندکاری ساڵی چوارەم · دەرچوونی چاوەڕوانکراو 2027",
@@ -877,7 +889,7 @@ const I18N = {
     hero_tagline:"Biomedizintechniker, der Medizin und Maschinen verbindet — Gehirn-Computer-Schnittstellen, eingebettete Systeme und biomedizinische Signalverarbeitung.",
     hero_summary:"Student im vierten Jahr der Biomedizintechnik in einem Doppelabschluss-Programm zwischen der Universität Duhok und der TH Mittelhessen (Deutschland). Ich entwerfe End-to-End-Systeme — von der Biosignalerfassung bis zur Firmware, die echte Hardware steuert.",
     badge_degree_k:"Doppelabschluss", badge_degree_v:"UoD × THM Deutschland", badge_grad_k:"Abschluss", badge_loc_k:"Standort", badge_loc_v:"Duhok, Irak",
-    hero_cta1:"Projekte ansehen", hero_cta2:"Kontakt aufnehmen",
+    hero_cta1:"Projekte ansehen", hero_cta2:"Kontakt aufnehmen", hero_cta3:"Lebenslauf herunterladen", proj1_link:"Code auf GitHub ansehen →",
     about_eyebrow:"Über mich", about_title:"Ausbildung & Hintergrund",
     edu_deg:"B.Sc. Biomedizintechnik", edu_school:"Universität Duhok (UoD) & TH Mittelhessen (THM), Deutschland",
     edu_meta:"Doppelabschluss-Programm · Student im 4. Jahr · Voraussichtlicher Abschluss 2027",
@@ -1065,49 +1077,63 @@ toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smoot
   const av = document.querySelector('.avatar');
   if (av) document.getElementById('chatAvatar').src = av.src;
 
-  const CONTACT = "You can reach Ali directly:\n• Email: ali.azhar.dewali@gmail.com\n• Instagram: @aliii.azharr\n• GitHub: aliazhardewali-pixel\nHe usually replies quickly.";
+  const CONTACT = "You can reach Ali directly:\n• Email: ali.azhar.dewali@gmail.com\n• WhatsApp: +964 750 792 4022\n• Instagram: @aliii.azharr\n• GitHub: aliazhardewali-pixel\nHe usually replies quickly.";
+  // keywords: single words are matched as whole words (or word-stems when 4+ letters); phrases with spaces are matched inside the sentence
   const KB = [
-    { k: ['hi','hello','hey','salam','slav','hallo','مرحبا','سلام'], w: 1,
-      a: "Hello! 👋 I'm Ali's automatic assistant — I'm here 24/7. Ask me about his studies, projects, skills, experience, or how to contact him." },
-    { k: ['who','about','introduce','yourself','bio','summary'], w: 2,
+    { k: ['hi','hello','hey','salam','slav','hallo','greetings','مرحبا','سلام'], w: 1,
+      a: "Hello! 👋 I'm Ali's automatic assistant — here 24/7. Ask me about his studies, projects, skills, experience, goals, or how to contact him." },
+    { k: ['who','introduce','yourself','bio','summary','about ali','about him','about you'], w: 2,
       a: "Ali Azhar Dewali is a fourth-year Biomedical Engineering student in a double-degree program between the University of Duhok (UoD) and TH Mittelhessen (THM) in Germany. He's based in Duhok, Kurdistan Region of Iraq, and builds systems that connect medicine and machines — from brain-computer interfaces to hospital equipment. Expected graduation: 2027." },
-    { k: ['study','studies','education','university','degree','college','school','student','graduat'], w: 2,
+    { k: ['stud','education','university','degree','college','school','graduat','bachelor'], w: 2,
       a: "Ali studies B.Sc. Biomedical Engineering in a double-degree program: University of Duhok (UoD) + TH Mittelhessen (THM), Germany. He's in his fourth year, the whole degree is taught in English, and he's expected to graduate in 2027. Before university: Werar High School (2023)." },
-    { k: ['project','projects','built','build','portfolio','work','made'], w: 2,
+    { k: ['qualif','credential','background','certif','award','achievement','training','course','diploma'], w: 3,
+      a: "Ali's qualifications:\n• B.Sc. Biomedical Engineering in progress — double degree, UoD × THM Germany (graduating 2027)\n• Hospital internship at Dr. Ghazi Hospital (summer 2025)\n• Certificate of Participation — 13th Engineering Design Day, UoD\n• Leadership Training, 22h (2023)\n• Rules of Success course (2020) and English training at Da Vinci Institute (2020)" },
+    { k: ['goal','plan','future','ambition','dream','aim','next','want','hope','career'], w: 3,
+      a: "Ali's goals:\n• Complete a six-month biomedical engineering internship in Germany in 2027\n• Graduate from the UoD × THM double-degree program in 2027\n• Learn German and Sorani Kurdish\n• Build a career where medicine meets machines — especially brain-computer interfaces" },
+    { k: ['project','built','build','portfolio','made','create'], w: 2,
       a: "Ali's main projects:\n• EEG-Controlled Levitation — control a floating ball with your focus (his flagship brain-computer interface)\n• ECG heart-signal monitor\n• Microcontroller DC motor control with PID\n• Multibody simulations in Dymola\n• Patient intake sheet tool for physicians\n• C++ calculator\nAsk me about any of them!" },
     { k: ['eeg','brain','bci','levitation','neurosky','focus','mind'], w: 3,
       a: "The EEG project is Ali's flagship: a NeuroSky headset reads brainwaves, a Python engine measures focus in real time, and an ESP32-controlled fan makes a ping-pong ball float — the harder you focus, the higher it goes. Full pipeline: signal acquisition → processing → motor control. He presented it at the 13th Engineering Design Day at UoD." },
     { k: ['ecg','heart','cardiac'], w: 3,
       a: "Ali designed a working simplified ECG device using three bio-potential electrodes to capture and display the heart's electrical signal." },
-    { k: ['skill','skills','program','programming','code','software','matlab','python','c++','arduino','esp32','tool','tools'], w: 2,
+    { k: ['skill','program','coding','code','software','matlab','python','c++','cpp','arduino','esp32','tool','tech','hardware'], w: 2,
       a: "Ali's technical skills:\n• Programming: C++, Python\n• Engineering software: MATLAB, Dymola, PlatformIO, Arduino IDE, Visual Studio\n• Data & productivity: Power BI, MS Office\n• Hardware: ESP32, Arduino, circuit design" },
-    { k: ['language','languages','speak','kurdish','arabic','english','badini'], w: 2,
+    { k: ['language','speak','kurdish','arabic','english','badini','german language'], w: 2,
       a: "Ali speaks Kurdish (Badini — native), Arabic and English fluently. His whole degree is taught in English. Next on his list: German and Sorani." },
-    { k: ['experience','internship','intern','hospital','ghazi','training','worked'], w: 2,
+    { k: ['experience','intern','hospital','ghazi','job','work'], w: 2,
       a: "In summer 2025 (July–September) Ali completed a biomedical engineering internship at Dr. Ghazi Hospital: operating, repairing, calibrating and installing clinical medical devices, supervised by Eng. Mohammed Mizori. The same training included maintaining oxygen and CO₂ generation plants and troubleshooting hospital-wide medical vacuum systems." },
-    { k: ['germany','german','abroad','thm','mittelhessen'], w: 2,
+    { k: ['germany','german','abroad','thm','mittelhessen','europe'], w: 2,
       a: "Germany is a core part of Ali's path: his degree is a double-degree with TH Mittelhessen (THM), and a six-month biomedical engineering internship in Germany is planned for 2027 as part of the program." },
-    { k: ['contact','email','mail','reach','instagram','phone','message','dm','hire','collaborat','cv','resume'], w: 2,
+    { k: ['contact','email','mail','reach','instagram','phone','message','dm','hire','collaborat','cv','resume','talk'], w: 2,
       a: CONTACT },
-    { k: ['hobby','hobbies','interest','interests','football','barcelona','soccer','free','fun','watch','game','thrones','dune'], w: 2,
+    { k: ['hobby','hobbies','interest','football','barcelona','soccer','fun','movie','series','read','game of thrones','free time','دون'], w: 2,
       a: "Beyond engineering, Ali supports FC Barcelona and the German national football team, loves science fiction and mystery (Dune, Sherlock Holmes), and is a Game of Thrones fan." },
-    { k: ['certificate','certification','design day','award','achievement'], w: 2,
-      a: "Ali's certifications include: participation in the 13th Engineering Design Day (University of Duhok), Leadership Training (22h, 2023), Rules of Success course (2020), and English language training at Da Vinci Institute (2020)." },
-    { k: ['where','location','live','based','duhok','city','from'], w: 2,
+    { k: ['design day','competition','exhibition','present'], w: 3,
+      a: "Ali presented his EEG-controlled levitation project at the 13th Engineering Design Day at the University of Duhok and holds a certificate of participation from the event." },
+    { k: ['where','location','live','based','duhok','city','from','country'], w: 2,
       a: "Ali is based in Duhok, Kurdistan Region, Iraq." },
-    { k: ['thank','thanks','great','nice','cool','awesome'], w: 1,
+    { k: ['thank','thanks','great','nice','cool','awesome','perfect'], w: 1,
       a: "You're welcome! Anything else you'd like to know about Ali? 😊" },
     { k: ['bye','goodbye','see you'], w: 1,
-      a: "Goodbye! And don't forget — Ali is one email away: ali.azhar.dewali@gmail.com 👋" }
+      a: "Goodbye! And remember — Ali is one email away: ali.azhar.dewali@gmail.com 👋" }
   ];
-  const FALLBACK = "Hmm, that's outside what I know — I'm a simple assistant that covers Ali's studies, projects, skills, experience and contact info.\n\nFor anything else, ask Ali himself:\n• ali.azhar.dewali@gmail.com\n• Instagram: @aliii.azharr";
+  const FALLBACK = "That one's outside what I know — I cover Ali's studies, projects, skills, experience, goals and contact info.\n\nFor anything else, ask Ali himself:\n• ali.azhar.dewali@gmail.com\n• Instagram: @aliii.azharr";
 
   function answer(q) {
-    const t = ' ' + q.toLowerCase().replace(/[^\w\s+#٠-٩؀-ۿ]/g, ' ') + ' ';
+    const clean = ' ' + q.toLowerCase().replace(/[^\w\s+#٠-٩؀-ۿ]/g, ' ').replace(/\s+/g, ' ') + ' ';
+    const words = clean.trim().split(' ');
     let best = null, bestScore = 0;
     KB.forEach(item => {
       let sc = 0;
-      item.k.forEach(kw => { if (t.includes(kw)) sc += item.w; });
+      item.k.forEach(kw => {
+        if (kw.indexOf(' ') !== -1) {
+          if (clean.indexOf(kw) !== -1) sc += item.w;
+        } else {
+          for (const w of words) {
+            if (w === kw || (kw.length >= 4 && w.indexOf(kw) === 0)) { sc += item.w; break; }
+          }
+        }
+      });
       if (sc > bestScore) { bestScore = sc; best = item; }
     });
     return best ? best.a : FALLBACK;
@@ -1140,7 +1166,7 @@ toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smoot
   send.addEventListener('click', submit);
   input.addEventListener('keydown', e => { if (e.key === 'Enter') submit(); });
 
-  ['Who is Ali?', 'His projects', 'Skills', 'Contact him'].forEach(c => {
+  ['Who is Ali?', 'His projects', 'His goals', 'Contact him'].forEach(c => {
     const b = document.createElement('button');
     b.className = 'chat-chip';
     b.textContent = c;
