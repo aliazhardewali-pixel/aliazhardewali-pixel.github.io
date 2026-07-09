@@ -395,6 +395,7 @@
       <a href="#projects" class="btn btn-primary" data-i18n="hero_cta1">View Projects</a>
       <a href="#contact" class="btn btn-ghost" data-i18n="hero_cta2">Get in Touch</a>
       <a href="Ali-Dewali-CV.pdf" download class="btn btn-ghost" data-i18n="hero_cta3">Download CV</a>
+      <button id="installBtn" class="btn btn-primary" style="display:none;" data-i18n="hero_cta4">📱 Install App</button>
     </div>
     <div class="stats reveal">
       <div class="stat"><div class="num">6+</div><div class="lbl" data-i18n="stat_projects">Projects</div></div>
@@ -616,6 +617,11 @@
   </div>
 </footer>
 
+<div id="iosTip" style="display:none; position:fixed; left:50%; bottom:30px; transform:translateX(-50%); z-index:80; width:min(340px, calc(100vw - 40px)); background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px; box-shadow:0 20px 50px -18px rgba(0,0,0,.5);">
+  <p style="font-size:14px; color:var(--ink); white-space:pre-line;" data-i18n="ios_hint">On iPhone: tap the Share button (the square with an arrow) at the bottom of Safari, then choose "Add to Home Screen".</p>
+  <button onclick="this.parentElement.style.display='none'" class="btn btn-primary" style="margin-top:12px; padding:8px 18px; font-size:13px;">OK</button>
+</div>
+
 <button id="chatBtn" aria-label="Chat with Ali's assistant">
   <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.3c-1.2 0-2.4-.2-3.4-.7L3 21l1.9-5.2A8.1 8.1 0 0 1 4 11.5 8.4 8.4 0 0 1 12.5 3.2 8.4 8.4 0 0 1 21 11.5z"/></svg>
   <span class="dot"></span>
@@ -649,7 +655,7 @@ const I18N = {
     hero_tagline:"Biomedical engineer bridging medicine and machines — brain-computer interfaces, embedded systems, and biomedical signal processing.",
     hero_summary:"Fourth-year Biomedical Engineering student in a double-degree program between the University of Duhok and TH Mittelhessen (Germany). I design end-to-end systems — from bio-signal acquisition to firmware that controls real hardware.",
     badge_degree_k:"Double Degree", badge_degree_v:"UoD × THM Germany", badge_grad_k:"Graduating", badge_loc_k:"Based in", badge_loc_v:"Duhok, Iraq",
-    hero_cta1:"View Projects", hero_cta2:"Get in Touch", hero_cta3:"Download CV", proj1_link:"View code on GitHub →",
+    hero_cta1:"View Projects", hero_cta2:"Get in Touch", hero_cta3:"Download CV", hero_cta4:"📱 Install App", ios_hint:"On iPhone: tap the Share button (the square with an arrow) at the bottom of Safari, then choose \"Add to Home Screen\".", proj1_link:"View code on GitHub →",
     about_eyebrow:"About", about_title:"Education & Background",
     edu_deg:"B.Sc. Biomedical Engineering", edu_school:"University of Duhok (UoD) & TH Mittelhessen (THM), Germany",
     edu_meta:"Double-degree program · 4th-year student · Expected graduation 2027",
@@ -709,7 +715,7 @@ const I18N = {
     hero_tagline:"مهندس طبي حيوي يربط بين الطب والآلات — واجهات الدماغ والحاسوب، والأنظمة المدمجة، ومعالجة الإشارات الحيوية.",
     hero_summary:"طالب في السنة الرابعة بهندسة الأجهزة الطبية ضمن برنامج شهادة مزدوجة بين جامعة دهوك وجامعة ميتلهيسن التقنية في ألمانيا. أصمّم أنظمة متكاملة — من التقاط الإشارات الحيوية إلى البرمجيات التي تتحكم بالعتاد الحقيقي.",
     badge_degree_k:"شهادة مزدوجة", badge_degree_v:"دهوك × THM ألمانيا", badge_grad_k:"التخرج", badge_loc_k:"المقر", badge_loc_v:"دهوك، العراق",
-    hero_cta1:"شاهد المشاريع", hero_cta2:"تواصل معي", hero_cta3:"تحميل السيرة الذاتية", proj1_link:"شاهد الكود على GitHub ←",
+    hero_cta1:"شاهد المشاريع", hero_cta2:"تواصل معي", hero_cta3:"تحميل السيرة الذاتية", hero_cta4:"📱 ثبّت التطبيق", ios_hint:"على الآيفون: اضغط زر المشاركة (المربع مع سهم) أسفل سفاري، ثم اختر «إضافة إلى الشاشة الرئيسية».", proj1_link:"شاهد الكود على GitHub ←",
     about_eyebrow:"نبذة", about_title:"التعليم والخلفية",
     edu_deg:"بكالوريوس هندسة طبية حيوية", edu_school:"جامعة دهوك (UoD) وجامعة ميتلهيسن التقنية (THM)، ألمانيا",
     edu_meta:"برنامج شهادة مزدوجة · طالب سنة رابعة · التخرج المتوقع 2027",
@@ -769,7 +775,7 @@ const I18N = {
     hero_tagline:"ئەندازیارێ بایۆمێدیکاڵ — پرەک د ناڤبەرا پزیشکی و ئامێران دا: ڕوویێن مێشک-کۆمپیوتەر، سیستەمێن ئێمبێدد، و پرۆسێسکرنا سیگناڵێن جەستەیی.",
     hero_summary:"خواندکارێ سالا چارێ یێ ئەندازیاریا بایۆمێدیکاڵ، د بەرنامەیێ دوو بڕوانامەیان دا د ناڤبەرا زانکۆیا دهۆک و زانکۆیا تەکنیکی یا میتڵهێسن (ئەلمانیا) دا. ئەز سیستەمێن تەمام دروست دکەم — ژ وەرگرتنا سیگناڵێن جەستەیی هەتا فیرموێرا کو کۆنترۆلا ئامێرێن ڕاستەقینە دکەت.",
     badge_degree_k:"دوو بڕوانامە", badge_degree_v:"دهۆک × THM ئەلمانیا", badge_grad_k:"دەرچوون", badge_loc_k:"جهـ", badge_loc_v:"دهۆک، عێراق",
-    hero_cta1:"پرۆژان ببینە", hero_cta2:"پەیوەندیێ بکە", hero_cta3:"CV داگرە", proj1_link:"کۆدی ل GitHub ببینە ←",
+    hero_cta1:"پرۆژان ببینە", hero_cta2:"پەیوەندیێ بکە", hero_cta3:"CV داگرە", hero_cta4:"📱 ئەپی داگرە", ios_hint:"ل ئایفۆنێ: دوگمەیا Share (چوارگۆشە دگەل تیرێ) ل خوارێ Safari بگرە، پاشی «Add to Home Screen» هەلبژێرە.", proj1_link:"کۆدی ل GitHub ببینە ←",
     about_eyebrow:"دەربارە", about_title:"خواندن و پاشخان",
     edu_deg:"بەکالۆریۆس د ئەندازیاریا بایۆمێدیکاڵ دا", edu_school:"زانکۆیا دهۆک (UoD) و زانکۆیا تەکنیکی یا میتڵهێسن (THM)، ئەلمانیا",
     edu_meta:"بەرنامەیێ دوو بڕوانامەیان · خواندکارێ سالا چارێ · دەرچوون 2027",
@@ -829,7 +835,7 @@ const I18N = {
     hero_tagline:"ئەندازیاری بایۆمێدیکاڵ کە پرد دەبەستێت لەنێوان پزیشکی و ئامێرەکان — ڕووکاری مێشک-کۆمپیوتەر، سیستەمە ئێمبێددکراوەکان، و پرۆسێسکردنی سیگناڵی بایۆلۆجی.",
     hero_summary:"خوێندکاری ساڵی چوارەمی ئەندازیاری بایۆمێدیکاڵ لە بەرنامەیەکی بڕوانامەی دووانەدا لەنێوان زانکۆی دهۆک و زانکۆی تەکنیکی میتڵهێسن (ئەڵمانیا). سیستەمی تەواو دروست دەکەم — لە وەرگرتنی سیگناڵی بایۆلۆجییەوە تا فیرموێر کە کۆنترۆڵی هاردوێری ڕاستەقینە دەکات.",
     badge_degree_k:"بڕوانامەی دووانە", badge_degree_v:"دهۆک × THM ئەڵمانیا", badge_grad_k:"دەرچوون", badge_loc_k:"شوێن", badge_loc_v:"دهۆک، عێراق",
-    hero_cta1:"پڕۆژەکان ببینە", hero_cta2:"پەیوەندیم پێوە بکە", hero_cta3:"CV دابگرە", proj1_link:"کۆدەکە لە GitHub ببینە ←",
+    hero_cta1:"پڕۆژەکان ببینە", hero_cta2:"پەیوەندیم پێوە بکە", hero_cta3:"CV دابگرە", hero_cta4:"📱 ئەپەکە دابمەزرێنە", ios_hint:"لە ئایفۆن: دوگمەی Share (چوارگۆشە لەگەڵ تیر) لە خوارەوەی Safari دابگرە، پاشان «Add to Home Screen» هەڵبژێرە.", proj1_link:"کۆدەکە لە GitHub ببینە ←",
     about_eyebrow:"دەربارە", about_title:"خوێندن و پاشخان",
     edu_deg:"بەکالۆریۆس لە ئەندازیاری بایۆمێدیکاڵ", edu_school:"زانکۆی دهۆک (UoD) و زانکۆی تەکنیکی میتڵهێسن (THM)، ئەڵمانیا",
     edu_meta:"بەرنامەی بڕوانامەی دووانە · خوێندکاری ساڵی چوارەم · دەرچوونی چاوەڕوانکراو 2027",
@@ -889,7 +895,7 @@ const I18N = {
     hero_tagline:"Biomedizintechniker, der Medizin und Maschinen verbindet — Gehirn-Computer-Schnittstellen, eingebettete Systeme und biomedizinische Signalverarbeitung.",
     hero_summary:"Student im vierten Jahr der Biomedizintechnik in einem Doppelabschluss-Programm zwischen der Universität Duhok und der TH Mittelhessen (Deutschland). Ich entwerfe End-to-End-Systeme — von der Biosignalerfassung bis zur Firmware, die echte Hardware steuert.",
     badge_degree_k:"Doppelabschluss", badge_degree_v:"UoD × THM Deutschland", badge_grad_k:"Abschluss", badge_loc_k:"Standort", badge_loc_v:"Duhok, Irak",
-    hero_cta1:"Projekte ansehen", hero_cta2:"Kontakt aufnehmen", hero_cta3:"Lebenslauf herunterladen", proj1_link:"Code auf GitHub ansehen →",
+    hero_cta1:"Projekte ansehen", hero_cta2:"Kontakt aufnehmen", hero_cta3:"Lebenslauf herunterladen", hero_cta4:"📱 App installieren", ios_hint:"Auf dem iPhone: in Safari unten auf Teilen tippen (Quadrat mit Pfeil), dann \"Zum Home-Bildschirm\" wählen.", proj1_link:"Code auf GitHub ansehen →",
     about_eyebrow:"Über mich", about_title:"Ausbildung & Hintergrund",
     edu_deg:"B.Sc. Biomedizintechnik", edu_school:"Universität Duhok (UoD) & TH Mittelhessen (THM), Deutschland",
     edu_meta:"Doppelabschluss-Programm · Student im 4. Jahr · Voraussichtlicher Abschluss 2027",
@@ -1185,6 +1191,31 @@ toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smoot
       input.focus();
     }
   });
+})();
+
+// ── install-app button (Android: real prompt · iOS: guide) ──
+(function () {
+  const ib = document.getElementById('installBtn');
+  if (!ib) return;
+  const standalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+  if (standalone) return; // already installed
+  let deferredPrompt = null;
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    deferredPrompt = e;
+    ib.style.display = 'inline-block';
+  });
+  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  if (isIOS) ib.style.display = 'inline-block';
+  ib.addEventListener('click', () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(() => { deferredPrompt = null; ib.style.display = 'none'; });
+    } else {
+      document.getElementById('iosTip').style.display = 'block';
+    }
+  });
+  window.addEventListener('appinstalled', () => { ib.style.display = 'none'; });
 })();
 
 // ── PWA: register service worker ──
