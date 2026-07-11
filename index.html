@@ -171,6 +171,39 @@
   #chatSend { border: none; border-radius: 10px; padding: 10px 16px; background: var(--accent); color: #fff; font-weight: 600; cursor: pointer; font-family: inherit; }
   #chatSend:hover { background: var(--accent-dark); }
 
+  /* ── MOTION LAYER ── */
+  @media (prefers-reduced-motion: no-preference) {
+    /* floating portrait */
+    .avatar-wrap { animation: floaty 5.5s ease-in-out infinite; }
+    /* drifting hero glows */
+    #top::before { animation: drift1 16s ease-in-out infinite alternate; }
+    #top::after { animation: drift2 20s ease-in-out infinite alternate; }
+    /* staggered pop-in for badges, stats, interest pills */
+    .badges .badge, .stats .stat, .pills .pill { opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease; }
+    .badges.vis .badge, .stats.vis .stat, .pills.vis .pill { opacity: 1; transform: none; }
+    .badges.vis .badge:nth-child(2), .stats.vis .stat:nth-child(2), .pills.vis .pill:nth-child(2) { transition-delay: .12s; }
+    .badges.vis .badge:nth-child(3), .stats.vis .stat:nth-child(3), .pills.vis .pill:nth-child(3) { transition-delay: .24s; }
+    .stats.vis .stat:nth-child(4) { transition-delay: .36s; }
+    /* heartbeat on the timeline dot */
+    .tl-item::before { animation: dotpulse 2.6s ease-out infinite; }
+    /* buttons lift on hover */
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 24px -12px rgba(15,138,143,.5); }
+    /* chat icon waves hello now and then */
+    #chatBtn svg { animation: nudge 8s ease-in-out infinite; }
+    /* animated underline on nav links */
+    .nav-links a { position: relative; }
+    .nav-links a::after { content: ''; position: absolute; inset-inline-start: 0; bottom: -5px; width: 100%; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: 0 50%; transition: transform .25s ease; }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+    /* project tags warm up on card hover */
+    .card .tag { transition: color .3s; }
+    .card:hover .tag { color: var(--amber); }
+  }
+  @keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+  @keyframes drift1 { from { transform: translate(0,0) scale(1); } to { transform: translate(-60px,45px) scale(1.15); } }
+  @keyframes drift2 { from { transform: translate(0,0) scale(1); } to { transform: translate(55px,-35px) scale(1.12); } }
+  @keyframes dotpulse { 0% { box-shadow: 0 0 0 0 var(--accent-soft); } 70% { box-shadow: 0 0 0 12px rgba(0,0,0,0); } 100% { box-shadow: 0 0 0 0 rgba(0,0,0,0); } }
+  @keyframes nudge { 0%, 86%, 100% { transform: rotate(0); } 89% { transform: rotate(-11deg); } 92% { transform: rotate(9deg); } 95% { transform: rotate(-5deg); } 98% { transform: rotate(2deg); } }
+
   /* ── NAV ── */
   header {
     position: sticky; top: 0; z-index: 50;
@@ -235,7 +268,7 @@
   p.body { color: var(--muted); margin-top: 16px; max-width: 680px; }
 
   .btn-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
-  .btn { padding: 13px 24px; border-radius: 10px; font-size: 15px; font-weight: 600; text-decoration: none; cursor: pointer; transition: all .2s; display: inline-block; }
+  .btn { padding: 13px 24px; border-radius: 10px; font-size: 15px; font-weight: 600; text-decoration: none; cursor: pointer; transition: all .2s, transform .25s, box-shadow .25s; display: inline-block; }
   .btn-primary { background: var(--accent); color: #fff; }
   .btn-primary:hover { background: var(--accent-dark); }
   .btn-ghost { background: transparent; color: var(--accent-dark); border: 1px solid var(--line); }
