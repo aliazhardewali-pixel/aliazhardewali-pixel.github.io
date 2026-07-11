@@ -108,6 +108,7 @@
     font-family: 'Inter', system-ui, sans-serif;
     background: var(--cream);
     color: var(--ink);
+    font-size: 17px;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
@@ -186,7 +187,7 @@
   .chat-head .st { font-size: 11px; color: var(--muted); display: flex; align-items: center; gap: 5px; }
   .chat-head .st::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #22c55e; }
   .chat-msgs { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 9px; background: var(--cream); }
-  .msg { max-width: 84%; padding: 9px 13px; border-radius: 14px; font-size: 13.5px; line-height: 1.55; white-space: pre-line; }
+  .msg { max-width: 84%; padding: 9px 13px; border-radius: 14px; font-size: 14.5px; line-height: 1.55; white-space: pre-line; }
   .msg.bot { background: var(--card); border: 1px solid var(--line); color: var(--ink); align-self: flex-start; border-start-start-radius: 4px; }
   .msg.user { background: var(--accent); color: #fff; align-self: flex-end; border-start-end-radius: 4px; }
   .msg.typing { color: var(--muted); letter-spacing: 3px; }
@@ -234,6 +235,20 @@
   @keyframes dotpulse { 0% { box-shadow: 0 0 0 0 var(--accent-soft); } 70% { box-shadow: 0 0 0 12px rgba(0,0,0,0); } 100% { box-shadow: 0 0 0 0 rgba(0,0,0,0); } }
   @keyframes nudge { 0%, 86%, 100% { transform: rotate(0); } 89% { transform: rotate(-11deg); } 92% { transform: rotate(9deg); } 95% { transform: rotate(-5deg); } 98% { transform: rotate(2deg); } }
 
+  /* ── ECG signal decorations ── */
+  .hero-signal { position: absolute; left: 0; bottom: 16px; width: 200%; height: 110px; z-index: 0; opacity: .12; pointer-events: none; }
+  .hero-signal path, .sig-divider path { stroke: var(--accent); stroke-width: 2; fill: none; }
+  .sig-divider { overflow: hidden; height: 44px; }
+  .sig-divider svg { display: block; width: 200%; height: 100%; opacity: .55; }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-signal { animation: sigslide 26s linear infinite; }
+    .sig-divider svg { animation: sigslide 15s linear infinite; }
+  }
+  @keyframes sigslide { to { transform: translateX(-50%); } }
+  /* ── dragon watermark ── */
+  #interests { position: relative; overflow: hidden; }
+  .dragon { position: absolute; inset-inline-end: 24px; bottom: 8px; width: 180px; height: auto; opacity: .13; pointer-events: none; color: var(--ink); }
+
   /* ── NAV ── */
   header {
     position: sticky; top: 0; z-index: 50;
@@ -264,7 +279,7 @@
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 34px; max-width: 640px; }
   .stat { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; text-align: center; }
   .stat .num { font-size: 26px; font-weight: 800; color: var(--accent); line-height: 1; }
-  .stat .lbl { font-size: 12px; color: var(--muted); margin-top: 6px; }
+  .stat .lbl { font-size: 13px; color: var(--muted); margin-top: 6px; }
   /* active nav link */
   .nav-links a.active { color: var(--accent); }
   @media (max-width: 560px) { .stats { grid-template-columns: repeat(2, 1fr); } }
@@ -272,7 +287,7 @@
   .logo { font-weight: 800; font-size: 16px; color: var(--accent-dark); letter-spacing: 1px; text-decoration: none; }
   .logo span { color: var(--amber); }
   .nav-links { display: flex; align-items: center; gap: 26px; }
-  .nav-links a { color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+  .nav-links a { color: var(--ink); text-decoration: none; font-size: 15px; font-weight: 500; transition: color .2s; }
   .nav-links a:hover { color: var(--accent); }
 
   /* language selector */
@@ -289,13 +304,13 @@
 
   /* ── SECTIONS ── */
   section { padding: 72px 0; border-bottom: 1px solid var(--line); }
-  .eyebrow { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+  .eyebrow { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 14px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
   html[dir="rtl"] .eyebrow { font-family: 'Cairo', sans-serif; letter-spacing: 1px; }
   h1 { font-size: clamp(34px, 6vw, 62px); font-weight: 800; line-height: 1.08; letter-spacing: -0.5px; }
   h2 { font-size: clamp(26px, 4vw, 36px); font-weight: 800; letter-spacing: -0.3px; }
   .accent { color: var(--accent); }
-  .lead { font-size: clamp(17px, 2.4vw, 22px); color: var(--muted); font-weight: 400; margin-top: 16px; max-width: 640px; }
-  p.body { color: var(--muted); margin-top: 16px; max-width: 680px; }
+  .lead { font-size: clamp(18px, 2.6vw, 24px); color: var(--muted); font-weight: 400; margin-top: 16px; max-width: 640px; }
+  p.body { color: var(--muted); margin-top: 16px; max-width: 680px; font-size: 17px; }
 
   .btn-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
   .btn { padding: 13px 24px; border-radius: 10px; font-size: 15px; font-weight: 600; text-decoration: none; cursor: pointer; transition: all .2s, transform .25s, box-shadow .25s; display: inline-block; }
@@ -306,7 +321,7 @@
 
   /* hero badges */
   .badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
-  .badge { background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: 13px; font-weight: 500; color: var(--ink); }
+  .badge { background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: 14px; font-weight: 500; color: var(--ink); }
   .badge b { color: var(--accent-dark); }
 
   /* section head */
@@ -324,11 +339,11 @@
   .card:hover { transform: translateY(-3px); box-shadow: 0 14px 34px -18px rgba(15,138,143,0.35); border-color: var(--accent); }
   .card .tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); font-weight: 600; }
   html[dir="rtl"] .card .tag { font-family: 'Cairo', sans-serif; }
-  .card h3 { font-size: 18px; font-weight: 700; margin-top: 8px; }
-  .card h4 { font-size: 15px; font-weight: 600; margin-top: 4px; color: var(--muted); }
-  .card p { font-size: 14px; color: var(--muted); margin-top: 10px; }
+  .card h3 { font-size: 19px; font-weight: 700; margin-top: 8px; }
+  .card h4 { font-size: 16px; font-weight: 600; margin-top: 4px; color: var(--muted); }
+  .card p { font-size: 15.5px; color: var(--muted); margin-top: 10px; }
   .chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
-  .chip { background: var(--accent-soft); color: var(--accent-dark); border-radius: 6px; padding: 4px 10px; font-size: 11px; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+  .chip { background: var(--accent-soft); color: var(--accent-dark); border-radius: 6px; padding: 4px 10px; font-size: 12px; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
   html[dir="rtl"] .chip { font-family: 'Cairo', sans-serif; }
 
   /* timeline (experience) */
@@ -340,36 +355,36 @@
   html[dir="rtl"] .tl-item .when { font-family: 'Cairo', sans-serif; }
   .tl-item h3 { font-size: 18px; font-weight: 700; margin-top: 4px; }
   .tl-item .org { font-size: 14px; color: var(--accent-dark); font-weight: 600; }
-  .tl-item p { font-size: 14px; color: var(--muted); margin-top: 8px; }
+  .tl-item p { font-size: 15.5px; color: var(--muted); margin-top: 8px; }
 
   /* education highlight */
   .edu-card { background: linear-gradient(135deg, var(--accent-soft), var(--card)); border: 1px solid var(--line); border-radius: 16px; padding: 26px; }
   .edu-card .deg { font-size: 20px; font-weight: 800; }
   .edu-card .school { color: var(--accent-dark); font-weight: 600; margin-top: 6px; }
-  .edu-card .meta { color: var(--muted); font-size: 14px; margin-top: 4px; }
+  .edu-card .meta { color: var(--muted); font-size: 15px; margin-top: 4px; }
 
   /* small lists */
   .plain-list { margin-top: 14px; display: grid; gap: 10px; }
-  .li { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--muted); }
+  .li { display: flex; gap: 10px; align-items: flex-start; font-size: 15.5px; color: var(--muted); }
   .li::before { content: '▹'; color: var(--accent); flex-shrink: 0; }
   html[dir="rtl"] .li::before { content: '◃'; }
 
   /* interests pills */
   .pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
-  .pill { background: var(--amber-soft); color: #9a5a12; border-radius: 999px; padding: 8px 16px; font-size: 14px; font-weight: 500; }
+  .pill { background: var(--amber-soft); color: #9a5a12; border-radius: 999px; padding: 8px 16px; font-size: 15px; font-weight: 500; }
 
   /* contact */
   .contact-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; }
   .contact-card { display: flex; align-items: center; gap: 14px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px; text-decoration: none; color: var(--ink); transition: all .2s; }
   .contact-card:hover { border-color: var(--accent); transform: translateY(-2px); }
   .contact-card .ic { width: 42px; height: 42px; border-radius: 10px; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--accent-dark); }
-  .contact-card .t { font-weight: 700; font-size: 15px; }
-  .contact-card .s { font-size: 13px; color: var(--muted); }
-  input, textarea { width: 100%; padding: 11px 14px; border: 1px solid var(--line); border-radius: 10px; font-family: inherit; font-size: 14px; background: var(--cream); margin-bottom: 12px; }
+  .contact-card .t { font-weight: 700; font-size: 16px; }
+  .contact-card .s { font-size: 14px; color: var(--muted); }
+  input, textarea { width: 100%; padding: 11px 14px; border: 1px solid var(--line); border-radius: 10px; font-family: inherit; font-size: 15px; background: var(--cream); margin-bottom: 12px; }
   input:focus, textarea:focus { outline: none; border-color: var(--accent); background: #fff; }
 
   footer { padding: 30px 0; text-align: center; }
-  footer p { font-size: 13px; color: var(--muted); }
+  footer p { font-size: 14px; color: var(--muted); }
 
   /* reveal animation */
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
@@ -437,6 +452,7 @@
 
 <!-- ═══════ HERO ═══════ -->
 <section id="top" style="border-bottom:none; padding-top:60px;">
+  <svg class="hero-signal" viewBox="0 0 2880 120" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0 60 h30 q6 -10 12 0 h20 l7 -34 l11 64 l7 -40 l5 10 h24 q8 -14 16 0 h36 q10 8 20 0 h52 h30 q6 -10 12 0 h20 l7 -34 l11 64 l7 -40 l5 10 h24 q8 -14 16 0 h36 q10 8 20 0 h52 h30 q6 -10 12 0 h20 l7 -34 l11 64 l7 -40 l5 10 h24 q8 -14 16 0 h36 q10 8 20 0 h52 h30 q6 -10 12 0 h20 l7 -34 l11 64 l7 -40 l5 10 h24 q8 -14 16 0 h36 q10 8 20 0 h52 h30 q6 -10 12 0 h20 l7 -34 l11 64 l7 -40 l5 10 h24 q8 -14 16 0 h36 q10 8 20 0 h52 h30 q6 -10 12 0 h20 l7 -34 l11 64 l7 -40 l5 10 h24 q8 -14 16 0 h36 q10 8 20 0 h52 M1440 60 h30 q6 -10 12 0 h20 l7 -34 l11 64 l7 -40 l5 10 h24 q8 -14 16 0 h36 q10 8 20 0 h52 h30 q6 -10 12 0 h20 l7 -34 l11 64 l7 -40 l5 10 h24 q8 -14 16 0 h36 q10 8 20 0 h52 h30 q6 -10 12 0 h20 l7 -34 l11 64 l7 -40 l5 10 h24 q8 -14 16 0 h36 q10 8 20 0 h52 h30 q6 -10 12 0 h20 l7 -34 l11 64 l7 -40 l5 10 h24 q8 -14 16 0 h36 q10 8 20 0 h52 h30 q6 -10 12 0 h20 l7 -34 l11 64 l7 -40 l5 10 h24 q8 -14 16 0 h36 q10 8 20 0 h52 h30 q6 -10 12 0 h20 l7 -34 l11 64 l7 -40 l5 10 h24 q8 -14 16 0 h36 q10 8 20 0 h52"/></svg>
   <div class="wrap">
     <div class="hero-flex">
     <div class="hero-text">
@@ -613,6 +629,7 @@
 
 <!-- ═══════ INTERESTS ═══════ -->
 <section id="interests">
+  <svg class="dragon" viewBox="0 0 640 400" aria-hidden="true"><path fill="currentColor" d="M96 176 C 84 164 66 160 48 166 L 20 178 C 30 186 42 188 54 188 L 34 202 C 52 206 74 202 88 192 C 92 210 100 226 114 238 C 138 252 166 260 196 262 C 210 240 224 222 228 200 C 246 148 292 108 348 92 C 330 122 322 148 326 172 C 306 160 288 164 278 180 C 262 172 248 180 244 196 C 238 210 240 226 250 240 C 274 250 300 252 324 246 C 356 240 388 246 416 262 C 452 284 490 286 528 268 C 560 254 588 258 608 276 L 632 262 L 616 286 L 636 296 C 604 300 576 292 552 300 C 512 314 470 308 436 288 C 420 300 398 306 376 304 C 344 300 316 288 296 268 C 268 276 236 274 208 264 C 176 256 148 244 128 224 C 116 210 106 194 96 176 Z"/></svg>
   <div class="wrap">
     <div class="sec-head reveal">
       <p class="eyebrow" data-i18n="int_eyebrow">Beyond Engineering</p>
@@ -679,19 +696,19 @@
     <button class="btn btn-ghost" style="display:block; width:100%;" onclick="cvChoose(false)" data-i18n="cv_without">Without photo</button>
   </div>
   <div id="cvStep2" style="display:none;">
-    <a id="cvEN" href="Ali-Dewali-CV.pdf" download class="btn btn-primary" style="display:block; margin-bottom:10px;" onclick="cvClose()">🇬🇧 English CV</a>
-    <a id="cvDE" href="Ali-Dewali-CV-DE.pdf" download class="btn btn-ghost" style="display:block;" onclick="cvClose()">🇩🇪 Deutscher Lebenslauf</a>
+    <a id="cvEN" href="Ali-Dewali-CV.pdf" download class="btn btn-primary" style="display:block; margin-bottom:10px;" onclick="cvClose()" data-i18n="cv_en">🇬🇧 English CV</a>
+    <a id="cvDE" href="Ali-Dewali-CV-DE.pdf" download class="btn btn-ghost" style="display:block;" onclick="cvClose()" data-i18n="cv_de">🇩🇪 Deutscher Lebenslauf</a>
   </div>
 </div>
 
 <div id="droidTip" style="display:none; position:fixed; left:50%; bottom:30px; transform:translateX(-50%); z-index:80; width:min(340px, calc(100vw - 40px)); background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px; box-shadow:0 20px 50px -18px rgba(0,0,0,.5);">
   <p style="font-size:14px; color:var(--ink); white-space:pre-line;" data-i18n="android_hint">You're inside an in-app browser (like Instagram's), which blocks installing. Tap the ⋮ or ••• menu in the corner and choose "Open in Chrome" / "Open in browser", then tap Install App again — or use the browser menu → "Add to Home screen".</p>
-  <button onclick="this.parentElement.style.display='none'" class="btn btn-primary" style="margin-top:12px; padding:8px 18px; font-size:13px;">OK</button>
+  <button onclick="this.parentElement.style.display='none'" class="btn btn-primary" style="margin-top:12px; padding:8px 18px; font-size:13px;" data-i18n="btn_ok">OK</button>
 </div>
 
 <div id="iosTip" style="display:none; position:fixed; left:50%; bottom:30px; transform:translateX(-50%); z-index:80; width:min(340px, calc(100vw - 40px)); background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px; box-shadow:0 20px 50px -18px rgba(0,0,0,.5);">
   <p style="font-size:14px; color:var(--ink); white-space:pre-line;" data-i18n="ios_hint">On iPhone: tap the Share button (the square with an arrow) at the bottom of Safari, then choose "Add to Home Screen".</p>
-  <button onclick="this.parentElement.style.display='none'" class="btn btn-primary" style="margin-top:12px; padding:8px 18px; font-size:13px;">OK</button>
+  <button onclick="this.parentElement.style.display='none'" class="btn btn-primary" style="margin-top:12px; padding:8px 18px; font-size:13px;" data-i18n="btn_ok">OK</button>
 </div>
 
 <button id="chatBtn" aria-label="Chat with Ali's assistant">
@@ -775,7 +792,7 @@ const I18N = {
     cc_email:"Email", cc_loc:"Location", cc_loc_v:"Duhok, Kurdistan Region, Iraq",
     footer:"© 2026 Ali Azhar Dewali · Biomedical Engineering",
     theme_cream:"Cream", theme_dark:"Dark", theme_ocean:"Ocean", theme_scrubs:"Scrubs", theme_monitor:"Monitor", theme_switch:"Theme",
-    chat_name:"Ali's Assistant", chat_status:"Online · answers 24/7", chat_ph:"Ask anything about Ali…", chat_send:"Send",
+    btn_ok:"OK", cv_en:"🇬🇧 English CV", cv_de:"🇩🇪 Deutscher Lebenslauf", chat_name:"Ali's Assistant", chat_status:"Online · answers 24/7", chat_ph:"Ask anything about Ali…", chat_send:"Send",
     stat_projects:"Projects", stat_intern:"Internship", stat_langs:"Languages", stat_grad:"Graduation",
   },
 
@@ -833,7 +850,7 @@ const I18N = {
     cc_email:"البريد الإلكتروني", cc_loc:"الموقع", cc_loc_v:"دهوك، إقليم كردستان، العراق",
     footer:"© 2026 علي أزهر ديوالي · الهندسة الطبية الحيوية",
     theme_cream:"كريمي", theme_dark:"داكن", theme_ocean:"محيطي", theme_scrubs:"جراحي", theme_monitor:"مونيتور", theme_switch:"السمة",
-    chat_name:"مساعد علي", chat_status:"متصل · يجيب 24/7", chat_ph:"اسأل أي شيء عن علي…", chat_send:"إرسال",
+    btn_ok:"حسناً", cv_en:"🇬🇧 ملف السيرة الذاتية بالإنجليزية", cv_de:"🇩🇪 السيرة الذاتية بالألمانية", chat_name:"مساعد علي", chat_status:"متصل · يجيب 24/7", chat_ph:"اسأل أي شيء عن علي…", chat_send:"إرسال",
     stat_projects:"مشاريع", stat_intern:"تدريب", stat_langs:"لغات", stat_grad:"التخرج",
   },
 
@@ -891,7 +908,7 @@ const I18N = {
     cc_email:"ئیمەیل", cc_loc:"جهـ", cc_loc_v:"دهۆک، هەرێما کوردستان، عێراق",
     footer:"© 2026 عەلی ئەزهەر دیوالی · ئەندازیاریا بایۆمێدیکاڵ",
     theme_cream:"کرێمی", theme_dark:"تاری", theme_ocean:"دەریایی", theme_scrubs:"پزیشکی", theme_monitor:"مۆنیتەر", theme_switch:"ڕەنگ",
-    chat_name:"هاریکارێ عەلی", chat_status:"ئۆنلاین · بەرسڤێ 24/7 ددەت", chat_ph:"هەر تشتەکی دەربارەی عەلی بپرسە…", chat_send:"بنێرە",
+    btn_ok:"باشە", cv_en:"🇬🇧 CV ب ئینگلیزی", cv_de:"🇩🇪 CV ب ئەلمانی", chat_name:"هاریکارێ عەلی", chat_status:"ئۆنلاین · بەرسڤێ 24/7 ددەت", chat_ph:"هەر تشتەکی دەربارەی عەلی بپرسە…", chat_send:"بنێرە",
     stat_projects:"پرۆژە", stat_intern:"ستاژ", stat_langs:"زمان", stat_grad:"دەرچوون",
   },
 
@@ -899,14 +916,14 @@ const I18N = {
     nav_about:"دەربارە", nav_exp:"شارەزایی", nav_projects:"پڕۆژەکان", nav_skills:"لێهاتووییەکان", nav_contact:"پەیوەندی",
     hero_eyebrow:"ئەندازیاری بایۆمێدیکاڵ",
     hero_tagline:"ئەندازیاری بایۆمێدیکاڵ کە پرد دەبەستێت لەنێوان پزیشکی و ئامێرەکان — ڕووکاری مێشک-کۆمپیوتەر، سیستەمە ئێمبێددکراوەکان، و پرۆسێسکردنی سیگناڵی بایۆلۆجی.",
-    hero_summary:"خوێندکاری ساڵی چوارەمی ئەندازیاری بایۆمێدیکاڵ لە بەرنامەیەکی بڕوانامەی دووانەدا لەنێوان زانکۆی دهۆک و زانکۆی تەکنیکی میتڵهێسن (ئەڵمانیا). سیستەمی تەواو دروست دەکەم — لە وەرگرتنی سیگناڵی بایۆلۆجییەوە تا فیرموێر کە کۆنترۆڵی هاردوێری ڕاستەقینە دەکات.",
+    hero_summary:"خوێندکاری ساڵی چوارەمی ئەندازیاری بایۆمێدیکاڵ لە بەرنامەیەکی بڕوانامەی دووانەدا لەنێوان زانکۆی دهۆک و زانکۆی تەکنیکی میتڵهێسن (ئەڵمانیا). سیستەمی تەواو دروست دەکەم — لە وەرگرتنی سیگناڵی بایۆلۆجی تا فیرموێری کۆنترۆڵی هاردوێری ڕاستەقینە.",
     badge_degree_k:"بڕوانامەی دووانە", badge_degree_v:"دهۆک × THM ئەڵمانیا", badge_grad_k:"دەرچوون", badge_loc_k:"شوێن", badge_loc_v:"دهۆک، عێراق",
-    hero_cta1:"پڕۆژەکان ببینە", hero_cta2:"پەیوەندیم پێوە بکە", hero_cta3:"CV دابگرە", hero_cta4:"📱 ئەپەکە دابمەزرێنە", cv_with:"📷 لەگەڵ وێنەکەم", cv_without:"بێ وێنە", android_hint:"تۆ لەناو وێبگەڕی ناو-ئەپدایت (وەک هی ئینستاگرام) کە ڕێگە بە دامەزراندن نادات. مێنیوی ⋮ یان ••• لە گۆشەکە دابگرە و «Open in Chrome» هەڵبژێرە، پاشان دووبارە دوگمەی Install App دابگرە — یان لە مێنیوی وێبگەڕ «Add to Home screen» هەڵبژێرە.", ios_hint:"لە ئایفۆن: دوگمەی Share (چوارگۆشە لەگەڵ تیر) لە خوارەوەی Safari دابگرە، پاشان «Add to Home Screen» هەڵبژێرە.", proj1_link:"کۆدەکە لە GitHub ببینە ←",
+    hero_cta1:"پڕۆژەکان ببینە", hero_cta2:"پەیوەندیم پێوە بکە", hero_cta3:"CV دابگرە", hero_cta4:"📱 ئەپەکە دابمەزرێنە", cv_with:"📷 لەگەڵ وێنەکەم", cv_without:"بێ وێنە", android_hint:"تۆ لەناو وێبگەڕی ناو-ئەپدا (وەک ئینستاگرام) کە دامەزراندن ناگرێت. مێنیوی ⋮ یان ••• لە گۆشەکە بگرە و «Open in Chrome» هەڵبژێرە، پاشان دووبارە دوگمەی Install App بگرە — یان لە مێنیوی وێبگەڕ «Add to Home screen» هەڵبژێرە.", ios_hint:"لە ئایفۆن: دوگمەی Share (چوارگۆشە لەگەڵ تیر) لە خوارەوەی Safari بگرە، پاشان «Add to Home Screen» هەڵبژێرە.", proj1_link:"کۆدەکە لە GitHub ببینە ←",
     about_eyebrow:"دەربارە", about_title:"خوێندن و پاشخان",
-    edu_deg:"بەکالۆریۆس لە ئەندازیاری بایۆمێدیکاڵ", edu_school:"زانکۆی دهۆک (UoD) و زانکۆی تەکنیکی میتڵهێسن (THM)، ئەڵمانیا",
+    edu_deg:"بەکالۆریۆسی ئەندازیاری بایۆمێدیکاڵ", edu_school:"زانکۆی دهۆک (UoD) و زانکۆی تەکنیکی میتڵهێسن (THM)، ئەڵمانیا",
     edu_meta:"بەرنامەی بڕوانامەی دووانە · خوێندکاری ساڵی چوارەم · دەرچوونی چاوەڕوانکراو 2027",
-    edu_li1:"پڕۆگرامێکی نێودەوڵەتی بڕوانامەی دووانە — خوێندنەکە بە تەواوی بە ئینگلیزییە.",
-    edu_li2:"جەخت لەسەر ئامێرە پزیشکییەکان، پرۆسێسکردنی سیگناڵ، و سیستەمە ئێمبێددکراوەکان.",
+    edu_li1:"بەرنامەی نێودەوڵەتی بڕوانامەی دووانە — خوێندنەکە بە تەواوی بە ئینگلیزی.",
+    edu_li2:"سەرنج لەسەر ئامێرە پزیشکییەکان، پرۆسێسکردنی سیگناڵ، و سیستەمە ئێمبێددکراوەکان.",
     edu_li3:"خوێندنی ئامادەیی: ئامادەیی وەرار (2023).",
     milestone_tag:"داهاتوو", milestone_title:"مەشقی پیشەیی لە ئەڵمانیا — 2027",
     milestone_body:"مەشقێکی شەش مانگی ئەندازیاری بایۆمێدیکاڵ لە ئەڵمانیا، وەک بەشێک لە بەرنامەی بڕوانامەی دووانە.",
@@ -919,7 +936,7 @@ const I18N = {
     proj1_tag:"ڕووکاری مێشک-کۆمپیوتەر", proj1_title:"فڕینی هەوایی بە EEG کۆنترۆڵکراو",
     proj1_body:"هێدسێتی EEGی NeuroSky داتای شەپۆلی مێشک دەنێرێت بۆ ئەنجینێکی پایتۆن کە سەرنج بە کاتی ڕاست دەپێوێت و پەنکەیەک بە ESP32 کۆنترۆڵدەکات — هەرچەند زیاتر سەرنج بدەیت، تۆپی پینگ-پۆنگ بەرزتر دەبێتەوە. زنجیرەی تەواو: وەرگرتن، شیکاری سیگناڵ، و کۆنترۆڵی مۆتۆر.",
     proj2_tag:"هاردوێری سیگناڵی بایۆلۆجی", proj2_title:"دیزاینی ئامێری ECG",
-    proj2_body:"ئامێرێکی ECGی سادە و کارا دروستکرا بە بەکارهێنانی سێ ئێلێکترۆد بۆ وەرگرتن و پیشاندانی سیگناڵی کارەبایی دڵ.",
+    proj2_body:"ئامێرێکی ECGی سادە و کارای دروستکرا بە بەکارهێنانی سێ ئێلێکترۆد بۆ وەرگرتن و پیشاندانی سیگناڵی کارەبایی دڵ.",
     chip_biopot:"جهدی بایۆلۆجی", chip_circuit:"دیزاینی سووڕ",
     proj3_tag:"کۆنترۆڵی ئێمبێدد", proj3_title:"کۆنترۆڵی مۆتۆر بە مایکرۆکۆنترۆڵەر",
     proj3_body:"سیستەمی کۆنترۆڵی خێرایی مۆتۆری DC دیزاینکرا لەسەر Arduino Uno، Nano و ESP32، بە دوگمە و پۆتانشیۆمیتەر بۆ ڕێکخستنی خێرایی، لەگەڵ کۆنترۆڵی PIDی گرێخراو و پیشاندانی زیندووی LCD.",
@@ -939,7 +956,7 @@ const I18N = {
     cert4:"کۆرسی پایتۆن (١٣ کاتژمێر) — Data with Baraa، یوتیوب (خۆفێربوون).",
     lang_tag:"زمانەکان",
     lang1:"کوردی (بادینی) — زمانی دایک", lang2:"عەرەبی — بە ڕەوانی",
-    lang3:"ئینگلیزی — بە ڕەوانی · خوێندنەکە بە ئینگلیزییە",
+    lang3:"ئینگلیزی — بە ڕەوانی · خوێندنەکە بە ئینگلیزی",
     int_eyebrow:"دەرەوەی ئەندازیاری", int_title:"ئارەزوو و خولیاکان",
     int1:"⚽ لایەنگری بارسێلۆنا", int2:"🇩🇪 تیمی نیشتمانی ئەڵمانیا بۆ تۆپی پێ",
     int3:"📚 خوێندنەوەی کتێب",
@@ -949,7 +966,7 @@ const I18N = {
     cc_email:"ئیمەیڵ", cc_loc:"شوێن", cc_loc_v:"دهۆک، هەرێمی کوردستان، عێراق",
     footer:"© 2026 عەلی ئەزهەر دیوالی · ئەندازیاری بایۆمێدیکاڵ",
     theme_cream:"کرێمی", theme_dark:"تاریک", theme_ocean:"دەریایی", theme_scrubs:"پزیشکی", theme_monitor:"مۆنیتەر", theme_switch:"ڕەنگ",
-    chat_name:"یاریدەدەری عەلی", chat_status:"ئۆنلاین · وەڵام 24/7", chat_ph:"هەر شتێک دەربارەی عەلی بپرسە…", chat_send:"بنێرە",
+    btn_ok:"باشە", cv_en:"🇬🇧 CV ئینگلیزی", cv_de:"🇩🇪 CV ئەڵمانی", chat_name:"یاریدەدەری عەلی", chat_status:"ئۆنلاین · وەڵام 24/7", chat_ph:"هەر شتێک دەربارەی عەلی بپرسە…", chat_send:"بنێرە",
     stat_projects:"پڕۆژە", stat_intern:"ستاژ", stat_langs:"زمان", stat_grad:"دەرچوون",
   },
 
@@ -1007,7 +1024,7 @@ const I18N = {
     cc_email:"E-Mail", cc_loc:"Standort", cc_loc_v:"Duhok, Region Kurdistan, Irak",
     footer:"© 2026 Ali Azhar Dewali · Biomedizintechnik",
     theme_cream:"Creme", theme_dark:"Dunkel", theme_ocean:"Ozean", theme_scrubs:"OP-Grün", theme_monitor:"Monitor", theme_switch:"Thema",
-    chat_name:"Alis Assistent", chat_status:"Online · antwortet 24/7", chat_ph:"Frag alles über Ali…", chat_send:"Senden",
+    btn_ok:"OK", cv_en:"🇬🇧 English CV", cv_de:"🇩🇪 Deutscher Lebenslauf", chat_name:"Alis Assistent", chat_status:"Online · antwortet 24/7", chat_ph:"Frag alles über Ali…", chat_send:"Senden",
     stat_projects:"Projekte", stat_intern:"Praktikum", stat_langs:"Sprachen", stat_grad:"Abschluss",
   },
 };
@@ -1107,6 +1124,20 @@ window.addEventListener('scroll', () => {
   navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + active));
 });
 toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// ── animated ECG dividers between sections ──
+(function () {
+  const seg = '<svg viewBox="0 0 2880 120" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0 60 h30 q6 -10 12 0 h20 l7 -34 l11 64 l7 -40 l5 10 h24 q8 -14 16 0 h36 q10 8 20 0 h52 h30 q6 -10 12 0 h20 l7 -34 l11 64 l7 -40 l5 10 h24 q8 -14 16 0 h36 q10 8 20 0 h52 h30 q6 -10 12 0 h20 l7 -34 l11 64 l7 -40 l5 10 h24 q8 -14 16 0 h36 q10 8 20 0 h52 h30 q6 -10 12 0 h20 l7 -34 l11 64 l7 -40 l5 10 h24 q8 -14 16 0 h36 q10 8 20 0 h52 h30 q6 -10 12 0 h20 l7 -34 l11 64 l7 -40 l5 10 h24 q8 -14 16 0 h36 q10 8 20 0 h52 h30 q6 -10 12 0 h20 l7 -34 l11 64 l7 -40 l5 10 h24 q8 -14 16 0 h36 q10 8 20 0 h52 M1440 60 h30 q6 -10 12 0 h20 l7 -34 l11 64 l7 -40 l5 10 h24 q8 -14 16 0 h36 q10 8 20 0 h52 h30 q6 -10 12 0 h20 l7 -34 l11 64 l7 -40 l5 10 h24 q8 -14 16 0 h36 q10 8 20 0 h52 h30 q6 -10 12 0 h20 l7 -34 l11 64 l7 -40 l5 10 h24 q8 -14 16 0 h36 q10 8 20 0 h52 h30 q6 -10 12 0 h20 l7 -34 l11 64 l7 -40 l5 10 h24 q8 -14 16 0 h36 q10 8 20 0 h52 h30 q6 -10 12 0 h20 l7 -34 l11 64 l7 -40 l5 10 h24 q8 -14 16 0 h36 q10 8 20 0 h52 h30 q6 -10 12 0 h20 l7 -34 l11 64 l7 -40 l5 10 h24 q8 -14 16 0 h36 q10 8 20 0 h52"/></svg>';
+  ['about','experience','projects','skills','interests'].forEach(id => {
+    const sec = document.getElementById(id);
+    if (!sec) return;
+    const div = document.createElement('div');
+    div.className = 'sig-divider';
+    div.setAttribute('aria-hidden', 'true');
+    div.innerHTML = seg;
+    sec.insertAdjacentElement('afterend', div);
+  });
+})();
 
 // animated count-up on hero stats
 (function () {
