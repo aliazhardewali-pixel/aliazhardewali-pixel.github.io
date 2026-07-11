@@ -68,6 +68,36 @@
     --amber-soft: #26210f;
     --header-bg: rgba(11,27,43,0.85);
   }
+  /* ── THEME: SCRUBS (surgical mint, light) ── */
+  [data-theme="scrubs"] {
+    --cream: #eef5f2;
+    --cream-2: #dfeae5;
+    --card: #ffffff;
+    --ink: #1f3a34;
+    --muted: #5f7a72;
+    --line: #cfe0d9;
+    --accent: #2f9488;
+    --accent-dark: #226b62;
+    --accent-soft: #dcefe9;
+    --amber: #d97f4a;
+    --amber-soft: #f7e8d9;
+    --header-bg: rgba(238,245,242,0.88);
+  }
+  /* ── THEME: MONITOR (patient-monitor dark, ECG green) ── */
+  [data-theme="monitor"] {
+    --cream: #050a08;
+    --cream-2: #0c1512;
+    --card: #0a1310;
+    --ink: #d8ffe9;
+    --muted: #6fa08c;
+    --line: #17352a;
+    --accent: #00e68a;
+    --accent-dark: #5cffb5;
+    --accent-soft: #06301f;
+    --amber: #ffc857;
+    --amber-soft: #2b220d;
+    --header-bg: rgba(5,10,8,0.85);
+  }
   html { transition: background-color .35s ease; }
   body, .card, header, .badge, .contact-card, input, textarea, .lang-select {
     transition: background-color .35s ease, color .35s ease, border-color .35s ease;
@@ -744,7 +774,7 @@ const I18N = {
     form_name:"Your name", form_email:"Your email", form_msg:"Your message…", form_send:"Send Message",
     cc_email:"Email", cc_loc:"Location", cc_loc_v:"Duhok, Kurdistan Region, Iraq",
     footer:"© 2026 Ali Azhar Dewali · Biomedical Engineering",
-    theme_cream:"Cream", theme_dark:"Dark", theme_ocean:"Ocean", theme_switch:"Theme",
+    theme_cream:"Cream", theme_dark:"Dark", theme_ocean:"Ocean", theme_scrubs:"Scrubs", theme_monitor:"Monitor", theme_switch:"Theme",
     chat_name:"Ali's Assistant", chat_status:"Online · answers 24/7", chat_ph:"Ask anything about Ali…", chat_send:"Send",
     stat_projects:"Projects", stat_intern:"Internship", stat_langs:"Languages", stat_grad:"Graduation",
   },
@@ -802,7 +832,7 @@ const I18N = {
     form_name:"اسمك", form_email:"بريدك الإلكتروني", form_msg:"رسالتك…", form_send:"إرسال الرسالة",
     cc_email:"البريد الإلكتروني", cc_loc:"الموقع", cc_loc_v:"دهوك، إقليم كردستان، العراق",
     footer:"© 2026 علي أزهر ديوالي · الهندسة الطبية الحيوية",
-    theme_cream:"كريمي", theme_dark:"داكن", theme_ocean:"محيطي", theme_switch:"السمة",
+    theme_cream:"كريمي", theme_dark:"داكن", theme_ocean:"محيطي", theme_scrubs:"جراحي", theme_monitor:"مونيتور", theme_switch:"السمة",
     chat_name:"مساعد علي", chat_status:"متصل · يجيب 24/7", chat_ph:"اسأل أي شيء عن علي…", chat_send:"إرسال",
     stat_projects:"مشاريع", stat_intern:"تدريب", stat_langs:"لغات", stat_grad:"التخرج",
   },
@@ -860,7 +890,7 @@ const I18N = {
     form_name:"ناڤێ تە", form_email:"ئیمەیلا تە", form_msg:"پەیاما تە…", form_send:"پەیامێ بنێرە",
     cc_email:"ئیمەیل", cc_loc:"جهـ", cc_loc_v:"دهۆک، هەرێما کوردستان، عێراق",
     footer:"© 2026 عەلی ئەزهەر دیوالی · ئەندازیاریا بایۆمێدیکاڵ",
-    theme_cream:"کرێمی", theme_dark:"تاری", theme_ocean:"دەریایی", theme_switch:"ڕەنگ",
+    theme_cream:"کرێمی", theme_dark:"تاری", theme_ocean:"دەریایی", theme_scrubs:"پزیشکی", theme_monitor:"مۆنیتەر", theme_switch:"ڕەنگ",
     chat_name:"هاریکارێ عەلی", chat_status:"ئۆنلاین · بەرسڤێ 24/7 ددەت", chat_ph:"هەر تشتەکی دەربارەی عەلی بپرسە…", chat_send:"بنێرە",
     stat_projects:"پرۆژە", stat_intern:"ستاژ", stat_langs:"زمان", stat_grad:"دەرچوون",
   },
@@ -918,7 +948,7 @@ const I18N = {
     form_name:"ناوت", form_email:"ئیمەیڵت", form_msg:"پەیامەکەت…", form_send:"پەیام بنێرە",
     cc_email:"ئیمەیڵ", cc_loc:"شوێن", cc_loc_v:"دهۆک، هەرێمی کوردستان، عێراق",
     footer:"© 2026 عەلی ئەزهەر دیوالی · ئەندازیاری بایۆمێدیکاڵ",
-    theme_cream:"کرێمی", theme_dark:"تاریک", theme_ocean:"دەریایی", theme_switch:"ڕەنگ",
+    theme_cream:"کرێمی", theme_dark:"تاریک", theme_ocean:"دەریایی", theme_scrubs:"پزیشکی", theme_monitor:"مۆنیتەر", theme_switch:"ڕەنگ",
     chat_name:"یاریدەدەری عەلی", chat_status:"ئۆنلاین · وەڵام 24/7", chat_ph:"هەر شتێک دەربارەی عەلی بپرسە…", chat_send:"بنێرە",
     stat_projects:"پڕۆژە", stat_intern:"ستاژ", stat_langs:"زمان", stat_grad:"دەرچوون",
   },
@@ -976,7 +1006,7 @@ const I18N = {
     form_name:"Ihr Name", form_email:"Ihre E-Mail", form_msg:"Ihre Nachricht…", form_send:"Nachricht senden",
     cc_email:"E-Mail", cc_loc:"Standort", cc_loc_v:"Duhok, Region Kurdistan, Irak",
     footer:"© 2026 Ali Azhar Dewali · Biomedizintechnik",
-    theme_cream:"Creme", theme_dark:"Dunkel", theme_ocean:"Ozean", theme_switch:"Thema",
+    theme_cream:"Creme", theme_dark:"Dunkel", theme_ocean:"Ozean", theme_scrubs:"OP-Grün", theme_monitor:"Monitor", theme_switch:"Thema",
     chat_name:"Alis Assistent", chat_status:"Online · antwortet 24/7", chat_ph:"Frag alles über Ali…", chat_send:"Senden",
     stat_projects:"Projekte", stat_intern:"Praktikum", stat_langs:"Sprachen", stat_grad:"Abschluss",
   },
@@ -986,8 +1016,8 @@ const RTL_LANGS = ['ar','bad','sor'];
 let currentLang = 'en';
 
 // THEME switching (cream -> dark -> ocean)
-const THEMES = ['cream','dark','ocean'];
-const THEME_ICONS = { cream:'☀', dark:'🌙', ocean:'🌊' };
+const THEMES = ['cream','dark','ocean','scrubs','monitor'];
+const THEME_ICONS = { cream:'☀', dark:'🌙', ocean:'🌊', scrubs:'🩺', monitor:'🫀' };
 let currentTheme = 'cream';
 try { currentTheme = localStorage.getItem('theme') || 'cream'; } catch(e) {}
 
