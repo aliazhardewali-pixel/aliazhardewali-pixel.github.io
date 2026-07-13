@@ -369,6 +369,30 @@
   .li::before { content: '▹'; color: var(--accent); flex-shrink: 0; }
   html[dir="rtl"] .li::before { content: '◃'; }
 
+  /* clickable certificate rows */
+  .cert-link { flex: 1; display: flex; align-items: flex-start; gap: 10px; color: var(--muted); text-decoration: none; cursor: pointer; transition: color .2s; }
+  .cert-link .cert-txt { flex: 1; }
+  .cert-link:hover { color: var(--accent-dark); }
+  .cert-badge { flex-shrink: 0; display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 9px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-dark); font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; transition: all .2s; }
+  html[dir="rtl"] .cert-badge { font-family: 'Cairo', sans-serif; }
+  .cert-link:hover .cert-badge { background: var(--accent); color: #fff; }
+  .cert-badge svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+  /* inline "view certificate" link (experience) */
+  .cert-inline { display: inline-flex; align-items: center; gap: 7px; margin-top: 12px; color: var(--accent); font-weight: 600; font-size: 13.5px; text-decoration: none; cursor: pointer; transition: color .2s; }
+  .cert-inline svg { width: 15px; height: 15px; }
+  .cert-inline:hover { color: var(--accent-dark); text-decoration: underline; }
+
+  /* certificate lightbox */
+  .cert-modal { position: fixed; inset: 0; z-index: 200; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(9,13,18,.84); backdrop-filter: blur(4px); }
+  .cert-modal.open { display: flex; animation: certFade .2s ease; }
+  @keyframes certFade { from { opacity: 0; } to { opacity: 1; } }
+  .cert-modal figure { margin: 0; max-width: 940px; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .cert-modal img { max-width: 100%; max-height: 76vh; border-radius: 10px; box-shadow: 0 30px 80px -20px rgba(0,0,0,.7); background: #fff; }
+  .cert-modal figcaption { color: #e6edf3; font-size: 14px; text-align: center; max-width: 620px; line-height: 1.5; }
+  .cert-close { position: absolute; top: 20px; inset-inline-end: 22px; width: 44px; height: 44px; border-radius: 50%; border: none; background: rgba(255,255,255,.14); color: #fff; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s; }
+  .cert-close:hover { background: rgba(255,255,255,.28); }
+
   /* interests pills */
   .pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
   .pill { background: var(--amber-soft); color: #9a5a12; border-radius: 999px; padding: 8px 16px; font-size: 15px; font-weight: 500; }
@@ -529,6 +553,7 @@
         <div class="org" data-i18n="exp1_org">Dr. Ghazi Hospital</div>
         <p data-i18n="exp1_body">Hands-on training in the operation, repair, calibration, and installation of clinical medical devices — supervised by Eng. Mohammed Mizori, under hospital CEO Dr. Abdullah Abdullah, and recognized for professional conduct and commitment to hospital safety standards.</p>
         <p data-i18n="exp1_body2">As part of the same training: maintenance and inspection of high-capacity oxygen and CO₂ generation plants, plus troubleshooting of hospital-wide medical vacuum systems used in critical care.</p>
+        <a class="cert-inline" href="certificates/cert-internship-ghazi-hospital.jpg" data-cert-img="certificates/cert-internship-ghazi-hospital.jpg" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><span data-i18n="exp1_cert">View internship certificate</span></a>
       </div>
     </div>
   </div>
@@ -608,11 +633,12 @@
       <div class="card reveal">
         <p class="tag" data-i18n="cert_tag">Certifications &amp; Training</p>
         <div class="plain-list">
-          <div class="li" data-i18n="cert0">Certificate of Participation — 13th Engineering Design Day, University of Duhok (May 2026).</div>
-          <div class="li" data-i18n="cert1">Leadership Training (22h) — Kurdistan Students Development Organization, 2023.</div>
-          <div class="li" data-i18n="cert2">Rules of Success Course (7h) — Infinity Organization for Civil Development, 2020.</div>
-          <div class="li" data-i18n="cert3">English Language Training — Da Vinci Institute, 2020.</div>
-          <div class="li"><a href="https://youtu.be/Rq5gJVxz55Q" target="_blank" rel="noopener" style="color:inherit;"><span data-i18n="cert4">Python Programming Course (13h) — Data with Baraa, YouTube (self-study).</span></a></div>
+          <div class="li li-cert"><a class="cert-link" href="certificates/cert-design-day-eeg.jpg" data-cert-img="certificates/cert-design-day-eeg.jpg" target="_blank" rel="noopener"><span class="cert-txt" data-i18n="cert0">Certificate of Participation — 13th Engineering Design Day, University of Duhok (May 2026).</span><span class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3m10 0h3a2 2 0 0 0 2-2v-3"/></svg><span data-i18n="cert_view">View</span></span></a></div>
+          <div class="li li-cert"><a class="cert-link" href="certificates/cert-ai-training-youth-center.jpg" data-cert-img="certificates/cert-ai-training-youth-center.jpg" target="_blank" rel="noopener"><span class="cert-txt" data-i18n="cert5">Artificial Intelligence Training Course (15h) — Youth Activities Developing Center, Duhok (2026).</span><span class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3m10 0h3a2 2 0 0 0 2-2v-3"/></svg><span data-i18n="cert_view">View</span></span></a></div>
+          <div class="li li-cert"><a class="cert-link" href="certificates/cert-leadership-ksdo.jpg" data-cert-img="certificates/cert-leadership-ksdo.jpg" target="_blank" rel="noopener"><span class="cert-txt" data-i18n="cert1">Leadership Training (22h) — Kurdistan Students Development Organization, 2023.</span><span class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3m10 0h3a2 2 0 0 0 2-2v-3"/></svg><span data-i18n="cert_view">View</span></span></a></div>
+          <div class="li li-cert"><a class="cert-link" href="certificates/cert-rules-of-success-infinity.jpg" data-cert-img="certificates/cert-rules-of-success-infinity.jpg" target="_blank" rel="noopener"><span class="cert-txt" data-i18n="cert2">Rules of Success Course (7h) — Infinity Organization for Civil Development, 2020.</span><span class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3m10 0h3a2 2 0 0 0 2-2v-3"/></svg><span data-i18n="cert_view">View</span></span></a></div>
+          <div class="li li-cert"><a class="cert-link" href="certificates/cert-english-davinci.jpg" data-cert-img="certificates/cert-english-davinci.jpg" target="_blank" rel="noopener"><span class="cert-txt" data-i18n="cert3">English Language Training — Da Vinci Institute, 2020.</span><span class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3m10 0h3a2 2 0 0 0 2-2v-3"/></svg><span data-i18n="cert_view">View</span></span></a></div>
+          <div class="li li-cert"><a class="cert-link" href="https://youtu.be/Rq5gJVxz55Q" target="_blank" rel="noopener"><span class="cert-txt" data-i18n="cert4">Python Programming Course (13h) — Data with Baraa, YouTube (self-study).</span><span class="cert-badge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>YouTube</span></a></div>
         </div>
       </div>
       <div class="card reveal">
@@ -666,6 +692,10 @@
         <a href="https://github.com/aliazhardewali-pixel" target="_blank" rel="noopener" class="contact-card">
           <span class="ic"><svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-1.94c-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.7 5.38-5.26 5.67.41.35.77 1.05.77 2.12v3.14c0 .3.21.66.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg></span>
           <span><span class="t">GitHub</span><br><span class="s">@aliazhardewali-pixel</span></span>
+        </a>
+        <a href="https://www.linkedin.com/in/ali-dewali" target="_blank" rel="noopener" class="contact-card">
+          <span class="ic"><svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></span>
+          <span><span class="t">LinkedIn</span><br><span class="s">ali-dewali</span></span>
         </a>
         <a href="https://instagram.com/aliii.azharr" target="_blank" rel="noopener" class="contact-card">
           <span class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></span>
@@ -735,6 +765,15 @@
   <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 16V5M5 10l5-5 5 5"/></svg>
 </button>
 
+<!-- Certificate lightbox -->
+<div class="cert-modal" id="certModal" role="dialog" aria-modal="true" aria-label="Certificate viewer">
+  <button class="cert-close" id="certClose" aria-label="Close">✕</button>
+  <figure id="certFigure">
+    <img id="certImg" src="" alt="Certificate">
+    <figcaption id="certCap"></figcaption>
+  </figure>
+</div>
+
 <script>
 // ════════════ TRANSLATIONS ════════════
 const I18N = {
@@ -758,6 +797,7 @@ const I18N = {
     exp1_role:"Biomedical Engineering Intern", exp1_org:"Dr. Ghazi Hospital",
     exp1_body:"Hands-on training in the operation, repair, calibration, and installation of clinical medical devices — supervised by Eng. Mohammed Mizori, under hospital CEO Dr. Abdullah Abdullah, and recognized for professional conduct and commitment to hospital safety standards.",
     exp1_body2:"As part of the same training: maintenance and inspection of high-capacity oxygen and CO₂ generation plants, plus troubleshooting of hospital-wide medical vacuum systems used in critical care.",
+    exp1_cert:"View internship certificate",
     proj_eyebrow:"Projects", proj_title:"Technical Projects",
     proj1_tag:"Brain-Computer Interface", proj1_title:"EEG-Controlled Aerodynamic Levitation",
     proj1_body:"A NeuroSky EEG headset streams brainwave data to a Python engine that measures focus in real time and drives an ESP32-controlled fan — the harder you focus, the higher a ping-pong ball floats. Full pipeline: acquisition, signal parsing, and motor control.",
@@ -780,6 +820,8 @@ const I18N = {
     cert2:"Rules of Success Course (7h) — Infinity Organization for Civil Development, 2020.",
     cert3:"English Language Training — Da Vinci Institute, 2020.",
     cert4:"Python Programming Course (13h) — Data with Baraa, YouTube (self-study).",
+    cert5:"Artificial Intelligence Training Course (15h) — Youth Activities Developing Center, Duhok (2026).",
+    cert_view:"View",
     lang_tag:"Languages",
     lang1:"Kurdish (Badini) — Native", lang2:"Arabic — Fluent",
     lang3:"English — Fluent · full degree taught in English",
@@ -816,6 +858,7 @@ const I18N = {
     exp1_role:"متدرب هندسة طبية حيوية", exp1_org:"مستشفى الدكتور غازي",
     exp1_body:"اكتسبتُ خبرة عملية في تشغيل وإصلاح ومعايرة وتركيب الأجهزة الطبية السريرية، بإشراف المهندس محمد ميزوري (المدير التنفيذي للمستشفى: د. عبدالله عبدالله)، ونلتُ تقديراً على السلوك المهني والالتزام بمعايير السلامة في المستشفى.",
     exp1_body2:"وضمن التدريب نفسه: صيانة وفحص محطات توليد الأوكسجين وثاني أوكسيد الكربون عالية السعة، والمساعدة في إصلاح أنظمة الشفط الطبي المستخدمة في العناية الحرجة.",
+    exp1_cert:"عرض شهادة التدريب",
     proj_eyebrow:"المشاريع", proj_title:"المشاريع التقنية",
     proj1_tag:"واجهة دماغ-حاسوب", proj1_title:"تحليق هوائي يتحكم به تخطيط الدماغ EEG",
     proj1_body:"سماعة EEG من NeuroSky تبثّ بيانات موجات الدماغ إلى محرك بايثون يقيس التركيز لحظياً ويشغّل مروحة يتحكم بها ESP32 — كلما زاد تركيزك ارتفعت كرة تنس الطاولة. مسار كامل: الالتقاط، تحليل الإشارة، والتحكم بالمحرك.",
@@ -838,6 +881,8 @@ const I18N = {
     cert2:"دورة قواعد النجاح (7 ساعات) — منظمة إنفينيتي للتنمية المدنية، 2020.",
     cert3:"تدريب على اللغة الإنجليزية — معهد دافنشي، 2020.",
     cert4:"دورة برمجة بايثون (13 ساعة) — Data with Baraa، يوتيوب (تعلم ذاتي).",
+    cert5:"دورة تدريبية في الذكاء الاصطناعي (15 ساعة) — مركز تنمية نشاطات الشباب، دهوك (2026).",
+    cert_view:"عرض",
     lang_tag:"اللغات",
     lang1:"الكردية (البادينية) — اللغة الأم", lang2:"العربية — بطلاقة",
     lang3:"الإنجليزية — بطلاقة · الدراسة كاملة بالإنجليزية",
@@ -874,6 +919,7 @@ const I18N = {
     exp1_role:"ستاژیێرێ ئەندازیاریا بایۆمێدیکاڵ", exp1_org:"نەخۆشخانا د. غازی",
     exp1_body:"شارەزاییا دەستی د بکارئینان، چاکرن، عەیارکرن و دانانا ئامێرێن پزیشکی دا — ب سەرپەرشتیا ئەندازیار محەمەد میزۆری (سەرۆکێ نەخۆشخانێ: د. عەبدوڵا عەبدوڵا)، و هاتمە پەسنکرن بۆ ڕەفتارا پیشەیی و پابەندبوونا ب سەلامەتیا نەخۆشخانێ.",
     exp1_body2:"د هەمان ستاژی دا: چاڤدێری و پشکنینا وێستگەهێن ئۆکسجینێ و CO₂ یێن مەزن، و چاکرنا سیستەمێن ڤاکیومێ پزیشکی یێن نەخۆشخانێ.",
+    exp1_cert:"بڕوانامەیا ستاژی ببینە",
     proj_eyebrow:"پرۆژە", proj_title:"پرۆژێن تەکنیکی",
     proj1_tag:"ڕوویا مێشک-کۆمپیوتەر", proj1_title:"فڕینا هەوایی یا ب EEG کۆنترۆلکری",
     proj1_body:"هێدسێتا EEG یا NeuroSky داتایێن پێلێن مێشکی دهنێریتە پرۆگرامەکێ پایتۆنێ کو ڕادەیا سەرنجدانێ ب دەمێ ڕاست دپیڤیت و پەنکەیەکا ب ESP32 کۆنترۆلکری دخەبیتینیت — چەند تو پتر سەرنجێ بدەی، تۆپا پینگ-پۆنگێ بلندتر دبیت. زنجیرەکا تەواو: وەرگرتن، شیکارا سیگناڵێ، و کۆنترۆلا مۆتۆرێ.",
@@ -896,6 +942,8 @@ const I18N = {
     cert2:"کۆرسا یاسایێن سەرکەفتنێ (7 دەمژمێر) — ڕێکخراوا ئینفینیتی بۆ پێشڤەبرنا شارستانی، 2020.",
     cert3:"ڕاهێنانا زمانێ ئینگلیزی — ئینستیتیوتا دافنشی، 2020.",
     cert4:"کۆرسا پایتۆنێ (13 دەمژمێر) — Data with Baraa، یوتیوب (فێربوونا خۆ).",
+    cert5:"کۆرسا ڕاهێنانا زیرەکیا دەستکرد (15 دەمژمێر) — ناوەندا پێشڤەبرنا چالاکیێن گەنجان، دهۆک (2026).",
+    cert_view:"بینین",
     lang_tag:"زمان",
     lang1:"کوردی (بادینی) — زمانێ دەیکێ", lang2:"عەرەبی — ب باشی",
     lang3:"ئینگلیزی — ب باشی · خواندن هەمی ب ئینگلیزی یە",
@@ -932,6 +980,7 @@ const I18N = {
     exp1_role:"مەشقکاری ئەندازیاری بایۆمێدیکاڵ", exp1_org:"نەخۆشخانەی د. غازی",
     exp1_body:"شارەزایی کردەیی لە بەکارهێنان، چاککردن، پێوانەکردن و دامەزراندنی ئامێرە پزیشکییەکان — بە سەرپەرشتی ئەندازیار محەمەد میزۆری (بەڕێوەبەری نەخۆشخانە: د. عەبدوڵڵا عەبدوڵڵا)، و پەسەندکرا بۆ ڕەفتاری پیشەیی و پابەندبوون بە سەلامەتی نەخۆشخانە.",
     exp1_body2:"لە هەمان مەشقدا: چاودێری و پشکنینی وێستگەکانی ئۆکسجین و CO₂ی گەورە، و چاککردنی سیستەمەکانی ڤاکیومی پزیشکی نەخۆشخانە کە لە چاودێری چڕدا بەکاردێن.",
+    exp1_cert:"بڕوانامەی مەشق ببینە",
     proj_eyebrow:"پڕۆژەکان", proj_title:"پڕۆژە تەکنیکییەکان",
     proj1_tag:"ڕووکاری مێشک-کۆمپیوتەر", proj1_title:"فڕینی هەوایی بە EEG کۆنترۆڵکراو",
     proj1_body:"هێدسێتی EEGی NeuroSky داتای شەپۆلی مێشک دەنێرێت بۆ ئەنجینێکی پایتۆن کە سەرنج بە کاتی ڕاست دەپێوێت و پەنکەیەک بە ESP32 کۆنترۆڵدەکات — هەرچەند زیاتر سەرنج بدەیت، تۆپی پینگ-پۆنگ بەرزتر دەبێتەوە. زنجیرەی تەواو: وەرگرتن، شیکاری سیگناڵ، و کۆنترۆڵی مۆتۆر.",
@@ -954,6 +1003,8 @@ const I18N = {
     cert2:"کۆرسی یاساکانی سەرکەوتن (٧ کاتژمێر) — ڕێکخراوی ئینفینیتی بۆ گەشەپێدانی شارستانی، 2020.",
     cert3:"مەشقی زمانی ئینگلیزی — ئینستیتیوتی دافنشی، 2020.",
     cert4:"کۆرسی پایتۆن (١٣ کاتژمێر) — Data with Baraa، یوتیوب (خۆفێربوون).",
+    cert5:"کۆرسی ڕاهێنانی ژیریی دەستکرد (١٥ کاتژمێر) — ناوەندی گەشەپێدانی چالاکییەکانی گەنجان، دهۆک (2026).",
+    cert_view:"بینین",
     lang_tag:"زمانەکان",
     lang1:"کوردی (بادینی) — زمانی دایک", lang2:"عەرەبی — بە ڕەوانی",
     lang3:"ئینگلیزی — بە ڕەوانی · خوێندنەکە بە ئینگلیزی",
@@ -990,6 +1041,7 @@ const I18N = {
     exp1_role:"Praktikant Biomedizintechnik", exp1_org:"Dr.-Ghazi-Krankenhaus",
     exp1_body:"Praktische Erfahrung in Betrieb, Reparatur, Kalibrierung und Installation klinischer Medizingeräte — betreut von Ing. Mohammed Mizori (Krankenhaus-CEO: Dr. Abdullah Abdullah); anerkannt für professionelles Verhalten und Einhaltung der Sicherheitsstandards.",
     exp1_body2:"Im Rahmen desselben Praktikums: Wartung und Inspektion von Sauerstoff- und CO₂-Erzeugungsanlagen sowie Fehlersuche an krankenhausweiten medizinischen Vakuumsystemen für die Intensivpflege.",
+    exp1_cert:"Praktikumszertifikat ansehen",
     proj_eyebrow:"Projekte", proj_title:"Technische Projekte",
     proj1_tag:"Gehirn-Computer-Schnittstelle", proj1_title:"EEG-gesteuerte aerodynamische Levitation",
     proj1_body:"Ein NeuroSky-EEG-Headset überträgt Hirnwellendaten an eine Python-Engine, die die Konzentration in Echtzeit misst und einen ESP32-gesteuerten Ventilator antreibt — je stärker die Konzentration, desto höher schwebt ein Tischtennisball. Vollständige Pipeline: Erfassung, Signalanalyse und Motorsteuerung.",
@@ -1012,6 +1064,8 @@ const I18N = {
     cert2:"Kurs „Regeln des Erfolgs“ (7 Std.) — Infinity Organization for Civil Development, 2020.",
     cert3:"Englisch-Sprachtraining — Da Vinci Institute, 2020.",
     cert4:"Python-Programmierkurs (13 Std.) — Data with Baraa, YouTube (Selbststudium).",
+    cert5:"Schulung Künstliche Intelligenz (15 Std.) — Jugendaktivitäten-Entwicklungszentrum, Duhok (2026).",
+    cert_view:"Ansehen",
     lang_tag:"Sprachen",
     lang1:"Kurdisch (Badini) — Muttersprache", lang2:"Arabisch — Fließend",
     lang3:"Englisch — Fließend · Studium vollständig auf Englisch",
@@ -1124,6 +1178,36 @@ window.addEventListener('scroll', () => {
   navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + active));
 });
 toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// ════════════ CERTIFICATE LIGHTBOX ════════════
+(function () {
+  const modal = document.getElementById('certModal');
+  if (!modal) return;
+  const img = document.getElementById('certImg');
+  const cap = document.getElementById('certCap');
+  function openCert(src, caption) {
+    img.src = src;
+    cap.textContent = caption || '';
+    cap.style.display = caption ? '' : 'none';
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeCert() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    img.src = '';
+  }
+  document.querySelectorAll('[data-cert-img]').forEach(el => {
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      const t = el.querySelector('.cert-txt') || el.querySelector('[data-i18n]');
+      openCert(el.getAttribute('data-cert-img'), t ? t.textContent.trim() : '');
+    });
+  });
+  document.getElementById('certClose').addEventListener('click', closeCert);
+  modal.addEventListener('click', e => { if (e.target === modal) closeCert(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeCert(); });
+})();
 
 // ── animated ECG dividers between sections ──
 (function () {
